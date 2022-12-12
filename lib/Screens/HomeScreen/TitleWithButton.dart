@@ -14,16 +14,19 @@ class TitleWithButton extends StatelessWidget {
         children: <Widget>[
           TextWithCustomUnderline(text: "Deals"),
           Spacer(),
-          Container(
-            margin: EdgeInsets.all(10),
-            width: 75,
-            height: 30,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10), color: kprimarycolor),
-            child: Text(
-              "View All",
-              style: TextStyle(color: Colors.white),
+          GestureDetector(
+            onTap: (){},
+            child: Container(
+              margin: EdgeInsets.all(10),
+              width: 75,
+              height: 30,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10), color: kprimarycolor),
+              child: Text(
+                "View All",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           )
         ],
