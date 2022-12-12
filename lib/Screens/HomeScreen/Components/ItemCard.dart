@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, prefer_const_constructors, unnecessary_string_interpolations
 
 import 'package:flutter/material.dart';
+import 'package:yeper_user/Screens/DetailsScreen/DetailsSceen.dart';
 
 import '../../../constants.dart';
 
@@ -26,7 +27,9 @@ class ItemCard extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(),),);
+      },
       child: Container(
         margin: EdgeInsets.only(
             left: kDefaultPadding,
