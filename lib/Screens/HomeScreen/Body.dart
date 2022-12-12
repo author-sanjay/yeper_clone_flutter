@@ -15,7 +15,21 @@ class Body extends StatelessWidget {
       child: Column(
         children: <Widget>[
           HeaderWithSearchbar(size: size),
-          TitleWithButton()
+          TitleWithButton(),
+          Container(
+            width: size.width*0.4,
+            child: Column(
+              children: <Widget>[
+                Image.asset("assets/images/image_1.png"),
+                Container(
+                  padding: EdgeInsets.all(kDefaultPadding/2),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
