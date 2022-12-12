@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+
+import '../../constants.dart';
+class TitleWithButton extends StatelessWidget {
+  const TitleWithButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      child: Row(
+        children: <Widget>[
+          TextWithCustomUnderline(text: "Deals"),
+          Spacer(),
+          Container(
+            margin: EdgeInsets.all(10),
+            width: 75,
+            height: 30,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10), color: kprimarycolor),
+            child: Text(
+              "View All",
+              style: TextStyle(color: Colors.white),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class TextWithCustomUnderline extends StatelessWidget {
+  const TextWithCustomUnderline({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 24,
+      child: Stack(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(left: kDefaultPadding / 4),
+            child: Text(
+              text,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                height: 5,
+                margin: EdgeInsets.only(right: kDefaultPadding / 4),
+                color: kprimarycolor.withOpacity(0.2),
+              ))
+        ],
+      ),
+    );
+  }
+}
