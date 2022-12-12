@@ -1,8 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, file_names
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:yeper_user/Screens/HomeScreen/Body.dart';
+import 'package:yeper_user/Screens/HomeScreen/Components/Body.dart';
 import 'package:yeper_user/constants.dart';
 
 class HomeScreen extends StatelessWidget {

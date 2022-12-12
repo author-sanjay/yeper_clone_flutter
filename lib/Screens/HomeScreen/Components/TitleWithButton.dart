@@ -1,6 +1,8 @@
+// ignore_for_file: file_names, prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
+import '../../../constants.dart';
 class TitleWithButton extends StatelessWidget {
   const TitleWithButton({
     Key? key,
@@ -13,22 +15,7 @@ class TitleWithButton extends StatelessWidget {
       child: Row(
         children: <Widget>[
           TextWithCustomUnderline(text: "Deals"),
-          Spacer(),
-          GestureDetector(
-            onTap: (){},
-            child: Container(
-              margin: EdgeInsets.all(10),
-              width: 75,
-              height: 30,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), color: kprimarycolor),
-              child: Text(
-                "View All",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          )
+          
         ],
       ),
     );

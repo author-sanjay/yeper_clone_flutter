@@ -1,10 +1,8 @@
-// ignore_for_file: file_names, prefer_const_constructors
+// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:yeper_user/constants.dart';
-
+import 'Doublecards.dart';
 import 'HeaderWithSearchbar.dart';
-import 'ItemCard.dart';
 import 'TitleWithButton.dart';
 
 class Body extends StatelessWidget {
@@ -18,7 +16,14 @@ class Body extends StatelessWidget {
         children: <Widget>[
           HeaderWithSearchbar(size: size),
           TitleWithButton(),
-          ItemCard(cardname: 'VISA', itemname: 'iPhone 13', profit: 5, site: 'Flipkart', image: 'assets/images/image_1.png', press: (){},)
+          Column(
+            children: [
+              DoubleCards(),
+              DoubleCards(),
+              DoubleCards(),
+              
+            ],
+          )
         ],
       ),
     );

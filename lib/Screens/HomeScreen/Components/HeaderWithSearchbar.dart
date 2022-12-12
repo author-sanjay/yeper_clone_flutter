@@ -1,9 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, file_names, avoid_print, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../constants.dart';
+import '../../../constants.dart';
 class HeaderWithSearchbar extends StatelessWidget {
   const HeaderWithSearchbar({
     Key? key,

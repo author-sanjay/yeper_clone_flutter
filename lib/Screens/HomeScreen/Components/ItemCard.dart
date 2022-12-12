@@ -1,6 +1,8 @@
+// ignore_for_file: file_names, prefer_const_constructors, unnecessary_string_interpolations
+
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
+import '../../../constants.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard(
