@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, file_names
 
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yeper_user/Screens/HomeScreen/Components/Body.dart';
@@ -13,6 +15,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar(),
       body: Body(),
+      drawer: Drawer(),
     );
   }
 
@@ -21,7 +24,9 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: kprimarycolor,
       elevation: 0,
       leading: IconButton(
-          onPressed: () {}, icon: SvgPicture.asset("assets/icons/menu.svg")),
+          onPressed: (() => {}),
+          // onPressed: () => Scaffold.of(context).openDrawer(),
+          icon: SvgPicture.asset("assets/icons/menu.svg")),
     );
   }
 }
