@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 
-class RightImageDetailPage extends StatelessWidget {
-  const RightImageDetailPage({
+
+class Images extends StatelessWidget {
+  const Images({
     Key? key,
     required this.size,
   }) : super(key: key);
