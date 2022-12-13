@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors, file_names
 
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yeper_user/Screens/HomeScreen/Components/Body.dart';
