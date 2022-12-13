@@ -1,23 +1,47 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:yeper_user/Screens/OtpScreen/OtpScreen.dart';
+import 'package:pinput/pinput.dart';
 
 import '../../../constants.dart';
 
 
+final defaultPinTheme = PinTheme(
+  width: 36,
+  height: 36,
+  textStyle: TextStyle(
+      fontSize: 20,
+      color: Color.fromRGBO(30, 60, 87, 1),
+      fontWeight: FontWeight.w600),
+  decoration: BoxDecoration(
+    border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
+    borderRadius: BorderRadius.circular(20),
+  ),
+);
+
+final focusedPinTheme = defaultPinTheme.copyDecorationWith(
+  border: Border.all(color: Color.fromRGBO(114, 178, 238, 1)),
+  borderRadius: BorderRadius.circular(8),
+);
+
+final submittedPinTheme = defaultPinTheme.copyWith(
+  decoration: defaultPinTheme.decoration?.copyWith(
+    color: Color.fromRGBO(234, 239, 243, 1),
+  ),
+);
+
+
 class TextFields extends StatelessWidget {
-  const TextFields({
-    Key? key,
-  }) : super(key: key);
+  const TextFields({super.key});
+
+  
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width * 0.2,
-          right: MediaQuery.of(context).size.width * 0.2),
+          left: MediaQuery.of(context).size.width * 0.1,
+          right: MediaQuery.of(context).size.width * 0.1),
       child: Column(
         children: <Widget>[
           RichText(
@@ -39,28 +63,21 @@ class TextFields extends StatelessWidget {
                 child: Text(
                     "Login and Start Earning with \n         Your Credit Card")),
           ),
-          TextField(
-            onChanged: (value) {
-              print(value);
+           // Only numbers can be entered
+          Pinput(
+            length: 6,
+            validator: (s) {
+              return s == '2222' ? null : 'Pin is incorrect';
             },
-            decoration: new InputDecoration(labelText: "Phone Number"),
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.digitsOnly,
-            ],
-          ), // Only numbers can be entered
-
+            pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+            showCursor: true,
+            onCompleted: (pin) => print(pin),
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: GestureDetector(
               onTap: (() {
-                
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => OtpScreen(),
-                  ),
-                );
+                print("jhjh");
               }),
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.8,
@@ -70,7 +87,7 @@ class TextFields extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20)),
                 child: Center(
                     child: Text(
-                  "Send Code",
+                  "Verify",
                   style: TextStyle(color: Colors.white, fontSize: 17),
                 )),
               ),
@@ -81,6 +98,7 @@ class TextFields extends StatelessWidget {
             child: Center(
               child: GestureDetector(
                 onTap: (() {
+                  
                 }),
                 child: RichText(
                   text: TextSpan(
