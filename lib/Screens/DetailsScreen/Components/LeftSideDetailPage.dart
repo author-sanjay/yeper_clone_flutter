@@ -1,54 +1,27 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names, avoid_unnecessary_containers
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, file_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:yeper_user/constants.dart';
+import 'package:flutter_svg/svg.dart';
 
-import 'RightImageDetailPage.dart';
-
-class Body extends StatelessWidget {
-  const Body({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          height: size.height * 0.8,
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                  child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: kDefaultPadding * 3),
-                child: LeftSideDetailPage(actualprice: '25000',offerPrice: '20000',card: 'VISA',earning: '500',),
-              )),
-              RightImageDetailPage(size: size)
-            ],
-          ),
-        )
-      ],
-    );
-  }
-}
-
+import '../../../constants.dart';
 
 
 class LeftSideDetailPage extends StatelessWidget {
   const LeftSideDetailPage({
-    Key? key, required this.actualprice, required this.offerPrice, required this.card, required this.earning,
-    
+    Key? key,
+    required this.actualprice,
+    required this.offerPrice,
+    required this.card,
+    required this.earning,
   }) : super(key: key);
 
   final String actualprice;
   final String offerPrice;
   final String card;
   final String earning;
-  
+
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: <Widget>[
         Align(
@@ -220,7 +193,8 @@ class LeftSideDetailPage extends StatelessWidget {
                     text: TextSpan(children: [
                   TextSpan(
                       text: earning,
-                      style: TextStyle(color: Colors.amberAccent.shade700, fontSize: 20))
+                      style: TextStyle(
+                          color: Colors.amberAccent.shade700, fontSize: 20))
                 ]))
               ],
             ),
