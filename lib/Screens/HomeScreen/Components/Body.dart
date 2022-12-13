@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'Doublecards.dart';
 import 'HeaderWithSearchbar.dart';
+import 'ItemCard.dart';
 import 'TitleWithButton.dart';
 
 class Body extends StatelessWidget {
@@ -16,14 +17,46 @@ class Body extends StatelessWidget {
         children: <Widget>[
           HeaderWithSearchbar(size: size),
           TitleWithButton(),
-          Column(
+          Wrap(
+            
             children: [
-              DoubleCards(),
-              DoubleCards(),
-              DoubleCards(),
+              ItemCard(
+                cardname: 'VISA',
+                itemname: 'iPhone 13',
+                profit: 5,
+                site: 'Flipkart',
+                image: 'assets/images/image_1.png',
+                press: () {},
+              ),
+              ItemCard(
+                cardname: 'VISA',
+                itemname: 'iPhone 13',
+                profit: 5,
+                site: 'Flipkart',
+                image: 'assets/images/image_1.png',
+                press: () {},
+              ),
+              ItemCard(
+                cardname: 'VISA',
+                itemname: 'iPhone 13',
+                profit: 5,
+                site: 'Flipkart',
+                image: 'assets/images/image_1.png',
+                press: () {},
+              ),
+              ItemCard(
+                cardname: 'VISA',
+                itemname: 'iPhone 13',
+                profit: 5,
+                site: 'Flipkart',
+                image: 'assets/images/image_1.png',
+                press: () {},
+              ),
               
             ],
           )
+
+          
         ],
       ),
     );
