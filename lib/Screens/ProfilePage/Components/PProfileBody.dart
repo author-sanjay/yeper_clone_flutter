@@ -93,7 +93,7 @@ class List extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  "Offers",
+                  "Orders",
                   style: TextStyle(fontSize: 22),
                 ),
                 SizedBox(
