@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
@@ -25,7 +27,6 @@ class OrderList extends StatelessWidget {
                   children: <Widget>[
                     GestureDetector(
                       onTap: (() {
-                        print("Hello");
                       }),
                       child: Container(
                         width: MediaQuery.of(context).size.width,

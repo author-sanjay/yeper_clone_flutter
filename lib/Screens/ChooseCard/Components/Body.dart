@@ -1,8 +1,7 @@
-// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, file_names
 
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/ChooseCard/Components/Header.dart';
-import 'package:yeper_user/constants.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});

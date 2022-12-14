@@ -1,10 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:yeper_user/Screens/EditProfile/EditProfile.dart';
-import 'package:yeper_user/Screens/OrderList/OrderList.dart';
 import 'package:yeper_user/Screens/ProfilePage/Profile.dart';
-import 'package:yeper_user/Screens/ReferalList/ReferralList.dart';
 import 'package:yeper_user/constants.dart';
 
 void main() {
@@ -26,7 +23,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
 
-      home: EditProfile(),
+      home: Profile(),
       
     );
   }

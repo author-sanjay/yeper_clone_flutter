@@ -1,6 +1,11 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, file_names, sized_box_for_whitespace, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:yeper_user/Screens/ChooseCard/ChooseCard.dart';
+import 'package:yeper_user/Screens/EditProfile/EditProfile.dart';
+import 'package:yeper_user/Screens/OrderList/OrderList.dart';
+import 'package:yeper_user/Screens/ReferalList/ReferralList.dart';
+import 'package:yeper_user/Screens/Wallet/Wallet.dart';
 import 'package:yeper_user/constants.dart';
 
 
@@ -23,12 +28,7 @@ class ProfileBody extends StatelessWidget {
                   SizedBox(height:20),
                   Text("Sanjay Kumar",style: TextStyle(fontSize: 25),),
                   SizedBox(height:20),
-                  Container(height: 23, decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    border: Border.all(),
-                    borderRadius: BorderRadius.circular(20)
-                  ), child: Text(" Edit Profile ",style: TextStyle(fontSize: 17),),),
-                  SizedBox(height: 20,),
+                  
                   
                   Container(
                     
@@ -52,151 +52,311 @@ class List extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       
-      children: [
+    children: [
+      GestureDetector(
+        onTap: (() {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EditProfile(),
+              ),
+            );
+        }),
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 32),
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.all(Radius.circular(18))),
+                  child: Icon(
+                    Icons.edit,
+                    color: Colors.lightBlue[900],
+                  ),
+                  padding: EdgeInsets.all(12),
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Edit Profile",
+                        style: TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+           
+       GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Wallet(),
+              ),
+            );
+        },
+         child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 32),
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.all(Radius.circular(18))),
+                  child: Icon(
+                    Icons.wallet,
+                    color: Colors.lightBlue[900],
+                  ),
+                  padding: EdgeInsets.all(12),
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text("Wallet",style: TextStyle(fontSize: 20),)
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+       ),
+
+      GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => OrderList(),
+              ),
+            );
+        },
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 32),
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.all(Radius.circular(18))),
+                  child: Icon(
+                    Icons.shop,
+                    color: Colors.lightBlue[900],
+                  ),
+                  padding: EdgeInsets.all(12),
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Orders",
+                        style: TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+       
+      GestureDetector(
+        onTap: (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ReferralList(),
+              ),
+            );
+        },
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 32),
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.all(Radius.circular(18))),
+                  child: Icon(
+                    Icons.person,
+                    color: Colors.lightBlue[900],
+                  ),
+                  padding: EdgeInsets.all(12),
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Referrals",
+                        style: TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+       
+      GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ChooseCard(),
+              ),
+            );
+        },
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 32),
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.all(Radius.circular(18))),
+                  child: Icon(
+                    Icons.credit_card,
+                    color: Colors.lightBlue[900],
+                  ),
+                  padding: EdgeInsets.all(12),
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Manage Cards",
+                        style: TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      
+      GestureDetector(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 32),
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.all(Radius.circular(18))),
+                  child: Icon(
+                    Icons.help_center,
+                    color: Colors.lightBlue[900],
+                  ),
+                  padding: EdgeInsets.all(12),
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Help & Support",
+                        style: TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
         
-      GestureDetector(
-        onTap: (() {
-          
-        }),
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            border: Border.all(),
+        GestureDetector(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 32),
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.all(Radius.circular(18))),
+                  child: Icon(
+                    Icons.contact_phone,
+                    color: Colors.lightBlue[900],
+                  ),
+                  padding: EdgeInsets.all(12),
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Contact Us",
+                        style: TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-          child:Column(
-          children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Transaction",
-              style: TextStyle(fontSize: 22),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            
-          ],
-        )
         ),
-      ),
-      GestureDetector(
-        onTap: (() {}),
-        child: Container(
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              border: Border.all(),
-            ),
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "Orders",
-                  style: TextStyle(fontSize: 22),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            )),
-      ),
-      GestureDetector(
-        onTap: (() {}),
-        child: Container(
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              border: Border.all(),
-            ),
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "Referrals",
-                  style: TextStyle(fontSize: 22),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            )),
-      ),
-     GestureDetector(
-        onTap: (() {}),
-        child: Container(
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              border: Border.all(),
-            ),
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "Wallet",
-                  style: TextStyle(fontSize: 22),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            )),
-      ), GestureDetector(
-        onTap: (() {}),
-        child: Container(
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              border: Border.all(),
-            ),
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "Help & Support",
-                  style: TextStyle(fontSize: 22),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            )),
-      ),
-      GestureDetector(
-        onTap: (() {
-          
-        }),
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            border: Border.all(),
-          ),
-          child:Column(
-          children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Contact Us",
-              style: TextStyle(fontSize: 22),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            
-          ],
-        )
-        ),
-      ),
-                  
-                  
-                  
-                ],
+           
+    ],
               );
   }
 }

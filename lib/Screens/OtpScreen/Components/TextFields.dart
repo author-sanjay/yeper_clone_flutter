@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names
 
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
@@ -67,6 +67,8 @@ class TextFields extends StatelessWidget {
           Pinput(
             length: 6,
             validator: (s) {
+              return null;
+            
               
             },
             pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
@@ -77,7 +79,6 @@ class TextFields extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20),
             child: GestureDetector(
               onTap: (() {
-                print("jhjh");
               }),
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.8,

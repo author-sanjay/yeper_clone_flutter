@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, file_names, unused_import, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/Wallet/Components/Header.dart';
@@ -26,7 +26,6 @@ class WalletBody extends StatelessWidget {
               children: <Widget>[
                 GestureDetector(
                       onTap: (() {
-                        print("Hello");
                       }),
                       child: Container(
                         width: MediaQuery.of(context).size.width,

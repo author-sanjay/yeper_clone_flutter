@@ -1,7 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, file_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../constants.dart';
 
@@ -26,7 +25,6 @@ class ProfileBody extends StatelessWidget {
                   children: <Widget>[
                     GestureDetector(
                       onTap: (() {
-                        print("Hello");
                       }),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
@@ -124,9 +122,8 @@ class ProfileBody extends StatelessWidget {
                                             children: <Widget>[
                                               TextField(
                                           onChanged: (value) {
-                                            print(value);
                                           },
-                                          decoration: new InputDecoration(
+                                          decoration: InputDecoration(
                                               labelText: "Name"),
                                           
 
@@ -169,9 +166,8 @@ class ProfileBody extends StatelessWidget {
                                       children: <Widget>[
                                         TextField(
                                           onChanged: (value) {
-                                            print(value);
                                           },
-                                          decoration: new InputDecoration(
+                                          decoration: InputDecoration(
                                               labelText: "Email"),
                                         ),
                                       ],
@@ -212,9 +208,8 @@ class ProfileBody extends StatelessWidget {
                                       children: <Widget>[
                                         TextField(
                                           onChanged: (value) {
-                                            print(value);
                                           },
-                                          decoration: new InputDecoration(
+                                          decoration: InputDecoration(
                                               labelText: "Phone Number",
                                             ),
                                             keyboardType: TextInputType.number,
@@ -257,9 +252,8 @@ class ProfileBody extends StatelessWidget {
                                       children: <Widget>[
                                         TextField(
                                           onChanged: (value) {
-                                            print(value);
                                           },
-                                          decoration: new InputDecoration(
+                                          decoration: InputDecoration(
                                               labelText: "Address"),
                                         ),
                                       ],
@@ -270,18 +264,23 @@ class ProfileBody extends StatelessWidget {
                             ),
                                   
                             SizedBox(height: 15,),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.8,
-                              height: 43,
-                              decoration: BoxDecoration(
-                                  color: kprimarycolor,
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Center(
-                                  child: Text(
-                                "Send Code",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17),
-                              )),
+                            GestureDetector(
+                              onTap: (() {
+                                
+                              }),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.8,
+                                height: 43,
+                                decoration: BoxDecoration(
+                                    color: kprimarycolor,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Center(
+                                    child: Text(
+                                  "Send Code",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 17),
+                                )),
+                              ),
                             ),
                                  
                             ],
