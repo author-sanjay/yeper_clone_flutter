@@ -17,22 +17,25 @@ class ProfileBody extends StatelessWidget {
     return SingleChildScrollView(
       child: SafeArea(child: 
         Container(
+          color: kprimarycolor,
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Center(
             child: Padding(
               padding: const EdgeInsets.only(top: 20),
+              
               child: Column(
+                
                 children: <Widget>[
                   CircleAvatar(backgroundImage: AssetImage("assets/images/logo.png"),radius: MediaQuery.of(context).size.width*0.15,),
                   SizedBox(height:20),
-                  Text("Sanjay Kumar",style: TextStyle(fontSize: 25),),
+                  Text("Sanjay Kumar",style: TextStyle(fontSize: 25,color: Colors.white),),
                   SizedBox(height:20),
                   
                   
                   Container(
                     
-                    color: kbackgroundColor,
+
                     child: List(),
             ),
           
@@ -98,7 +101,7 @@ class List extends StatelessWidget {
             ),
           ),
         ),
-           
+        SizedBox(height: 10,),
        GestureDetector(
         onTap: () {
           Navigator.push(
@@ -141,7 +144,9 @@ class List extends StatelessWidget {
             ),
           ),
        ),
-
+        SizedBox(
+          height: 10,
+        ),
       GestureDetector(
         onTap: () {
           Navigator.push(
@@ -187,7 +192,9 @@ class List extends StatelessWidget {
             ),
           ),
         ),
-       
+       SizedBox(
+          height: 10,
+        ),
       GestureDetector(
         onTap: (){
           Navigator.push(
@@ -233,7 +240,9 @@ class List extends StatelessWidget {
             ),
           ),
         ),
-       
+       SizedBox(
+          height: 10,
+        ),
       GestureDetector(
         onTap: () {
           Navigator.push(
@@ -279,7 +288,9 @@ class List extends StatelessWidget {
             ),
           ),
         ),
-      
+      SizedBox(
+          height: 10,
+        ),
       GestureDetector(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 32),
@@ -317,7 +328,9 @@ class List extends StatelessWidget {
             ),
           ),
         ),
-        
+        SizedBox(
+          height: 10,
+        ),
         GestureDetector(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 32),

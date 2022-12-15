@@ -29,7 +29,7 @@ class ProfileBody extends StatelessWidget {
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         margin: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height * 0.10),
+                            top: MediaQuery.of(context).size.height * 0.20),
                         child: Column(
                           children: <Widget>[
                             Text(
@@ -135,7 +135,9 @@ class ProfileBody extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  
+                                  SizedBox(
+                              height: 10,
+                            ),
                                  Container(
                               margin: EdgeInsets.symmetric(horizontal: 32),
                               padding: EdgeInsets.all(16),
@@ -177,7 +179,9 @@ class ProfileBody extends StatelessWidget {
                               ),
                             ),
                                   
-
+                            SizedBox(
+                              height: 10,
+                            ),
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: 32),
                               padding: EdgeInsets.all(16),
@@ -221,7 +225,9 @@ class ProfileBody extends StatelessWidget {
                               ),
                             ),
                                   
-
+                            SizedBox(
+                              height: 10,
+                            ),
                               Container(
                               margin: EdgeInsets.symmetric(horizontal: 32),
                               padding: EdgeInsets.all(16),
@@ -263,7 +269,7 @@ class ProfileBody extends StatelessWidget {
                               ),
                             ),
                                   
-                            SizedBox(height: 15,),
+                            SizedBox(height: 10,),
                             GestureDetector(
                               onTap: (() {
                                 

@@ -14,7 +14,21 @@ class Body extends StatelessWidget {
       child: Column(
         children: <Widget>[
           HeaderWithSearchbar(size: size), 
-          Card(cardName: "MasterCard",)
+          Card(cardName: "MasterCard",),
+          SizedBox(height: 10,),
+          Card(cardName: "Visa",),
+          SizedBox(
+            height: 10,
+          ),
+          Card(
+            cardName: "Paytm",
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Card(
+            cardName: "HDFC",
+          )
         ],
       ),
     ));

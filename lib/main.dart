@@ -1,8 +1,16 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:yeper_user/Screens/ChooseCard/ChooseCard.dart';
+import 'package:yeper_user/Screens/EditProfile/EditProfile.dart';
+import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:yeper_user/Screens/ProfilePage/Profile.dart';
+import 'package:yeper_user/Screens/Referal/Referal.dart';
+import 'package:yeper_user/Screens/ReferalList/ReferralList.dart';
+import 'package:yeper_user/Screens/Wallet/Wallet.dart';
+
 import 'package:yeper_user/constants.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -23,7 +31,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
 
-      home: Profile(),
+      home: EditProfile(),
       
     );
   }
