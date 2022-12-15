@@ -15,8 +15,10 @@ class Body extends StatelessWidget {
             Expanded(
               child: Column() 
             ),
-            Container( height: size.height*0.8,
+            Container( 
+            height: size.height*0.8,
             width: size.width*0.75,
+            
             decoration: BoxDecoration(
               image: DecorationImage(
                 alignment: Alignment.centerLeft,
