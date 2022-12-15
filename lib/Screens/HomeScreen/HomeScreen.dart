@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar(),
       body: Body(),
+      drawer: Drawer(),
     );
   }
 
@@ -21,7 +22,9 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: kprimarycolor,
       elevation: 0,
       leading: IconButton(
-          onPressed: () {}, icon: SvgPicture.asset("assets/icons/menu.svg")),
+          onPressed: (() => {}),
+          // onPressed: () => Scaffold.of(context).openDrawer(),
+          icon: SvgPicture.asset("assets/icons/menu.svg")),
     );
   }
 }
