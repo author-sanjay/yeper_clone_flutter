@@ -126,6 +126,9 @@ class _OrderListState extends State<OrderList> {
                           SizedBox(
                             height: 16,
                           ),
+                          _isloading?Center(
+                    child: CircularProgressIndicator(),
+                  ):
                           ListView.builder(
                             itemBuilder: (context, index) {
                               return orderdetails(
