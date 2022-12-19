@@ -5,18 +5,19 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../constants.dart';
 
-
 class LeftIcons extends StatelessWidget {
   const LeftIcons({
     Key? key,
     required this.actualprice,
     required this.offerPrice,
     required this.card,
+    required this.earning
   }) : super(key: key);
 
   final String actualprice;
   final String offerPrice;
   final String card;
+  final String earning;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +61,7 @@ class LeftIcons extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: "Actual \nPrice",
+                          text: "You \n pay",
                           style: TextStyle(color: Colors.black, fontSize: 12),
                         ),
                       ],
@@ -101,7 +102,7 @@ class LeftIcons extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: "Offer \nPrice",
+                          text: "You \nGet",
                           style: TextStyle(color: Colors.black, fontSize: 12),
                         ),
                       ],
@@ -151,7 +152,7 @@ class LeftIcons extends StatelessWidget {
                   RichText(
                       text: TextSpan(children: [
                     TextSpan(
-                        text: card,
+                        text: card.toUpperCase(),
                         style: TextStyle(color: Colors.indigo, fontSize: 20))
                   ]))
                 ],
@@ -193,7 +194,7 @@ class LeftIcons extends StatelessWidget {
                   RichText(
                       text: TextSpan(children: [
                     TextSpan(
-                        text: "500",
+                        text: earning,
                         style: TextStyle(
                             color: Colors.amber.shade800, fontSize: 20))
                   ]))

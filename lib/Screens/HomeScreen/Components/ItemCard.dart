@@ -13,7 +13,10 @@ class ItemCard extends StatelessWidget {
       required this.profit,
       required this.site,
       required this.image,
-      required this.press})
+      required this.press,
+      required this.desc,
+      required this.actual,
+      required this.offer})
       : super(key: key);
 
   final String itemname;
@@ -22,23 +25,41 @@ class ItemCard extends StatelessWidget {
   final String site;
   final String image;
   final Function press;
+  final int actual;
+  final int offer;
+  final String desc;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(),),);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailsScreen(
+                actualprice: actual,
+                card: cardname,
+                earning: profit.toInt(),
+                offer: offer,
+                desc: desc,
+                photo: image),
+          ),
+        );
       },
       child: Container(
         margin: EdgeInsets.only(
-            left: kDefaultPadding,
+            left: kDefaultPadding * 0.5,
             top: kDefaultPadding / 2,
             bottom: kDefaultPadding * 2.5),
-        width: size.width * 0.4,
+        width: size.width * 0.42,
         child: Column(
           children: <Widget>[
-            Image.asset(image),
+            Image.network(
+              image,
+              fit: BoxFit.cover,
+              height: size.height * 0.25,
+            ),
             Container(
               padding: EdgeInsets.all(kDefaultPadding / 2),
               decoration: BoxDecoration(

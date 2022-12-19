@@ -19,7 +19,7 @@ class ProfileBody extends StatelessWidget {
             children: <Widget>[
               //Container for top data
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 32, vertical: 32),
+                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -29,7 +29,7 @@ class ProfileBody extends StatelessWidget {
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         margin: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height * 0.20),
+                            top: MediaQuery.of(context).size.height * 0.10),
                         child: Column(
                           children: <Widget>[
                             Text(
@@ -47,7 +47,7 @@ class ProfileBody extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 24,
+                      height: 12,
                     ),
                   ],
                 ),
@@ -67,7 +67,7 @@ class ProfileBody extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           SizedBox(
-                            height: 24,
+                            height: 12,
                           ),
                           Container(
                             child: Row(
@@ -85,11 +85,9 @@ class ProfileBody extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: 32),
                           ),
                           SizedBox(
-                            height: 24,
+                            height: 12,
                           ),
-                          SizedBox(
-                            height: 16,
-                          ),
+                          
                           Column(
                             children: [
                               Container(
@@ -136,7 +134,7 @@ class ProfileBody extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
                                  Container(
                               margin: EdgeInsets.symmetric(horizontal: 32),
@@ -180,7 +178,7 @@ class ProfileBody extends StatelessWidget {
                             ),
                                   
                             SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: 32),
@@ -226,7 +224,7 @@ class ProfileBody extends StatelessWidget {
                             ),
                                   
                             SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
                               Container(
                               margin: EdgeInsets.symmetric(horizontal: 32),
@@ -269,14 +267,14 @@ class ProfileBody extends StatelessWidget {
                               ),
                             ),
                                   
-                            SizedBox(height: 10,),
+                            SizedBox(height: 5,),
                             GestureDetector(
                               onTap: (() {
                                 
                               }),
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.8,
-                                height: 43,
+                                height: 24,
                                 decoration: BoxDecoration(
                                     color: kprimarycolor,
                                     borderRadius: BorderRadius.circular(20)),

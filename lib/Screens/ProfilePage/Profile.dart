@@ -10,7 +10,6 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: kprimarycolor, elevation: 0.3,centerTitle: true,title: Text("My Profile"),),
       body: ProfileBody(),
     );
   }

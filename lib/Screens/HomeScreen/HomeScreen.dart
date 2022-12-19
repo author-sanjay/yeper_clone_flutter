@@ -3,7 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yeper_user/Screens/HomeScreen/Components/Body.dart';
+import 'package:yeper_user/Screens/ProfilePage/Components/PProfileBody.dart';
+import 'package:yeper_user/Screens/ProfilePage/Profile.dart';
 import 'package:yeper_user/constants.dart';
+
+final navigatorKey = GlobalKey<NavigatorState>();
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,20 +15,26 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: AppBar(
+        backgroundColor: kprimarycolor,
+        elevation: 0,
+      ),
       body: Body(),
-      drawer: Drawer(),
+      drawer: drawer(),
     );
   }
+}
 
-  AppBar buildAppBar() {
-    return AppBar(
-      backgroundColor: kprimarycolor,
-      elevation: 0,
-      leading: IconButton(
-          onPressed: (() => {}),
-          // onPressed: () => Scaffold.of(context).openDrawer(),
-          icon: SvgPicture.asset("assets/icons/menu.svg")),
+class drawer extends StatelessWidget {
+  const drawer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      backgroundColor: Colors.white,
+      child: ProfileBody(key: key),
     );
   }
 }

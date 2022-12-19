@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/DetailsScreen/Components/Image.dart';
 import 'package:yeper_user/Screens/DetailsScreen/Components/LeftIcons.dart';
 
-
-
 class ImageAndIcons extends StatelessWidget {
   const ImageAndIcons({
     Key? key,
@@ -14,13 +12,15 @@ class ImageAndIcons extends StatelessWidget {
     required this.offerPrice,
     required this.card,
     required this.earning,
+    required this.photo,
   }) : super(key: key);
 
   final Size size;
-  final String actualprice;
-  final String offerPrice;
+  final int actualprice;
+  final int offerPrice;
   final String card;
-  final String earning;
+  final int earning;
+  final String photo;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,9 @@ class ImageAndIcons extends StatelessWidget {
       height: size.height * 0.8,
       child: Row(
         children: <Widget>[
-          LeftIcons(actualprice: actualprice, offerPrice: offerPrice, card: card),
-          Images(size: size)
+          LeftIcons(
+              actualprice: actualprice.toString() , offerPrice: offerPrice.toString() , card: card,earning: earning.toString(),),
+          Images(size: size, Url: photo,)
         ],
       ),
     );

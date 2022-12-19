@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, file_names, sized_box_for_whitespace, sort_child_properties_last
-
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/ChooseCard/ChooseCard.dart';
 import 'package:yeper_user/Screens/EditProfile/EditProfile.dart';
@@ -17,20 +16,20 @@ class ProfileBody extends StatelessWidget {
     return SingleChildScrollView(
       child: SafeArea(child: 
         Container(
-          color: kprimarycolor,
+          
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 10),
               
               child: Column(
                 
                 children: <Widget>[
                   CircleAvatar(backgroundImage: AssetImage("assets/images/logo.png"),radius: MediaQuery.of(context).size.width*0.15,),
-                  SizedBox(height:20),
+                  SizedBox(height:5),
                   Text("Sanjay Kumar",style: TextStyle(fontSize: 25,color: Colors.white),),
-                  SizedBox(height:20),
+                  SizedBox(height:5),
                   
                   
                   Container(
@@ -101,7 +100,7 @@ class List extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 10,),
+        SizedBox(height: 3,),
        GestureDetector(
         onTap: () {
           Navigator.push(
@@ -145,7 +144,7 @@ class List extends StatelessWidget {
           ),
        ),
         SizedBox(
-          height: 10,
+          height: 3,
         ),
       GestureDetector(
         onTap: () {
@@ -193,7 +192,7 @@ class List extends StatelessWidget {
           ),
         ),
        SizedBox(
-          height: 10,
+          height: 3,
         ),
       GestureDetector(
         onTap: (){
@@ -241,7 +240,7 @@ class List extends StatelessWidget {
           ),
         ),
        SizedBox(
-          height: 10,
+          height: 3,
         ),
       GestureDetector(
         onTap: () {
@@ -289,7 +288,7 @@ class List extends StatelessWidget {
           ),
         ),
       SizedBox(
-          height: 10,
+          height: 3,
         ),
       GestureDetector(
           child: Container(
@@ -329,7 +328,7 @@ class List extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 10,
+          height:3,
         ),
         GestureDetector(
           child: Container(
@@ -373,3 +372,4 @@ class List extends StatelessWidget {
               );
   }
 }
+

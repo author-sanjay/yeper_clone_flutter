@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 
 import '../../../constants.dart';
-
 
 final defaultPinTheme = PinTheme(
   width: 36,
@@ -30,11 +30,8 @@ final submittedPinTheme = defaultPinTheme.copyWith(
   ),
 );
 
-
 class TextFields extends StatelessWidget {
   const TextFields({super.key});
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -63,22 +60,25 @@ class TextFields extends StatelessWidget {
                 child: Text(
                     "Login and Start Earning with \n         Your Credit Card")),
           ),
-           // Only numbers can be entered
+          // Only numbers can be entered
           Pinput(
             length: 6,
             validator: (s) {
               return null;
-            
-              
             },
             pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
             showCursor: true,
-            
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: GestureDetector(
               onTap: (() {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeScreen(),
+                  ),
+                );
               }),
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.8,
@@ -98,9 +98,7 @@ class TextFields extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10),
             child: Center(
               child: GestureDetector(
-                onTap: (() {
-                  
-                }),
+                onTap: (() {}),
                 child: RichText(
                   text: TextSpan(
                     children: [

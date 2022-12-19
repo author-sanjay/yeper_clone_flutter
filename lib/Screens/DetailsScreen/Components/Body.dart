@@ -5,8 +5,20 @@ import 'package:yeper_user/Screens/DetailsScreen/Components/IconsandImage.dart';
 import 'package:yeper_user/Screens/DetailsScreen/Components/OfferDetails.dart';
 
 class Body extends StatelessWidget {
-  const Body({super.key});
+  Body({super.key,
+      required this.actualprice,
+      required this.card,
+      required this.earning,
+      required this.offer,
+      required this.desc,
+      required this.photo});
 
+  int actualprice;
+  String card;
+  int earning;
+  int offer;
+  String desc;
+  String photo;
   @override
   Widget build(BuildContext context) {
 
@@ -16,12 +28,13 @@ class Body extends StatelessWidget {
         children: <Widget>[
           ImageAndIcons(
             size: size,
-            actualprice: '25000',
-            card: 'VISA',
-            earning: '250',
-            offerPrice: '20000',
+            actualprice:actualprice,
+            card: card,
+            earning: earning,
+            offerPrice: offer,
+            photo: photo,
           ),
-          OfferDetails(Details: "This is the Description"),
+          OfferDetails(Details: desc),
         ],
       ),
     );

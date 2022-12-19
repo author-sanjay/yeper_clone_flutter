@@ -4,14 +4,11 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 
-
 class Images extends StatelessWidget {
-  const Images({
-    Key? key,
-    required this.size,
-  }) : super(key: key);
+  Images({Key? key, required this.size, required this.Url}) : super(key: key);
 
   final Size size;
+  String Url;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +27,7 @@ class Images extends StatelessWidget {
           image: DecorationImage(
               alignment: Alignment.centerLeft,
               fit: BoxFit.cover,
-              image: AssetImage("assets/images/img.png"))),
+              image: NetworkImage(Url))),
     );
   }
 }

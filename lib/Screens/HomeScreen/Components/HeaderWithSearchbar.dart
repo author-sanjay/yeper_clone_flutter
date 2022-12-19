@@ -2,8 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:yeper_user/Screens/ProfilePage/Profile.dart';
+import 'package:yeper_user/Screens/Wallet/Wallet.dart';
 
 import '../../../constants.dart';
+
 class HeaderWithSearchbar extends StatelessWidget {
   const HeaderWithSearchbar({
     Key? key,
@@ -28,7 +31,12 @@ class HeaderWithSearchbar extends StatelessWidget {
                     bottomRight: Radius.circular(36))),
             child: GestureDetector(
               onTap: (() {
-                print("Hello");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Profile(),
+                  ),
+                );
               }),
               child: Container(
                 width: MediaQuery.of(context).size.width,
