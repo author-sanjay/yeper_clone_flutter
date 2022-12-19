@@ -1,11 +1,35 @@
 // ignore_for_file: file_names, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:yeper_user/modals/GetOrders.dart';
+import 'package:yeper_user/modals/GetOrdersapi.dart';
 
 import '../../constants.dart';
 
-class OrderList extends StatelessWidget {
+class OrderList extends StatefulWidget {
   const OrderList({super.key});
+
+  @override
+  State<OrderList> createState() => _OrderListState();
+}
+
+class _OrderListState extends State<OrderList> {
+  late List<GetOrders> _getdeals;
+  bool _isloading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    getDeals();
+  }
+
+  Future<void> getDeals() async {
+    _getdeals = await GetOrdersapi.getOrders();
+    setState(() {
+      _isloading = false;
+    });
+    print(_getdeals);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,23 +50,33 @@ class OrderList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     GestureDetector(
-                      onTap: (() {
-                      }),
+                      onTap: (() {}),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.10),
+                        margin: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height * 0.10),
                         child: Column(
                           children: <Widget>[
-                           
-                            Text(
-                              "Your Orders",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline5
-                                  ?.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 50),
+                            Row(
+                              children: [
+                                Text(
+                                  "Your \nOrders",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline5
+                                      ?.copyWith(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w200,
+                                        fontSize: 50,
+                                      ),
+                                ),
+                                Spacer(),
+                                Icon(
+                                  Icons.shopping_cart,
+                                  color: Colors.white,
+                                  size: 50,
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -78,7 +112,7 @@ class OrderList extends StatelessWidget {
                                 Text(
                                   "Recent Transactions",
                                   style: TextStyle(
-                                      fontWeight: FontWeight.w900,
+                                      fontWeight: FontWeight.w400,
                                       fontSize: 24,
                                       color: Colors.black),
                                 ),
@@ -94,71 +128,13 @@ class OrderList extends StatelessWidget {
                           ),
                           ListView.builder(
                             itemBuilder: (context, index) {
-                              return Container(
-                                margin: EdgeInsets.symmetric(horizontal: 32),
-                                padding: EdgeInsets.all(16),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20))),
-                                child: Row(
-                                  children: <Widget>[
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey[100],
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(18))),
-                                      child: Icon(
-                                        Icons.date_range,
-                                        color: Colors.lightBlue[900],
-                                      ),
-                                      padding: EdgeInsets.all(12),
-                                    ),
-                                    SizedBox(
-                                      width: 16,
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            "Payment",
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.grey[900]),
-                                          ),
-                                          Text(
-                                            "Payment from Saad",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.grey[500]),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: <Widget>[
-                                        
-                                        Text(
-                                          "26 Jan",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w700,
-                                              color: Colors.grey[500]),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              );
+                              return orderdetails(
+                                  name: _getdeals[index].product,
+                                  date: _getdeals[index].date,
+                                  status: _getdeals[index].orderstatus);
                             },
                             shrinkWrap: true,
-                            itemCount: 10,
+                            itemCount: _getdeals.length,
                             padding: EdgeInsets.all(0),
                             controller:
                                 ScrollController(keepScrollOffset: false),
@@ -178,5 +154,74 @@ class OrderList extends StatelessWidget {
         ),
       ),
     ));
+  }
+}
+
+class orderdetails extends StatelessWidget {
+  orderdetails({Key? key, required this.name, required this.date,required this.status})
+      : super(key: key);
+  String name;
+  String date;
+  String status;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 32),
+      
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(20))),
+      child: Row(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.all(Radius.circular(18))),
+            child: Icon(
+              Icons.date_range,
+              color: Colors.lightBlue[900],
+            ),
+            padding: EdgeInsets.all(12),
+          ),
+          SizedBox(
+            width: 16,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "$name",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey[900]),
+                ),
+                Text(
+                  "$status",
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey[500]),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              Text(
+                "$date",
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.grey[500]),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

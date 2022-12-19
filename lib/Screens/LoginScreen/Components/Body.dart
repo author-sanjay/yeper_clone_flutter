@@ -3,6 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yeper_user/Screens/LoginScreen/Components/LoginFields.dart';
+import 'package:yeper_user/modals/UserModal.dart';
+
+User user =
+    new User(0, "", "", "", 1, "idfc", "name", "", "referalcode", "referedby");
 
 class Body extends StatelessWidget {
   const Body({super.key});
