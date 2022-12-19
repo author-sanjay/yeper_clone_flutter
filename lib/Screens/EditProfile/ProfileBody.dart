@@ -12,7 +12,7 @@ class ProfileBody extends StatelessWidget {
     return SingleChildScrollView(
       child: SafeArea(
         child: Container(
-          color: kprimarycolor,
+          color: Color.fromARGB(255, 82, 29, 83),
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
           child: Stack(
@@ -32,16 +32,14 @@ class ProfileBody extends StatelessWidget {
                             top: MediaQuery.of(context).size.height * 0.10),
                         child: Column(
                           children: <Widget>[
-                            Text(
-                              "Edit Profile",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline5
-                                  ?.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 50),
-                            ),
+                            CircleAvatar(radius: MediaQuery.of(context).size.width*0.3, child: Center(child: CircleAvatar(radius: MediaQuery.of(context).size.width * 0.27,
+                                    backgroundImage:
+                                        AssetImage("assets/images/image_1.png")),)),
+                          
+                          SizedBox(height: 10,),
+                            Text("Sanjay Kumar",style: TextStyle(fontSize: 23,color: Colors.white,fontWeight: FontWeight.w200)),
+                            SizedBox(height: 5,),
+                            // Text("Profile Photo can ",style: TextStyle(fontSize: 23,color: Colors.white,fontWeight: FontWeight.w200))
                           ],
                         ),
                       ),
@@ -76,8 +74,8 @@ class ProfileBody extends StatelessWidget {
                                 Text(
                                   "Edit Mode",
                                   style: TextStyle(
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 24,
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 30,
                                       color: Colors.black),
                                 ),
                               ],
@@ -274,7 +272,7 @@ class ProfileBody extends StatelessWidget {
                               }),
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.8,
-                                height: 24,
+                                height: 50,
                                 decoration: BoxDecoration(
                                     color: kprimarycolor,
                                     borderRadius: BorderRadius.circular(20)),

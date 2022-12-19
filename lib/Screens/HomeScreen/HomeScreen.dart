@@ -33,7 +33,8 @@ class drawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.white,
+      
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       child: ProfileBody(key: key),
     );
   }
