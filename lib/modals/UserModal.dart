@@ -14,9 +14,20 @@ class User extends ChangeNotifier {
   final String referedby;
   final int acnumber;
   final String bankname;
+  final int wallet;
   final String idfc;
-  User(this.acnumber, this.address, this.bankname, this.email, this.id,
-      this.idfc, this.name, this.phonenumber, this.referalcode, this.referedby);
+  User(
+      this.acnumber,
+      this.address,
+      this.wallet,
+      this.bankname,
+      this.email,
+      this.id,
+      this.idfc,
+      this.name,
+      this.phonenumber,
+      this.referalcode,
+      this.referedby);
 
   void signin(String email, String password, int id) {
     email = email;
