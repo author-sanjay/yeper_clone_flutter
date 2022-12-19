@@ -65,9 +65,10 @@ class ProfileBody extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           SizedBox(
-                            height: 12,
+                            height: 22,
                           ),
                           Container(
+                            
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
