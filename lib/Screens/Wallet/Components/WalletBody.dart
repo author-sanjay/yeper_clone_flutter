@@ -14,6 +14,8 @@ class WalletBody extends StatefulWidget {
 }
 
 class _WalletBodyState extends State<WalletBody> {
+ 
+
   late List<Gettxn> _getdeals;
   bool _isloading = true;
 
@@ -27,6 +29,7 @@ class _WalletBodyState extends State<WalletBody> {
     _getdeals = await Gettxnapi.getDeals();
     setState(() {
       _isloading = false;
+      
     });
     print(_getdeals);
   }
@@ -65,16 +68,20 @@ class _WalletBodyState extends State<WalletBody> {
                                       fontWeight: FontWeight.w300,
                                       fontSize: 20),
                             ),
-                            Text(
-                              "Rs 24",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline5
-                                  ?.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 50),
-                            ),
+                            _isloading
+                                ? Center(
+                                    child: CircularProgressIndicator(),
+                                  )
+                                : Text(
+                                    "Rs 50",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline5
+                                        ?.copyWith(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 50),
+                                  ),
                             SizedBox(
                               height: 25,
                             ),
@@ -214,14 +221,15 @@ class txndetails extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                       color: Colors.grey[900]),
                 ),
-                incoming?
-                Text(
-                  "Payment from CCredit",
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.grey[500]),
-                ): Text(
+                incoming
+                    ? Text(
+                        "Payment from CCredit",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.grey[500]),
+                      )
+                    : Text(
                         "Paid to you",
                         style: TextStyle(
                             fontSize: 15,
