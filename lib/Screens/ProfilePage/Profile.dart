@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/ProfilePage/Components/PProfileBody.dart';
-import 'package:yeper_user/constants.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});

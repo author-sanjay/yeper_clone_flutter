@@ -1,8 +1,6 @@
-// ignore_for_file: empty_constructor_bodies, override_on_non_overriding_member
+// ignore_for_file: empty_constructor_bodies, override_on_non_overriding_member, file_names
 
-import 'dart:ffi';
 
-import 'package:http/http.dart';
 
 class Gettxn {
   String date;

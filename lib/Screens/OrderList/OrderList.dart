@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, prefer_const_literals_to_create_immutables
+// ignore_for_file: file_names, prefer_const_literals_to_create_immutables, unnecessary_string_interpolations, must_be_immutable, avoid_print, camel_case_types
 
 import 'package:flutter/material.dart';
 import 'package:yeper_user/modals/GetOrders.dart';

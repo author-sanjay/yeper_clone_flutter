@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last, file_names, unused_import, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, file_names, unused_import, prefer_const_literals_to_create_immutables, avoid_print, must_be_immutable, camel_case_types, unnecessary_string_interpolations
 
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/Wallet/Components/Header.dart';

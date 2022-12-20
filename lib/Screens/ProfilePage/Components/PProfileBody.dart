@@ -1,11 +1,10 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, file_names, sized_box_for_whitespace, sort_child_properties_last
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, file_names, sized_box_for_whitespace, sort_child_properties_last, avoid_unnecessary_containers
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/ChooseCard/ChooseCard.dart';
 import 'package:yeper_user/Screens/EditProfile/EditProfile.dart';
 import 'package:yeper_user/Screens/OrderList/OrderList.dart';
 import 'package:yeper_user/Screens/ReferalList/ReferralList.dart';
 import 'package:yeper_user/Screens/Wallet/Wallet.dart';
-import 'package:yeper_user/constants.dart';
 
 
 class ProfileBody extends StatelessWidget {
