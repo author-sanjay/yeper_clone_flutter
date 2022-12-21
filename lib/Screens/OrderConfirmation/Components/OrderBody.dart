@@ -88,7 +88,7 @@ class _OrderBodyState extends State<OrderBody> {
                           fontWeight: FontWeight.w400),
                     ),
                     Text(
-                      "37977",
+                      "hghu",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -112,7 +112,7 @@ class _OrderBodyState extends State<OrderBody> {
                           fontWeight: FontWeight.w400),
                     ),
                     Text(
-                      "37977",
+                      "",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -166,7 +166,7 @@ class _OrderBodyState extends State<OrderBody> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Order Status:  ",
+                                  "Status: ",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,

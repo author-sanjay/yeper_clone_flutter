@@ -110,7 +110,7 @@ class _OrderListState extends State<OrderList> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
-                                  "Recent Transactions",
+                                  "Recent Orders",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 24,
@@ -126,22 +126,24 @@ class _OrderListState extends State<OrderList> {
                           SizedBox(
                             height: 16,
                           ),
-                          _isloading?Center(
-                    child: CircularProgressIndicator(),
-                  ):
-                          ListView.builder(
-                            itemBuilder: (context, index) {
-                              return orderdetails(
-                                  name: _getdeals[index].product,
-                                  date: _getdeals[index].date,
-                                  status: _getdeals[index].orderstatus);
-                            },
-                            shrinkWrap: true,
-                            itemCount: _getdeals.length,
-                            padding: EdgeInsets.all(0),
-                            controller:
-                                ScrollController(keepScrollOffset: false),
-                          ),
+                          _isloading
+                              ? Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : ListView.builder(
+                                  itemBuilder: (context, index) {
+                                    return orderdetails(
+                                        name: _getdeals[index].product,
+                                        date: _getdeals[index].date,
+                                        status: _getdeals[index].orderstatus,
+                                        id: _getdeals[index].orderid);
+                                  },
+                                  shrinkWrap: true,
+                                  itemCount: _getdeals.length,
+                                  padding: EdgeInsets.all(0),
+                                  controller:
+                                      ScrollController(keepScrollOffset: false),
+                                ),
                         ],
                       ),
                       controller: scrollController,
@@ -161,48 +163,70 @@ class _OrderListState extends State<OrderList> {
 }
 
 class orderdetails extends StatelessWidget {
-  orderdetails({Key? key, required this.name, required this.date,required this.status})
+  orderdetails(
+      {Key? key,
+      required this.name,
+      required this.date,
+      required this.status,
+      required this.id})
       : super(key: key);
+  int id;
   String name;
   String date;
   String status;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 32),
-      
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(20))),
-      child: Row(
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-                color: Colors.grey[100],
-                borderRadius: BorderRadius.all(Radius.circular(18))),
-            child: Icon(
-              Icons.date_range,
-              color: Colors.lightBlue[900],
+    return GestureDetector(
+      onTap: (() {
+        print(id);
+      }),
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 32),
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(20))),
+        child: Row(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.all(Radius.circular(18))),
+              child: Icon(
+                Icons.date_range,
+                color: Colors.lightBlue[900],
+              ),
+              padding: EdgeInsets.all(12),
             ),
-            padding: EdgeInsets.all(12),
-          ),
-          SizedBox(
-            width: 16,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            SizedBox(
+              width: 16,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "$name",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.grey[900]),
+                  ),
+                  Text(
+                    "$status",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.grey[500]),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 Text(
-                  "$name",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.grey[900]),
-                ),
-                Text(
-                  "$status",
+                  "$date",
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
@@ -210,20 +234,8 @@ class orderdetails extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Text(
-                "$date",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.grey[500]),
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -14,8 +14,9 @@ class Body extends StatelessWidget {
       required this.desc,
       required this.photo,
       required this.link,
-      required this.platform});
-
+      required this.platform,
+      required this.id});
+  int id;
   int actualprice;
   String card;
   int earning;

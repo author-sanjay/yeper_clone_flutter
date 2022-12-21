@@ -18,9 +18,10 @@ class ItemCard extends StatelessWidget {
       required this.actual,
       required this.offer,
       required this.link,
-      required this.platform})
+      required this.platform,
+      required this.id})
       : super(key: key);
-
+  final int id;
   final String itemname;
   final String cardname;
   final double profit;
@@ -42,6 +43,7 @@ class ItemCard extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => DetailsScreen(
+                id: id,
                 link: link,
                 platform: platform,
                 actualprice: actual,

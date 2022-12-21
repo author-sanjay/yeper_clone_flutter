@@ -48,6 +48,7 @@ class _BodyState extends State<Body> {
                   children: [
                     for (var i in _getdeals)
                       ItemCard(
+                        id: i.id,
                         cardname: i.card,
                         itemname: i.name,
                         profit: i.earning.toDouble(),

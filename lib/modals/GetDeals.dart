@@ -1,6 +1,7 @@
 // ignore_for_file: empty_constructor_bodies, override_on_non_overriding_member, file_names
 
 class GetDeals {
+  int id;
   String name;
   String desc;
   int actual;
@@ -12,11 +13,12 @@ class GetDeals {
   String offerlink;
   String platform;
 
-  GetDeals(this.actual, this.card, this.count, this.desc, this.earning,
+  GetDeals(this.id, this.actual, this.card, this.count, this.desc, this.earning,
       this.images, this.name, this.offer, this.offerlink, this.platform);
 
   GetDeals.fromJson(Map<dynamic, dynamic> json)
-      : actual = json["actual_price"] as int,
+      : id = json["id"] as int,
+        actual = json["actual_price"] as int,
         card = json["card"] as String,
         count = json["countleft"] as int,
         desc = json["description"] as String,

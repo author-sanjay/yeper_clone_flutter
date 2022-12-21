@@ -15,7 +15,9 @@ class DetailsScreen extends StatelessWidget {
       required this.desc,
       required this.photo,
       required this.link,
-      required this.platform});
+      required this.platform,
+      required this.id});
+  int id;
   int actualprice;
   String card;
   int earning;
@@ -28,6 +30,7 @@ class DetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Body(
+          id: id,
           actualprice: actualprice,
           card: card,
           desc: desc,
@@ -38,6 +41,7 @@ class DetailsScreen extends StatelessWidget {
           link: link,
           platform: platform),
       bottomNavigationBar: ActivateOffer(
+          id: id,
           key: key,
           actualprice: actualprice,
           card: card,

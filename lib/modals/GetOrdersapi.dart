@@ -11,8 +11,9 @@ import '../api.dart';
 class GetOrdersapi {
   static Future<List<GetOrders>> getOrders() async {
     Map<String, String> headers = {"Content-type": "application/json"};
-    var res = await http
-        .get(Uri.parse(api + "/orders/getsingle/" + user.id.toString()),headers: headers);
+    var res = await http.get(
+        Uri.parse(api + "/orders/getsingle/" + user.id.toString()),
+        headers: headers);
 
     print(res.body);
 

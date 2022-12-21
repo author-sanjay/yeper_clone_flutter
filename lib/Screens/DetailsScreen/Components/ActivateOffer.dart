@@ -1,9 +1,13 @@
 // ignore_for_file: prefer_const_constructors, file_names
 
-import 'package:flutter/material.dart';
-import 'package:yeper_user/Screens/OrderConfirmation/OrderConfirmation.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:yeper_user/Screens/LoginScreen/Components/Body.dart';
+import 'package:yeper_user/api.dart';
 import '../../../constants.dart';
+import '../../OrderConfirmation/OrderConfirmation.dart';
 
 class ActivateOffer extends StatefulWidget {
   ActivateOffer(
@@ -15,9 +19,10 @@ class ActivateOffer extends StatefulWidget {
       required this.desc,
       required this.photo,
       required this.link,
-      required this.platform})
+      required this.platform,
+      required this.id})
       : super(key: key);
-
+  int id;
   int actualprice;
   String card;
   int earning;
@@ -31,6 +36,27 @@ class ActivateOffer extends StatefulWidget {
 }
 
 class _ActivateOfferState extends State<ActivateOffer> {
+  Map<String, String> headers = {"Content-type": "application/json"};
+  Future<void> addorder() async {
+    final json = jsonEncode({
+      "order_status": "Unplaced",
+      "date": (DateTime.now().day + DateTime.now().month + DateTime.now().year)
+          .toString(),
+      "product": "Details",
+      "deal": widget.id,
+    });
+    var res = await http.post(
+        Uri.parse(api +
+            "/orders/add/" +
+            user.id.toString() +
+            "/" +
+            widget.id.toString()),
+        headers: headers,
+        body: json);
+
+    print(res.body);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -50,17 +76,24 @@ class _ActivateOfferState extends State<ActivateOffer> {
         height: 55,
         child: GestureDetector(
           onTap: () {
-            OrderConfirmation(
-              actualprice: widget.actualprice,
-              card: widget.card,
-              desc: widget.desc,
-              earning: widget.earning,
-              offer: widget.offer,
-              photo: widget.photo,
-              key: widget.key,
-              link: widget.link,
-              platform: widget.platform,
-            );
+            // print(DateTime.now().month);
+            addorder();
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => OrderConfirmation(
+            //       actualprice: widget.actualprice,
+            //       card: widget.card,
+            //       desc: widget.desc,
+            //       earning: widget.earning,
+            //       offer: widget.offer,
+            //       photo: widget.photo,
+            //       key: widget.key,
+            //       link: widget.link,
+            //       platform: widget.platform,
+            //     ),
+            //   ),
+            // );
           },
           child: Align(
             alignment: Alignment.center,
