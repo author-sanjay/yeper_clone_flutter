@@ -40,33 +40,35 @@ class _BodyState extends State<Body> {
         children: <Widget>[
           HeaderWithSearchbar(size: size),
           TitleWithButton(),
-           _isloading
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  ):
-          Wrap(
-            children: [
-              for (var i in _getdeals)
-                ItemCard(
-                  cardname: i.card,
-                  itemname: i.name,
-                  profit: i.earning.toDouble(),
-                  site: 'Flipkart',
-                  image: i.images,
-                  press: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => DetailsScreen(),
-                    //   ),
-                    // );
-                  },
-                  actual: i.actual,
-                  desc: i.desc,
-                  offer: i.offer,
-                ),
-            ],
-          )
+          _isloading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Wrap(
+                  children: [
+                    for (var i in _getdeals)
+                      ItemCard(
+                        cardname: i.card,
+                        itemname: i.name,
+                        profit: i.earning.toDouble(),
+                        site: 'Flipkart',
+                        image: i.images,
+                        link: i.offerlink,
+                        platform: i.platform,
+                        press: () {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => DetailsScreen(),
+                          //   ),
+                          // );
+                        },
+                        actual: i.actual,
+                        desc: i.desc,
+                        offer: i.offer,
+                      ),
+                  ],
+                )
         ],
       ),
     );

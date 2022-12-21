@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:yeper_user/Screens/LoginScreen/LoginScreen.dart';
 import 'package:yeper_user/Screens/OrderConfirmation/OrderConfirmation.dart';
 
 import 'package:yeper_user/constants.dart';
@@ -23,6 +24,6 @@ class MyApp extends StatelessWidget {
           textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: OrderConfirmation());
+        home: LoginScreen());
   }
 }

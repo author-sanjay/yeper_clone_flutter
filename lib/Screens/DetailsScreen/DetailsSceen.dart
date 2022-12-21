@@ -13,13 +13,17 @@ class DetailsScreen extends StatelessWidget {
       required this.earning,
       required this.offer,
       required this.desc,
-      required this.photo});
+      required this.photo,
+      required this.link,
+      required this.platform});
   int actualprice;
   String card;
   int earning;
   int offer;
   String desc;
   String photo;
+  String link;
+  String platform;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

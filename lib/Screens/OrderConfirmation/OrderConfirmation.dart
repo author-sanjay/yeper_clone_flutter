@@ -9,7 +9,10 @@ class OrderConfirmation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: OrderBody(),
+      body: Container(
+          child: OrderBody(
+        url: "https://flutter.dev",
+      )),
     );
   }
 }

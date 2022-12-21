@@ -1,6 +1,5 @@
 // ignore_for_file: empty_constructor_bodies, override_on_non_overriding_member, file_names
 
-
 class GetDeals {
   String name;
   String desc;

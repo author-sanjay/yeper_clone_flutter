@@ -16,7 +16,9 @@ class ItemCard extends StatelessWidget {
       required this.press,
       required this.desc,
       required this.actual,
-      required this.offer})
+      required this.offer,
+      required this.link,
+      required this.platform})
       : super(key: key);
 
   final String itemname;
@@ -28,6 +30,8 @@ class ItemCard extends StatelessWidget {
   final int actual;
   final int offer;
   final String desc;
+  final String link;
+  final String platform;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -38,6 +42,8 @@ class ItemCard extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => DetailsScreen(
+                link: link,
+                platform: platform,
                 actualprice: actual,
                 card: cardname,
                 earning: profit.toInt(),
