@@ -24,8 +24,8 @@ class GetDeals {
         images = json["photourl"] as String,
         name = json["product_name"] as String,
         offer = json["offer_price"] as int,
-        offerlink = json["link"] as String,
-        platform = json["platforms"] as String;
+        offerlink = json["offerlink"] as String,
+        platform = json["platform"] as String;
 
   static List<GetDeals> dealsfromapi(List api) {
     return api.map((e) {
@@ -35,6 +35,6 @@ class GetDeals {
 
   @override
   String tostring() {
-    return '{name:$name, image:$images, actual:$actual, offer:$offer, card:$card, earning:$earning desc:$desc, count:$count';
+    return '{name:$name, image:$images, actual:$actual, offer:$offer, card:$card, earning:$earning desc:$desc, count:$count , link:$offerlink, platform:$platform ';
   }
 }

@@ -5,13 +5,16 @@ import 'package:yeper_user/Screens/DetailsScreen/Components/IconsandImage.dart';
 import 'package:yeper_user/Screens/DetailsScreen/Components/OfferDetails.dart';
 
 class Body extends StatelessWidget {
-  Body({super.key,
+  Body(
+      {super.key,
       required this.actualprice,
       required this.card,
       required this.earning,
       required this.offer,
       required this.desc,
-      required this.photo});
+      required this.photo,
+      required this.link,
+      required this.platform});
 
   int actualprice;
   String card;
@@ -19,16 +22,17 @@ class Body extends StatelessWidget {
   int offer;
   String desc;
   String photo;
+  String link;
+  String platform;
   @override
   Widget build(BuildContext context) {
-
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
           ImageAndIcons(
             size: size,
-            actualprice:actualprice,
+            actualprice: actualprice,
             card: card,
             earning: earning,
             offerPrice: offer,

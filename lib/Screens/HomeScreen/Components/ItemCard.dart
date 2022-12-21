@@ -55,10 +55,10 @@ class ItemCard extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.only(
-            left: kDefaultPadding * 0.5,
+            left: kDefaultPadding * 0.4,
             top: kDefaultPadding / 2,
             bottom: kDefaultPadding * 2.5),
-        width: size.width * 0.42,
+        width: size.width * 0.45,
         child: Column(
           children: <Widget>[
             Image.network(

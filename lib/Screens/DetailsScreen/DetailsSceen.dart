@@ -34,8 +34,19 @@ class DetailsScreen extends StatelessWidget {
           earning: earning,
           offer: offer,
           photo: photo,
-          key: key),
-      bottomNavigationBar: ActivateOffer(),
+          key: key,
+          link: link,
+          platform: platform),
+      bottomNavigationBar: ActivateOffer(
+          key: key,
+          actualprice: actualprice,
+          card: card,
+          desc: desc,
+          earning: earning,
+          offer: offer,
+          photo: photo,
+          link: link,
+          platform: platform),
     );
   }
 }

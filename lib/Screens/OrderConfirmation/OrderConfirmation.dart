@@ -4,14 +4,39 @@ import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/OrderConfirmation/Components/OrderBody.dart';
 
 class OrderConfirmation extends StatelessWidget {
-  const OrderConfirmation({super.key});
+  OrderConfirmation(
+      {super.key,
+      required this.actualprice,
+      required this.card,
+      required this.earning,
+      required this.offer,
+      required this.desc,
+      required this.photo,
+      required this.link,
+      required this.platform});
 
+  int actualprice;
+  String card;
+  int earning;
+  int offer;
+  String desc;
+  String photo;
+  String link;
+  String platform;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
           child: OrderBody(
-        url: "https://flutter.dev",
+        actualprice: actualprice,
+        card: card,
+        desc: desc,
+        earning: earning,
+        link: link,
+        offer: offer,
+        photo: photo,
+        platform: platform,
+        key: key,
       )),
     );
   }

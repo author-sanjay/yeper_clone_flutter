@@ -6,15 +6,33 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class OrderBody extends StatefulWidget {
-  const OrderBody({super.key, required this.url});
-  final String url;
+  OrderBody(
+      {super.key,
+      required this.actualprice,
+      required this.card,
+      required this.earning,
+      required this.offer,
+      required this.desc,
+      required this.photo,
+      required this.link,
+      required this.platform});
+
+  int actualprice;
+  String card;
+  int earning;
+  int offer;
+  String desc;
+  String photo;
+  String link;
+  String platform;
+
   @override
   State<OrderBody> createState() => _OrderBodyState();
 }
 
 class _OrderBodyState extends State<OrderBody> {
   deals() async {
-    await launchUrl(Uri.parse(widget.url));
+    await launchUrl(Uri.parse(widget.link));
   }
 
   @override
@@ -52,9 +70,7 @@ class _OrderBodyState extends State<OrderBody> {
               width: MediaQuery.of(context).size.width * 0.4,
               height: MediaQuery.of(context).size.height * 0.25,
               child: ClipRRect(
-                  child: Image.asset(
-                    "assets/images/image_1.png",
-                  ),
+                  child: Image.network(widget.photo),
                   borderRadius: BorderRadius.circular(20)),
             ),
           ),

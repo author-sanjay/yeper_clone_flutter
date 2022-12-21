@@ -51,7 +51,7 @@ class _BodyState extends State<Body> {
                         cardname: i.card,
                         itemname: i.name,
                         profit: i.earning.toDouble(),
-                        site: 'Flipkart',
+                        site: i.platform,
                         image: i.images,
                         link: i.offerlink,
                         platform: i.platform,
