@@ -1,19 +1,22 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names, avoid_print, unnecessary_new
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:yeper_user/Screens/LoginScreen/LoginScreen.dart';
 import 'package:yeper_user/Screens/OtpScreen/OtpScreen.dart';
 
 import '../../../constants.dart';
-
 
 class TextFields extends StatelessWidget {
   const TextFields({
     Key? key,
   }) : super(key: key);
 
+  static String verify = "";
   @override
   Widget build(BuildContext context) {
+    late String phone_number;
     return Container(
       padding: EdgeInsets.only(
           left: MediaQuery.of(context).size.width * 0.2,
@@ -41,7 +44,7 @@ class TextFields extends StatelessWidget {
           ),
           TextField(
             onChanged: (value) {
-              print(value);
+              phone_number = value;
             },
             decoration: new InputDecoration(labelText: "Phone Number"),
             keyboardType: TextInputType.number,
@@ -53,13 +56,21 @@ class TextFields extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: GestureDetector(
-              onTap: (() {
-                
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => OtpScreen(),
-                  ),
+              onTap: (() async {
+                await FirebaseAuth.instance.verifyPhoneNumber(
+                  phoneNumber: "+91" + phone_number,
+                  verificationCompleted: (PhoneAuthCredential credential) {},
+                  verificationFailed: (FirebaseAuthException e) {},
+                  codeSent: (String verificationId, int? resendToken) {
+                    TextFields.verify = verificationId;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OtpScreen(),
+                      ),
+                    );
+                  },
+                  codeAutoRetrievalTimeout: (String verificationId) {},
                 );
               }),
               child: Container(
@@ -80,8 +91,7 @@ class TextFields extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10),
             child: Center(
               child: GestureDetector(
-                onTap: (() {
-                }),
+                onTap: (() {}),
                 child: RichText(
                   text: TextSpan(
                     children: [

@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
+import 'package:yeper_user/Screens/LoginScreen/LoginScreen.dart';
 
 import '../../../constants.dart';
+import '../../LoginScreen/Components/LoginFields.dart';
 
 final defaultPinTheme = PinTheme(
   width: 36,
@@ -30,9 +33,16 @@ final submittedPinTheme = defaultPinTheme.copyWith(
   ),
 );
 
-class TextFields extends StatelessWidget {
-  const TextFields({super.key});
+class Verify extends StatefulWidget {
+  const Verify({super.key});
 
+  @override
+  State<Verify> createState() => _VerifyState();
+}
+
+class _VerifyState extends State<Verify> {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  late String code;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -63,6 +73,9 @@ class TextFields extends StatelessWidget {
           // Only numbers can be entered
           Pinput(
             length: 6,
+            onChanged: ((value) {
+              code = value;
+            }),
             validator: (s) {
               return null;
             },
@@ -72,13 +85,27 @@ class TextFields extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: GestureDetector(
-              onTap: (() {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomeScreen(),
-                  ),
-                );
+              onTap: (() async {
+                try {
+                  PhoneAuthCredential credential = PhoneAuthProvider.credential(
+                      verificationId: TextFields.verify, smsCode: code);
+
+                  // Sign the user in (or link) with the credential
+                  await auth.signInWithCredential(credential);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(),
+                    ),
+                  );
+                } catch (_) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ),
+                  );
+                }
               }),
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.8,
