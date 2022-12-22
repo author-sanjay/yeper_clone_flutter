@@ -1,7 +1,7 @@
+// ignore_for_file: file_names, non_constant_identifier_names, prefer_const_literals_to_create_immutables, prefer_const_constructors, unnecessary_new, prefer_interpolation_to_compose_strings, empty_statements
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:yeper_user/Screens/Register/OtpScreenRegister.dart';
 
 import '../../constants.dart';
@@ -104,7 +104,7 @@ class Registerfields extends StatelessWidget {
         ],
       ),
     );
-    ;
+    
   }
 }
 

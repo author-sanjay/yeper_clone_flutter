@@ -1,14 +1,9 @@
-// ignore_for_file: prefer_const_constructors, file_names, prefer_const_literals_to_create_immutables, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, file_names, prefer_const_literals_to_create_immutables, use_build_context_synchronously, unnecessary_import, must_be_immutable, avoid_unnecessary_containers, sort_child_properties_last, sized_box_for_whitespace
 
-import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:url_launcher/url_launcher.dart';
-import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 
-import '../../../api.dart';
 
 class PreviewBody extends StatefulWidget {
   PreviewBody(

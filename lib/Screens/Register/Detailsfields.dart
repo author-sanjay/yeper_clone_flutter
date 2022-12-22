@@ -1,7 +1,6 @@
+// ignore_for_file: file_names, prefer_typing_uninitialized_variables, sized_box_for_whitespace, prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:yeper_user/constants.dart';
 
 class DetailsFields extends StatelessWidget {
@@ -40,7 +39,7 @@ class DetailsFields extends StatelessWidget {
                     onChanged: (value) {
                       DetailsFields.name = value;
                     },
-                    decoration: new InputDecoration(labelText: "Name"),
+                    decoration: const InputDecoration(labelText: "Name"),
                     keyboardType: TextInputType.number,
                   ),
                   SizedBox(height: 10),
@@ -48,7 +47,7 @@ class DetailsFields extends StatelessWidget {
                     onChanged: (value) {
                       DetailsFields.email = value;
                     },
-                    decoration: new InputDecoration(labelText: "Email"),
+                    decoration: const InputDecoration(labelText: "Email"),
                     keyboardType: TextInputType.number,
                   ),
                   SizedBox(height: 10),
@@ -57,7 +56,7 @@ class DetailsFields extends StatelessWidget {
                       // phone_number = value;
                       DetailsFields.address = value;
                     },
-                    decoration: new InputDecoration(labelText: "Address"),
+                    decoration: const InputDecoration(labelText: "Address"),
                     keyboardType: TextInputType.number,
                   ),
                   SizedBox(height: 10),
@@ -65,7 +64,7 @@ class DetailsFields extends StatelessWidget {
                     onChanged: (value) {
                       DetailsFields.bankaccount = value;
                     },
-                    decoration: new InputDecoration(labelText: "Bank Account"),
+                    decoration: const InputDecoration(labelText: "Bank Account"),
                     keyboardType: TextInputType.number,
                   ),
                   SizedBox(height: 10),
@@ -73,7 +72,7 @@ class DetailsFields extends StatelessWidget {
                     onChanged: (value) {
                       DetailsFields.bankname = value;
                     },
-                    decoration: new InputDecoration(labelText: "Bank Name"),
+                    decoration: const InputDecoration(labelText: "Bank Name"),
                     keyboardType: TextInputType.number,
                   ),
                   SizedBox(height: 10),
@@ -81,7 +80,7 @@ class DetailsFields extends StatelessWidget {
                     onChanged: (value) {
                       DetailsFields.ifsc = value;
                     },
-                    decoration: new InputDecoration(labelText: "IFSC"),
+                    decoration: const InputDecoration(labelText: "IFSC"),
                     keyboardType: TextInputType.number,
                   ),
                   SizedBox(height: 20),

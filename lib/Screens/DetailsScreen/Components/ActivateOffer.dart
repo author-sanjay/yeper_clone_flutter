@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, file_names, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, file_names, use_build_context_synchronously, must_be_immutable, prefer_final_fields, prefer_interpolation_to_compose_strings, avoid_print
 
 import 'dart:convert';
 

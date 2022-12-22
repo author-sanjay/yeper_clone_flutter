@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names, avoid_print, unnecessary_new
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names, avoid_print, unnecessary_new, non_constant_identifier_names, prefer_interpolation_to_compose_strings
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:yeper_user/Screens/LoginScreen/LoginScreen.dart';
 import 'package:yeper_user/Screens/OtpScreen/OtpScreen.dart';
 
 import '../../../constants.dart';
