@@ -10,8 +10,8 @@ import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 
 import '../../../api.dart';
 
-class OrderBody extends StatefulWidget {
-  OrderBody(
+class PreviewBody extends StatefulWidget {
+  PreviewBody(
       {super.key,
       required this.orderid,
       required this.actualprice,
@@ -20,11 +20,11 @@ class OrderBody extends StatefulWidget {
       required this.offer,
       required this.desc,
       required this.photo,
-      required this.link,
       required this.platform,
       required this.id,
-      required this.status});
-
+      required this.status,
+      required this.txn});
+  String txn;
   int orderid;
   int id;
   int actualprice;
@@ -33,44 +33,20 @@ class OrderBody extends StatefulWidget {
   int offer;
   String desc;
   String photo;
-  String link;
+
   String platform;
   String status;
   @override
-  State<OrderBody> createState() => _OrderBodyState();
+  State<PreviewBody> createState() => _PreviewBodyState();
 }
 
-class _OrderBodyState extends State<OrderBody> {
+class _PreviewBodyState extends State<PreviewBody> {
   // bool isloading = true;
-  Future<void> update(int id, String txnid) async {
-    final json = jsonEncode({"order_status": "Placed", "platformtxnid": txnid});
-    Map<String, String> headers = {"Content-type": "application/json"};
-    var res = await http.put(
-        Uri.parse(api + "/orders/updatestatus/" + id.toString()),
-        headers: headers,
-        body: json);
 
-    try {
-      final results = jsonDecode(res.body);
-      print(results);
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-      );
-    } catch (_) {
-      print("Error");
-    }
-  }
-
-  late String orderidofplatform;
   @override
   void initState() {
     // getdeals(widget.orderid);
     super.initState();
-  }
-
-  deals() async {
-    await launchUrl(Uri.parse(widget.link));
   }
 
   @override
@@ -257,19 +233,13 @@ class _OrderBodyState extends State<OrderBody> {
                       ),
                       Container(
                         color: Colors.white,
-                        child: TextFormField(
-                            onChanged: (value) {
-                              orderidofplatform = value;
-                            },
-                            decoration: InputDecoration(
-                                labelText: "Platform Order ID")),
-                      ),
+                        child: Text(widget.txn.toUpperCase(), style:  TextStyle(fontSize: 25),)),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.01),
                       GestureDetector(
                         child: Text("Don't Have one? click here"),
                         onTap: () {
-                          deals();
+                          // deals();
                         },
                       ),
                       SizedBox(
@@ -388,40 +358,6 @@ class _OrderBodyState extends State<OrderBody> {
                       ),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.03),
-                      Container(
-                        color: Colors.white,
-                        child: Column(
-                          children: [
-                            ElevatedButton(
-                                onPressed: () {
-                                  if (orderidofplatform == null) {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(const SnackBar(
-                                      content: Text(
-                                          "Please enter Platform order id"),
-                                    ));
-                                  } else {
-                                    update(widget.orderid, orderidofplatform);
-                                  }
-
-                                  setState(() {
-                                    widget.status = "Placed";
-                                  });
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                    Color.fromARGB(255, 7, 66, 88),
-                                  ),
-                                ),
-                                child: Text(
-                                  "Claim It",
-                                  style: TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.w300),
-                                ))
-                          ],
-                        ),
-                      ),
                     ],
                   ),
                 )),

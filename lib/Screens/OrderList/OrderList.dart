@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, prefer_const_literals_to_create_immutables, unnecessary_string_interpolations, must_be_immutable, avoid_print, camel_case_types
 
 import 'package:flutter/material.dart';
+import 'package:yeper_user/Screens/OrderList/Orderpreview.dart';
 import 'package:yeper_user/modals/GetOrders.dart';
 import 'package:yeper_user/modals/GetOrdersapi.dart';
 
@@ -133,10 +134,13 @@ class _OrderListState extends State<OrderList> {
                               : ListView.builder(
                                   itemBuilder: (context, index) {
                                     return orderdetails(
-                                        name: _getdeals[index].product,
-                                        date: _getdeals[index].date,
-                                        status: _getdeals[index].orderstatus,
-                                        id: _getdeals[index].orderid);
+                                      name: _getdeals[index].product,
+                                      date: _getdeals[index].date,
+                                      status: _getdeals[index].orderstatus,
+                                      id: _getdeals[index].orderid,
+                                      deal: _getdeals[index].deal,
+                                      platformlink: _getdeals[index].txn,
+                                    );
                                   },
                                   shrinkWrap: true,
                                   itemCount: _getdeals.length,
@@ -168,17 +172,32 @@ class orderdetails extends StatelessWidget {
       required this.name,
       required this.date,
       required this.status,
-      required this.id})
+      required this.id,
+      required this.deal,
+      required this.platformlink})
       : super(key: key);
+
+  String platformlink;
   int id;
   String name;
   String date;
   String status;
+  int deal;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (() {
-        print(id);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OrderPreview(
+              status: "Started",
+              orderid: id,
+              id: deal,
+              txn:platformlink,
+                          ),
+          ),
+        );
       }),
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 32),

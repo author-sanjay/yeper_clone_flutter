@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_constructors, file_names
+// ignore_for_file: prefer_const_constructors, file_names, use_build_context_synchronously
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -36,6 +37,8 @@ class ActivateOffer extends StatefulWidget {
 }
 
 class _ActivateOfferState extends State<ActivateOffer> {
+  bool _isloading = false;
+
   Map<String, String> headers = {"Content-type": "application/json"};
   Future<void> addorder() async {
     final json = jsonEncode({
@@ -54,7 +57,31 @@ class _ActivateOfferState extends State<ActivateOffer> {
         headers: headers,
         body: json);
 
-    print(res.body);
+    try {
+      final results = jsonDecode(res.body);
+      print(results);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => OrderConfirmation(
+            actualprice: widget.actualprice,
+            card: widget.card,
+            desc: widget.desc,
+            earning: widget.earning,
+            id: widget.id,
+            link: widget.link,
+            offer: widget.offer,
+            photo: widget.photo,
+            platform: widget.platform,
+            key: widget.key,
+            status: "Started",
+            orderid: results["id"],
+          ),
+        ),
+      );
+    } catch (_) {
+      print("failed");
+    }
   }
 
   @override
@@ -77,34 +104,24 @@ class _ActivateOfferState extends State<ActivateOffer> {
         child: GestureDetector(
           onTap: () {
             // print(DateTime.now().month);
+
             addorder();
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => OrderConfirmation(
-            //       actualprice: widget.actualprice,
-            //       card: widget.card,
-            //       desc: widget.desc,
-            //       earning: widget.earning,
-            //       offer: widget.offer,
-            //       photo: widget.photo,
-            //       key: widget.key,
-            //       link: widget.link,
-            //       platform: widget.platform,
-            //     ),
-            //   ),
-            // );
           },
-          child: Align(
-            alignment: Alignment.center,
-            child: RichText(
-                text: TextSpan(
-                    text: "Activate Offer",
-                    style: Theme.of(context).textTheme.headline4?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ))),
-          ),
+          child: _isloading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Align(
+                  alignment: Alignment.center,
+                  child: RichText(
+                      text: TextSpan(
+                          text: "Activate Offer",
+                          style:
+                              Theme.of(context).textTheme.headline4?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ))),
+                ),
         ),
       ),
     );
