@@ -7,6 +7,7 @@ import 'package:yeper_user/Screens/EditProfile/EditProfile.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:yeper_user/Screens/LoginScreen/Components/Body.dart';
 import 'package:http/http.dart' as http;
+import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/api.dart';
 
 class ProfileBody extends StatefulWidget {
@@ -18,8 +19,8 @@ class ProfileBody extends StatefulWidget {
 
 class _ProfileBodyState extends State<ProfileBody> {
   Map<String, String> headers = {"Content-type": "application/json"};
-  Future<void> post(String email, String phonenumber, int ac, String bankname,
-      String idfc) async {
+  Future<void> post(String email, String phonenumber, String ac,
+      String bankname, String idfc) async {
     final json = jsonEncode({
       "email": email,
       "phonenumber": phonenumber,
@@ -53,16 +54,16 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   @override
   Widget build(BuildContext context) {
-    int id = user.id;
-    String name = user.name;
-    String email = user.email;
-    String phonenumber = user.phonenumber;
-    String address = user.address;
-    String referalcode = user.referalcode;
-    String referedby = user.referedby;
-    int acnumber = user.acnumber;
-    String bankname = user.bankname;
-    String idfc = user.idfc;
+    String? id = user.id;
+    String? name = user.name;
+    String? email = user.email;
+    String? phonenumber = user.phonenumber;
+    String? address = user.address;
+    String? referalcode = user.referalcode;
+    String? referedby = user.referedby;
+    String? acnumber = user.acnumber;
+    String? bankname = user.bankname;
+    String? idfc = user.idfc;
     return SingleChildScrollView(
       child: Container(
         color: Color.fromARGB(255, 82, 29, 83),
@@ -211,7 +212,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                               children: <Widget>[
                                 TextField(
                                   onChanged: (value) {
-                                    acnumber = int.parse(value);
+                                    acnumber = value;
                                   },
                                   decoration: InputDecoration(
                                       labelText: "Bank A/C Number"),
@@ -310,7 +311,12 @@ class _ProfileBodyState extends State<ProfileBody> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        post(email, phonenumber, acnumber, bankname, idfc);
+                        post(
+                            email.toString(),
+                            phonenumber.toString(),
+                            acnumber.toString(),
+                            bankname.toString(),
+                            idfc.toString());
                       },
                       child: Text("Save"),
                       style: ButtonStyle(),

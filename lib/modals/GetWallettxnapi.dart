@@ -4,14 +4,15 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:yeper_user/Screens/LoginScreen/Components/Body.dart';
 import 'package:yeper_user/modals/GetWallettxn.dart';
+import 'package:yeper_user/modals/UserModal.dart';
 
+import '../Screens/Register/Detailsfields.dart';
 import '../api.dart';
 
 class Gettxnapi {
   static Future<List<Gettxn>> getDeals() async {
     Map<String, String> headers = {"Content-type": "application/json"};
-    var res = await http.get(
-        Uri.parse(api + "/txn/getsingle/" + user.id.toString()),
+    var res = await http.get(Uri.parse(api + "/txn/getsingle/" + user.id),
         headers: headers);
 
     List _temp = [];

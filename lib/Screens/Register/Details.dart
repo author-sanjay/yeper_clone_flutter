@@ -11,7 +11,14 @@ class Details extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // ignore: prefer_const_constructors
-      appBar: AppBar(title: Center(child: Text("Profile", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w300))), backgroundColor: Colors.white,elevation: 0.1,),
+      appBar: AppBar(
+        title: Center(
+            child: Text("Profile",
+                style: TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.w300))),
+        backgroundColor: Colors.white,
+        elevation: 0.1,
+      ),
       body: DetailsFields(),
     );
   }

@@ -9,6 +9,7 @@ import '../../constants.dart';
 class Registerfields extends StatelessWidget {
   const Registerfields({super.key});
   static String verify = "";
+  static String phone_number = "";
   @override
   Widget build(BuildContext context) {
     late String phone_number;
@@ -34,8 +35,8 @@ class Registerfields extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 10, bottom: 20),
             child: Center(
-                child: Text(
-                    "Register and Start Earning with Your Credit Card")),
+                child:
+                    Text("Register and Start Earning with Your Credit Card")),
           ),
           TextField(
             onChanged: (value) {
@@ -104,7 +105,6 @@ class Registerfields extends StatelessWidget {
         ],
       ),
     );
-    
   }
 }
 

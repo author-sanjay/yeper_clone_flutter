@@ -3,13 +3,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:yeper_user/Screens/Register/Details.dart';
 import 'package:yeper_user/Screens/Register/Register.dart';
 import 'package:yeper_user/Screens/Register/Registerfields.dart';
 import 'package:yeper_user/constants.dart';
 
 class RegisterVerify extends StatefulWidget {
   const RegisterVerify({super.key});
-
+  static var uid;
   @override
   State<RegisterVerify> createState() => _RegisterVerifyState();
 }
@@ -66,12 +67,14 @@ class _RegisterVerifyState extends State<RegisterVerify> {
 
                   // Sign the user in (or link) with the credential
                   await auth.signInWithCredential(credential);
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => HomeScreen(),
-                  //   ),
-                  // );
+
+                  RegisterVerify.uid = FirebaseAuth.instance.currentUser?.uid;
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Details(),
+                    ),
+                  );
                   print("Success");
                 } catch (_) {
                   Navigator.push(

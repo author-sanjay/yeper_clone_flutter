@@ -8,6 +8,7 @@ import 'package:yeper_user/Screens/LoginScreen/Components/Body.dart';
 import 'package:yeper_user/api.dart';
 import '../../../constants.dart';
 import '../../OrderConfirmation/OrderConfirmation.dart';
+import '../../Register/Detailsfields.dart';
 
 class ActivateOffer extends StatefulWidget {
   ActivateOffer(
