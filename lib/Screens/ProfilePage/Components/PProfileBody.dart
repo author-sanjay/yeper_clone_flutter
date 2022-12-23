@@ -4,8 +4,8 @@ import 'package:yeper_user/Screens/ChooseCard/ChooseCard.dart';
 import 'package:yeper_user/Screens/EditProfile/EditProfile.dart';
 import 'package:yeper_user/Screens/OrderList/OrderList.dart';
 import 'package:yeper_user/Screens/ReferalList/ReferralList.dart';
+import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/Screens/Wallet/Wallet.dart';
-
 
 class ProfileBody extends StatelessWidget {
   const ProfileBody({super.key});
@@ -13,40 +13,43 @@ class ProfileBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: SafeArea(child: 
-        Container(
+      child: SafeArea(
+        child: Container(
           color: Colors.white,
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Center(
             child: Padding(
               padding: const EdgeInsets.only(top: 20),
-              
               child: Column(
-                
                 children: <Widget>[
                   CircleAvatar(
-                    radius: MediaQuery.of(context).size.width * 0.15+2,
+                    radius: MediaQuery.of(context).size.width * 0.15 + 2,
                     backgroundColor: Colors.black,
-
-                    child: CircleAvatar(backgroundImage: AssetImage("assets/images/logo.png"),radius: MediaQuery.of(context).size.width*0.15,),
-                  )
-                  ,
-                  SizedBox(height:5),
-                  Text("Sanjay Kumar",style: TextStyle(fontSize: 25,color: Colors.black, fontWeight: FontWeight.w300),),
-                  SizedBox(height:5),
-                  
-                  
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage("assets/images/logo.png"),
+                      radius: MediaQuery.of(context).size.width * 0.15,
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    user.name.toString(),
+                    style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w300),
+                  ),
+                  SizedBox(height: 5),
                   Container(
-                    
-
                     child: List(),
-            ),
-          
+                  ),
                 ],
-              ),),),
+              ),
+            ),
+          ),
+        ),
       ),
-    ),);
+    );
   }
 }
 
@@ -58,28 +61,27 @@ class List extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      
-    children: [
-      GestureDetector(
-        onTap: (() {
-          Navigator.push(
+      children: [
+        GestureDetector(
+          onTap: (() {
+            Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => EditProfile(),
               ),
             );
-        }),
+          }),
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 47),
-            padding: EdgeInsets.only(top:32,bottom: 8),
+            padding: EdgeInsets.only(top: 32, bottom: 8),
             decoration: BoxDecoration(
-                color:  Colors.white,
+                color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             child: Row(
               children: <Widget>[
                 Container(
                   decoration: BoxDecoration(
-                      color:  Colors.white,
+                      color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(18))),
                   child: Icon(
                     Icons.edit,
@@ -96,7 +98,8 @@ class List extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Edit Profile",
-                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.w300),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w300),
                       )
                     ],
                   ),
@@ -105,17 +108,16 @@ class List extends StatelessWidget {
             ),
           ),
         ),
-        
-       GestureDetector(
-        onTap: () {
-          Navigator.push(
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => Wallet(),
               ),
             );
-        },
-         child: Container(
+          },
+          child: Container(
             margin: EdgeInsets.symmetric(horizontal: 32),
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -140,24 +142,27 @@ class List extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text("Wallet",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w300),)
+                      Text(
+                        "Wallet",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w300),
+                      )
                     ],
                   ),
                 ),
               ],
             ),
           ),
-       ),
-
-      GestureDetector(
-        onTap: () {
-          Navigator.push(
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => OrderList(),
               ),
             );
-        },
+          },
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 32),
             padding: EdgeInsets.all(16),
@@ -185,7 +190,8 @@ class List extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Orders",
-                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.w300),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w300),
                       )
                     ],
                   ),
@@ -194,16 +200,15 @@ class List extends StatelessWidget {
             ),
           ),
         ),
-       
-      GestureDetector(
-        onTap: (){
-          Navigator.push(
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => ReferralList(),
               ),
             );
-        },
+          },
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 32),
             padding: EdgeInsets.all(16),
@@ -231,7 +236,8 @@ class List extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Referrals",
-                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.w300),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w300),
                       )
                     ],
                   ),
@@ -240,16 +246,15 @@ class List extends StatelessWidget {
             ),
           ),
         ),
-       
-      GestureDetector(
-        onTap: () {
-          Navigator.push(
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => ChooseCard(),
               ),
             );
-        },
+          },
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 32),
             padding: EdgeInsets.all(16),
@@ -277,7 +282,8 @@ class List extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Manage Cards",
-                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.w300),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w300),
                       )
                     ],
                   ),
@@ -286,7 +292,7 @@ class List extends StatelessWidget {
             ),
           ),
         ),
-      GestureDetector(
+        GestureDetector(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 32),
             padding: EdgeInsets.all(16),
@@ -314,7 +320,8 @@ class List extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Help & Support",
-                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.w300),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w300),
                       )
                     ],
                   ),
@@ -323,7 +330,6 @@ class List extends StatelessWidget {
             ),
           ),
         ),
-       
         GestureDetector(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 32),
@@ -352,7 +358,8 @@ class List extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Contact Us",
-                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.w300),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w300),
                       )
                     ],
                   ),
@@ -361,9 +368,7 @@ class List extends StatelessWidget {
             ),
           ),
         ),
-           
-    ],
-              );
+      ],
+    );
   }
 }
-

@@ -12,7 +12,8 @@ import '../api.dart';
 class Gettxnapi {
   static Future<List<Gettxn>> getDeals() async {
     Map<String, String> headers = {"Content-type": "application/json"};
-    var res = await http.get(Uri.parse(api + "/txn/getsingle/" + user.id),
+    var res = await http.get(
+        Uri.parse(api + "/txn/getsingle/" + user.id.toString()),
         headers: headers);
 
     List _temp = [];

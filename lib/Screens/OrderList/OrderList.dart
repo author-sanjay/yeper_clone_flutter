@@ -194,8 +194,8 @@ class orderdetails extends StatelessWidget {
               status: "Started",
               orderid: id,
               id: deal,
-              txn:platformlink,
-                          ),
+              txn: platformlink,
+            ),
           ),
         );
       }),

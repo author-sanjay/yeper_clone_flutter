@@ -5,17 +5,17 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 
 class Users extends ChangeNotifier {
-  late final String id;
-  late final String name;
-  late final String email;
-  late final String phonenumber;
-  late final String address;
-  late final String referalcode;
-  late final String referedby;
-  late final String acnumber;
-  late final String bankname;
-  late final int wallet;
-  late final String idfc;
+  late String? id;
+  late String? name;
+  late String? email;
+  late String? phonenumber;
+  late String? address;
+  late String? referalcode;
+  late String? referedby;
+  late String? acnumber;
+  late String? bankname;
+  // late final int wallet;
+  late String? idfc;
 
   // void signin(String email, String password, int id) {
   //   email = email;
@@ -33,7 +33,7 @@ class Users extends ChangeNotifier {
       String referedby,
       String acnumber,
       String bankname,
-      int wallet,
+      // int wallet,
       String idfc) {
     id = id;
     name = name;
@@ -44,8 +44,9 @@ class Users extends ChangeNotifier {
     referedby = referedby;
     acnumber = acnumber;
     bankname = bankname;
-    wallet = wallet;
+    // wallet = wallet;
     idfc = idfc;
+    notifyListeners();
   }
 
   // Users.fromJson(Map<dynamic, dynamic> result)
