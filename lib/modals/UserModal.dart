@@ -4,6 +4,12 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 
+class Wallet {
+  late int id;
+  late int balance;
+  Wallet(this.balance, this.id);
+}
+
 class Users extends ChangeNotifier {
   late String? id;
   late String? name;
@@ -14,7 +20,7 @@ class Users extends ChangeNotifier {
   late String? referedby;
   late String? acnumber;
   late String? bankname;
-  // late final int wallet;
+  // late Wallet wallet;
   late String? idfc;
 
   // void signin(String email, String password, int id) {
@@ -33,7 +39,7 @@ class Users extends ChangeNotifier {
       String referedby,
       String acnumber,
       String bankname,
-      // int wallet,
+      // Wallet wallet,
       String idfc) {
     id = id;
     name = name;

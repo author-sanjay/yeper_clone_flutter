@@ -42,6 +42,7 @@ dependencies:
   firebase_core:
   firebase_auth:
   provider:
+  firebase_storage:
 
 dev_dependencies:
   flutter_test:

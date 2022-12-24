@@ -33,67 +33,67 @@ class _HomeScreenState extends State<HomeScreen> {
 
     var result = jsonDecode(res.body);
     print(result);
-    
-      try{
-        user.id=  result["uid"];
-        print(user.id);
-      }catch (e){
-        print(e);
-      }
-        try{
-        user.name=  result["name"];
 
-        print(user.name);
-      }catch (e){
-        print(e);
-      }
-      try{
-        user.email=  result["email"];
-        print(user.email);
-      }catch (e){
-        print(e);
-      }
-      try{
-        user.phonenumber=  result["phonenumber"];
-        print(user.phonenumber);
-      }catch (e){
-        print(e);
-      }
-      try{
-        user.address=  result["address"];
-        print(user.address);
-      }catch (e){
-        print(e);
-      }
+    try {
+      user.id = result["uid"];
+      print(user.id);
+    } catch (e) {
+      print(e);
+    }
+    try {
+      user.name = result["name"];
 
-try{
-        user.referalcode=  result["referalCode"]  ;
-        print(user.referalcode);
-      }catch (e){
-        print(e);
-      }
-      try{
-        user.referedby=  result["referralof"]  ;
-    print(user.referedby);
-      }catch (e){
-        print(e);
-      }   
+      print(user.name);
+    } catch (e) {
+      print(e);
+    }
+    try {
+      user.email = result["email"];
+      print(user.email);
+    } catch (e) {
+      print(e);
+    }
+    try {
+      user.phonenumber = result["phonenumber"];
+      print(user.phonenumber);
+    } catch (e) {
+      print(e);
+    }
+    try {
+      user.address = result["address"];
+      print(user.address);
+    } catch (e) {
+      print(e);
+    }
 
-try{
-        user.acnumber=  result["acnumber"]  ;
+    try {
+      user.referalcode = result["referalCode"];
+      print(user.referalcode);
+    } catch (e) {
+      print(e);
+    }
+    try {
+      user.referedby = result["referralof"];
+      print(user.referedby);
+    } catch (e) {
+      print(e);
+    }
+
+    try {
+      user.acnumber = result["acnumber"];
       print(user.acnumber);
-      }catch (e){
-        print(e);
-      }  
-      try{
-        user.bankname=  result["bankname"]  ;
-    print(user.bankname);
-      }catch (e){
-        print(e);
-      }      // result["wallet"]  ,
-        
-        try{
-        user.idfc=  result["idfc"] ;
+    } catch (e) {
+      print(e);
+    }
+    try {
+      user.bankname = result["bankname"];
+      print(user.bankname);
+    } catch (e) {
+      print(e);
+    } // result["wallet"]  ,
+
+    try {
+      user.idfc = result["idfc"];
     } catch (e) {
       print(e);
     }

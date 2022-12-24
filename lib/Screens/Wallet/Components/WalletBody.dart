@@ -1,10 +1,15 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, file_names, unused_import, prefer_const_literals_to_create_immutables, avoid_print, must_be_immutable, camel_case_types, unnecessary_string_interpolations
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/Screens/Wallet/Components/Header.dart';
 import 'package:yeper_user/constants.dart';
 import 'package:yeper_user/modals/GetWallettxn.dart';
 import 'package:yeper_user/modals/GetWallettxnapi.dart';
+import 'package:http/http.dart' as http;
+import '../../../api.dart';
 
 class WalletBody extends StatefulWidget {
   const WalletBody({super.key});
@@ -14,8 +19,18 @@ class WalletBody extends StatefulWidget {
 }
 
 class _WalletBodyState extends State<WalletBody> {
- 
+  Future<void> getbalance() async {
+    Map<String, String> headers = {"Content-type": "application/json"};
+    var res = await http.get(
+        Uri.parse(api + "/user/getwalletbalance/" + user.id.toString()),
+        headers: headers);
 
+    var result = jsonDecode(res.body);
+    balance = result;
+    setState(() {});
+  }
+
+  late int balance;
   late List<Gettxn> _getdeals;
   bool _isloading = true;
 
@@ -23,13 +38,13 @@ class _WalletBodyState extends State<WalletBody> {
   void initState() {
     super.initState();
     getDeals();
+    getbalance();
   }
 
   Future<void> getDeals() async {
     _getdeals = await Gettxnapi.getDeals();
     setState(() {
       _isloading = false;
-      
     });
     print(_getdeals);
   }
@@ -73,7 +88,7 @@ class _WalletBodyState extends State<WalletBody> {
                                     child: CircularProgressIndicator(),
                                   )
                                 : Text(
-                                    "Rs 50",
+                                    "Rs $balance",
                                     style: Theme.of(context)
                                         .textTheme
                                         .headline5
@@ -244,14 +259,14 @@ class txndetails extends StatelessWidget {
             children: <Widget>[
               incoming
                   ? Text(
-                      "+\$$amount",
+                      "+ Rs $amount",
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
                           color: Colors.lightGreen),
                     )
                   : Text(
-                      "-\$$amount",
+                      "-Rs $amount",
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,

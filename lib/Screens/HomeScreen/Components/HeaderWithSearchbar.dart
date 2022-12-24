@@ -1,13 +1,18 @@
 // ignore_for_file: prefer_const_constructors, file_names, avoid_print, sized_box_for_whitespace, unused_import
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:yeper_user/Screens/ProfilePage/Profile.dart';
+import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/Screens/Wallet/Wallet.dart';
-
+import 'package:http/http.dart' as http;
+import '../../../api.dart';
 import '../../../constants.dart';
 
-class HeaderWithSearchbar extends StatelessWidget {
+class HeaderWithSearchbar extends StatefulWidget {
   const HeaderWithSearchbar({
     Key? key,
     required this.size,
@@ -16,14 +21,19 @@ class HeaderWithSearchbar extends StatelessWidget {
   final Size size;
 
   @override
+  State<HeaderWithSearchbar> createState() => _HeaderWithSearchbarState();
+}
+
+class _HeaderWithSearchbarState extends State<HeaderWithSearchbar> {
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: kDefaultPadding * 2.5),
-      height: size.height * 0.2,
+      height: widget.size.height * 0.2,
       child: Stack(
         children: <Widget>[
           Container(
-            height: size.height * 0.2 - 27,
+            height: widget.size.height * 0.2 - 27,
             decoration: BoxDecoration(
                 color: kprimarycolor,
                 borderRadius: BorderRadius.only(
@@ -40,21 +50,47 @@ class HeaderWithSearchbar extends StatelessWidget {
               }),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      "Your Balance",
-                      style: Theme.of(context).textTheme.headline5?.copyWith(
-                          color: Colors.white, fontWeight: FontWeight.w300),
-                    ),
-                    Text(
-                      "\$ 24",
-                      style: Theme.of(context).textTheme.headline5?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30),
-                    ),
-                  ],
+                padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * 0.1,
+                    vertical: MediaQuery.of(context).size.width * 0.05),
+                child: Container(
+                  child: Row(
+                    children: [
+                      Column(
+                        children: <Widget>[
+                          Text(
+                            "Welcome",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5
+                                ?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 12),
+                          ),
+                          Text(
+                            user.name.toString().toUpperCase(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5
+                                ?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 30),
+                          ),
+                        ],
+                      ),
+                      Spacer(),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: MediaQuery.of(context).size.width * 0.05),
+                        child: CircleAvatar(
+                            radius: MediaQuery.of(context).size.width * 0.10,
+                            backgroundImage:
+                                AssetImage("assets/images/image_1.png")),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

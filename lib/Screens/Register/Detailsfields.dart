@@ -68,7 +68,7 @@ class _DetailsFieldsState extends State<DetailsFields> {
           "referedby",
           result["acnumber"],
           DetailsFields.bankname,
-          // 1,
+          // jsonDecode(result["wallet"])["id"],
           DetailsFields.ifsc);
 
       // user.acnumber = result["acnumber"];

@@ -41,11 +41,13 @@ class OrderBody extends StatefulWidget {
 
 class _OrderBodyState extends State<OrderBody> {
   // bool isloading = true;
+  bool neworder = true;
   Future<void> update(int id, String txnid) async {
     final json = jsonEncode({"order_status": "Placed", "platformtxnid": txnid});
+    print(json);
     Map<String, String> headers = {"Content-type": "application/json"};
-    var res = await http.put(
-        Uri.parse(api + "/orders/updatestatus/" + id.toString()),
+    var res = await http.post(
+        Uri.parse(api + "/orders/updatesingle/" + id.toString()),
         headers: headers,
         body: json);
 
@@ -254,23 +256,30 @@ class _OrderBodyState extends State<OrderBody> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.01,
                       ),
-                      Container(
-                        color: Colors.white,
-                        child: TextFormField(
-                            onChanged: (value) {
-                              orderidofplatform = value;
-                            },
-                            decoration: InputDecoration(
-                                labelText: "Platform Order ID")),
-                      ),
+                      neworder
+                          ? Text(
+                              "Click on CLick it to ",
+                              style: TextStyle(fontSize: 15),
+                            )
+                          : Container(
+                              color: Colors.white,
+                              child: TextFormField(
+                                  onChanged: (value) {
+                                    orderidofplatform = value;
+                                  },
+                                  decoration: InputDecoration(
+                                      labelText: "Platform Order ID")),
+                            ),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.01),
-                      GestureDetector(
-                        child: Text("Don't Have one? click here"),
-                        onTap: () {
-                          deals();
-                        },
-                      ),
+                      neworder
+                          ? Text("activate offer")
+                          : GestureDetector(
+                              child: Text("Don't Have one? click here"),
+                              onTap: () {
+                                deals();
+                              },
+                            ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.02,
                       ),
@@ -391,33 +400,55 @@ class _OrderBodyState extends State<OrderBody> {
                         color: Colors.white,
                         child: Column(
                           children: [
-                            ElevatedButton(
-                                onPressed: () {
-                                  if (orderidofplatform == null) {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(const SnackBar(
-                                      content: Text(
-                                          "Please enter Platform order id"),
-                                    ));
-                                  } else {
-                                    update(widget.orderid, orderidofplatform);
-                                  }
+                            neworder
+                                ? ElevatedButton(
+                                    onPressed: () {
+                                      deals();
+                                      setState(() {
+                                        neworder = false;
+                                      });
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                        Color.fromARGB(255, 7, 66, 88),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      "Activate Order",
+                                      style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.w300),
+                                    ))
+                                : ElevatedButton(
+                                    onPressed: () {
+                                      if (orderidofplatform == null) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                          content: Text(
+                                              "Please enter Platform order id"),
+                                        ));
+                                      } else {
+                                        update(
+                                            widget.orderid, orderidofplatform);
+                                      }
 
-                                  setState(() {
-                                    widget.status = "Placed";
-                                  });
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                    Color.fromARGB(255, 7, 66, 88),
-                                  ),
-                                ),
-                                child: Text(
-                                  "Claim It",
-                                  style: TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.w300),
-                                ))
+                                      setState(() {
+                                        widget.status = "Placed";
+                                      });
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                        Color.fromARGB(255, 7, 66, 88),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      "Claim It",
+                                      style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.w300),
+                                    ))
                           ],
                         ),
                       ),
