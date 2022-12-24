@@ -1,16 +1,39 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, file_names, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:yeper_user/modals/GeRefralls.dart';
 
 import '../../constants.dart';
+import '../../modals/GetReferals.dart';
 
-class ReferralList extends StatelessWidget {
+class ReferralList extends StatefulWidget {
   const ReferralList({super.key});
+
+  @override
+  State<ReferralList> createState() => _ReferralListState();
+}
+
+class _ReferralListState extends State<ReferralList> {
+  late List<GetRef> _getdeals;
+  bool _isloading = true;
+  Future<void> getDeals() async {
+    _getdeals = await GetRefapi.getDeals();
+    setState(() {
+      _isloading = false;
+    });
+    print(_getdeals);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getDeals();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  SingleChildScrollView(
+      body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
             color: kprimarycolor,
@@ -79,7 +102,7 @@ class ReferralList extends StatelessWidget {
                                   Text(
                                     "Recent Transactions",
                                     style: TextStyle(
-                                        fontWeight: FontWeight.w900,
+                                        fontWeight: FontWeight.w400,
                                         fontSize: 24,
                                         color: Colors.black),
                                   ),
@@ -93,70 +116,23 @@ class ReferralList extends StatelessWidget {
                             SizedBox(
                               height: 16,
                             ),
-                            ListView.builder(
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 32),
-                                  padding: EdgeInsets.all(16),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20))),
-                                  child: Row(
-                                    children: <Widget>[
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey[100],
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(18))),
-                                        child: Icon(
-                                          Icons.person,
-                                          color: Colors.lightBlue[900],
-                                        ),
-                                        padding: EdgeInsets.all(12),
-                                      ),
-                                      SizedBox(
-                                        width: 16,
-                                      ),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text(
-                                              "Sanjay",
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: Colors.grey[900]),
-                                            ),
-                                            
-                                          ],
-                                        ),
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: <Widget>[
-                                          Text(
-                                            "26 Jan",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.grey[500]),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                            _isloading
+                                ? Center(
+                                    child: CircularProgressIndicator(),
+                                  )
+                                : ListView.builder(
+                                    itemBuilder: (context, index) {
+                                      return ref(
+                                        name: _getdeals[index].name,
+                                        date: _getdeals[index].date,
+                                      );
+                                    },
+                                    shrinkWrap: true,
+                                    itemCount: _getdeals.length,
+                                    padding: EdgeInsets.all(0),
+                                    controller: ScrollController(
+                                        keepScrollOffset: false),
                                   ),
-                                );
-                              },
-                              shrinkWrap: true,
-                              itemCount: 10,
-                              padding: EdgeInsets.all(0),
-                              controller:
-                                  ScrollController(keepScrollOffset: false),
-                            ),
                           ],
                         ),
                         controller: scrollController,
@@ -171,6 +147,70 @@ class ReferralList extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ref extends StatefulWidget {
+  ref({Key? key, required this.name, required this.date}) : super(key: key);
+  String name;
+  String date;
+  @override
+  State<ref> createState() => _refState();
+}
+
+class _refState extends State<ref> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 32),
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(20))),
+      child: Row(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.all(Radius.circular(18))),
+            child: Icon(
+              Icons.person,
+              color: Colors.lightBlue[900],
+            ),
+            padding: EdgeInsets.all(12),
+          ),
+          SizedBox(
+            width: 16,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  widget.name,
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey[900]),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              Text(
+                widget.date,
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.grey[500]),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
