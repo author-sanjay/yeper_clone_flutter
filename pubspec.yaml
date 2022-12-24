@@ -43,6 +43,7 @@ dependencies:
   firebase_auth:
   provider:
   firebase_storage:
+  file_picker:
 
 dev_dependencies:
   flutter_test:

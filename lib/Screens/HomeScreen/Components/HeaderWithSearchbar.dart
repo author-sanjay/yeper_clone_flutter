@@ -81,6 +81,7 @@ class _HeaderWithSearchbarState extends State<HeaderWithSearchbar> {
                         ],
                       ),
                       Spacer(),
+                      user.photo?.length==0?
                       Container(
                         padding: EdgeInsets.symmetric(
                             vertical: MediaQuery.of(context).size.width * 0.05),
@@ -88,7 +89,16 @@ class _HeaderWithSearchbarState extends State<HeaderWithSearchbar> {
                             radius: MediaQuery.of(context).size.width * 0.10,
                             backgroundImage:
                                 AssetImage("assets/images/image_1.png")),
-                      ),
+                      ): Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical:
+                                      MediaQuery.of(context).size.width * 0.05),
+                              child: CircleAvatar(
+                                  radius:
+                                      MediaQuery.of(context).size.width * 0.10,
+                                  backgroundImage:
+                                      NetworkImage(user.photo.toString()),
+                            ),)
                     ],
                   ),
                 ),

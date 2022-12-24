@@ -23,6 +23,7 @@ class ProfileBody extends StatelessWidget {
               padding: const EdgeInsets.only(top: 20),
               child: Column(
                 children: <Widget>[
+                  user.photo?.length==0?
                   CircleAvatar(
                     radius: MediaQuery.of(context).size.width * 0.15 + 2,
                     backgroundColor: Colors.black,
@@ -30,7 +31,15 @@ class ProfileBody extends StatelessWidget {
                       backgroundImage: AssetImage("assets/images/logo.png"),
                       radius: MediaQuery.of(context).size.width * 0.15,
                     ),
-                  ),
+                  ): CircleAvatar(
+                          radius: MediaQuery.of(context).size.width * 0.15 + 2,
+                          backgroundColor: Colors.black,
+                          child: CircleAvatar(
+                            backgroundImage:
+                                NetworkImage(user.photo.toString()),
+                            radius: MediaQuery.of(context).size.width * 0.15,
+                          ),
+                        ),
                   SizedBox(height: 5),
                   Text(
                     user.name.toString(),

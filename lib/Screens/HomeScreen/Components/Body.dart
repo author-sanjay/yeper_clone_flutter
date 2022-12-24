@@ -41,9 +41,9 @@ class _BodyState extends State<Body> {
           HeaderWithSearchbar(size: size),
           TitleWithButton(),
           _isloading
-              ? Center(
+              ?Center(
                   child: CircularProgressIndicator(),
-                )
+                ) 
               : Wrap(
                   children: [
                     for (var i in _getdeals)

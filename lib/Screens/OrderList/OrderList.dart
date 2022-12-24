@@ -191,7 +191,7 @@ class orderdetails extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => OrderPreview(
-              status: "Started",
+              status: status,
               orderid: id,
               id: deal,
               txn: platformlink,

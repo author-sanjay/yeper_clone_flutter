@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/EditProfile/EditProfile.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
@@ -9,6 +10,8 @@ import 'package:yeper_user/Screens/LoginScreen/Components/Body.dart';
 import 'package:http/http.dart' as http;
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/api.dart';
+
+import '../../Storage.dart';
 
 class ProfileBody extends StatefulWidget {
   const ProfileBody({super.key});
@@ -19,14 +22,16 @@ class ProfileBody extends StatefulWidget {
 
 class _ProfileBodyState extends State<ProfileBody> {
   Map<String, String> headers = {"Content-type": "application/json"};
-  Future<void> post(String email, String phonenumber, String ac,
-      String bankname, String idfc) async {
+  Future<void> post(String? email, String? phonenumber, String? ac,
+      String? bankname, String? idfc, String? photo) async {
+    // print("$email  $phonenumber $ac $bankname $idfc $photo");
     final json = jsonEncode({
       "email": email,
       "phonenumber": phonenumber,
       "acnumber": ac,
       "bankname": bankname,
-      "idfc": idfc
+      "idfc": idfc,
+      "photo": photo
     });
 
     var res = await http.put(
@@ -36,6 +41,8 @@ class _ProfileBodyState extends State<ProfileBody> {
 
     try {
       final result = jsonDecode(res.body);
+      print(result);
+
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -54,19 +61,21 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   @override
   Widget build(BuildContext context) {
-    String? id = user.id;
-    String? name = user.name;
+    // String? id = user.id;
+    // String? name = user.name;
     String? email = user.email;
     String? phonenumber = user.phonenumber;
-    String? address = user.address;
-    String? referalcode = user.referalcode;
-    String? referedby = user.referedby;
+    // String? address = user.address;
+    // String? referalcode = user.referalcode;
+    // String? referedby = user.referedby;
     String? acnumber = user.acnumber;
     String? bankname = user.bankname;
     String? idfc = user.idfc;
+    String? photo = user.photo;
+    final Storage storage = Storage();
     return SingleChildScrollView(
       child: Container(
-        color: Color.fromARGB(255, 82, 29, 83),
+        color: Color.fromARGB(255, 181, 114, 20),
         height: MediaQuery.of(context).size.height,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,11 +90,63 @@ class _ProfileBodyState extends State<ProfileBody> {
                   children: <Widget>[
                     CircleAvatar(
                         radius: MediaQuery.of(context).size.width * 0.21,
+                        backgroundColor: Colors.white,
                         child: Center(
+                          child: GestureDetector(
+                            onTap: (() async {
+                              final results =
+                                  await FilePicker.platform.pickFiles(
+                                allowMultiple: false,
+                                type: FileType.image,
+                              );
+                              if (results == null) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text("File not selected"),
+                                ));
+                                return null;
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text("File selected"),
+                                ));
+                              }
+                              final path = results.files.single.path;
+                              final filename = results.files.single.name;
+                              // ignore: avoid_print
+                              storage
+                                  .uploadfile(path!, filename)
+                                  .then(((result) {
+                                // deals("", "", "", "", "", "", 0, widget.photourl!);
+
+                                setState(() {
+                                  // deal.photo = result;
+                                  // widget.photo = result;
+                                  photo = result;
+                                  user.photo = result;
+                                });
+                              }));
+                            }),
+                            child: 
+                             user.photo?.length==0?
+                  CircleAvatar(
+                    radius: MediaQuery.of(context).size.width * 0.2,
+                    backgroundColor: Colors.black,
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage("assets/images/logo.png"),
+                      radius: MediaQuery.of(context).size.width * 0.02,
+                    ),
+                  ): CircleAvatar(
+                          radius: MediaQuery.of(context).size.width * 0.2,
+                          backgroundColor: Colors.black,
                           child: CircleAvatar(
-                              radius: MediaQuery.of(context).size.width * 0.20,
-                              backgroundImage:
-                                  AssetImage("assets/images/image_1.png")),
+                            backgroundImage:
+                                NetworkImage(user.photo.toString()),
+                            radius: MediaQuery.of(context).size.width * 0.2,
+                          ),
+                        ),
+                           
+                          ),
                         )),
 
                     SizedBox(
@@ -95,7 +156,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                         style: TextStyle(
                             fontSize: 23,
                             color: Colors.white,
-                            fontWeight: FontWeight.w200)),
+                            fontWeight: FontWeight.w300)),
                     SizedBox(
                       height: 5,
                     ),
@@ -316,7 +377,8 @@ class _ProfileBodyState extends State<ProfileBody> {
                             phonenumber.toString(),
                             acnumber.toString(),
                             bankname.toString(),
-                            idfc.toString());
+                            idfc.toString(),
+                            photo.toString());
                       },
                       child: Text("Save"),
                       style: ButtonStyle(),

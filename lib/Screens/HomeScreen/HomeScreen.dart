@@ -25,6 +25,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late String? uid;
+  bool isloading = true;
   Future<void> gettinguser() async {
     Map<String, String> headers = {"Content-type": "application/json"};
     var res = await http.get(
@@ -97,6 +98,17 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (e) {
       print(e);
     }
+
+    try {
+      user.photo = result["photo"];
+      print(user.photo);
+    } catch (e) {
+      print(e);
+    }
+
+    setState(() {
+      isloading = false;
+    });
   }
 
   void initState() {
@@ -113,7 +125,11 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: kprimarycolor,
         elevation: 0,
       ),
-      body: Body(),
+      body: isloading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Body(),
       drawer: drawer(),
     );
   }

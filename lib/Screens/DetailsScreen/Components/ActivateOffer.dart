@@ -3,12 +3,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:yeper_user/Screens/LoginScreen/Components/Body.dart';
-import 'package:yeper_user/api.dart';
+import 'package:yeper_user/Screens/Register/Detailsfields.dart';
+import '../../../api.dart';
 import '../../../constants.dart';
+import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+
 import '../../OrderConfirmation/OrderConfirmation.dart';
-import '../../Register/Detailsfields.dart';
 
 class ActivateOffer extends StatefulWidget {
   ActivateOffer(
@@ -41,13 +42,17 @@ class _ActivateOfferState extends State<ActivateOffer> {
 
   Map<String, String> headers = {"Content-type": "application/json"};
   Future<void> addorder() async {
+    var dt = DateTime.now();
+
+    var newFormat = DateFormat("dd-MM-yy");
+    String updatedDt = newFormat.format(dt);
     final json = jsonEncode({
       "order_status": "Unplaced",
-      "date": (DateTime.now().day + DateTime.now().month + DateTime.now().year)
-          .toString(),
+      "date": updatedDt,
       "product": "Details",
       "deal": widget.id,
     });
+
     var res = await http.post(
         Uri.parse(api +
             "/orders/add/" +
@@ -119,7 +124,7 @@ class _ActivateOfferState extends State<ActivateOffer> {
                           style:
                               Theme.of(context).textTheme.headline4?.copyWith(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w400,
                                   ))),
                 ),
         ),

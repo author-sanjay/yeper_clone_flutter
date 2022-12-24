@@ -21,6 +21,7 @@ class Users extends ChangeNotifier {
   late String? acnumber;
   late String? bankname;
   // late Wallet wallet;
+  late String? photo;
   late String? idfc;
 
   // void signin(String email, String password, int id) {
@@ -40,6 +41,7 @@ class Users extends ChangeNotifier {
       String acnumber,
       String bankname,
       // Wallet wallet,
+      String photo,
       String idfc) {
     id = id;
     name = name;
@@ -51,6 +53,7 @@ class Users extends ChangeNotifier {
     acnumber = acnumber;
     bankname = bankname;
     // wallet = wallet;
+    photo = photo;
     idfc = idfc;
     notifyListeners();
   }
