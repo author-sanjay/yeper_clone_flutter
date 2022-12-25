@@ -26,7 +26,7 @@ class Images extends StatelessWidget {
           ],
           image: DecorationImage(
               alignment: Alignment.centerLeft,
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
               image: NetworkImage(Url))),
     );
   }
