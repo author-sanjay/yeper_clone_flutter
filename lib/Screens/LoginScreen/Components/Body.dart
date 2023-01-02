@@ -12,22 +12,20 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        alignment: Alignment.center,
-        child: Center(
-            child: Column(
-          children: <Widget>[
-            SvgPicture.asset(
-              "assets/images/login.svg",
-              fit: BoxFit.contain,
-              height: MediaQuery.of(context).size.height * 0.6,
-              width: MediaQuery.of(context).size.width * 0.6,
-            ),
-            TextFields(),
-          ],
-        )),
-      ),
+          width: MediaQuery.of(context).size.width,
+          // height: MediaQuery.of(context).size.height,
+          alignment: Alignment.center,
+          child: Column(
+            children: <Widget>[
+              SvgPicture.asset(
+                "assets/images/register.svg",
+                fit: BoxFit.contain,
+                height: MediaQuery.of(context).size.height * 0.55,
+                width: MediaQuery.of(context).size.width * 0.6,
+              ),
+              TextFields(),
+            ],
+          )),
     );
   }
 }

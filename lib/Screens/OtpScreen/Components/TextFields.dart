@@ -46,6 +46,7 @@ class _VerifyState extends State<Verify> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.topLeft,
       padding: EdgeInsets.only(
           left: MediaQuery.of(context).size.width * 0.1,
           right: MediaQuery.of(context).size.width * 0.1),
@@ -55,7 +56,7 @@ class _VerifyState extends State<Verify> {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: "Login",
+                  text: "Enter OTP",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 40,

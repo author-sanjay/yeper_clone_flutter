@@ -12,13 +12,13 @@ class Body extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        // height: MediaQuery.of(context).size.height,
         alignment: Alignment.center,
         child: Center(
             child: Column(
           children: <Widget>[
             SvgPicture.asset(
-              "assets/images/login.svg",
+              "assets/images/register.svg",
               fit: BoxFit.contain,
               height: MediaQuery.of(context).size.height * 0.6,
               width: MediaQuery.of(context).size.width * 0.6,
