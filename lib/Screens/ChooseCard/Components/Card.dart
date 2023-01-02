@@ -1,14 +1,19 @@
 // ignore_for_file: file_names
 
-import 'package:flutter/material.dart';
+import 'dart:html';
 
+import 'package:flutter/material.dart';
 
 class Card extends StatelessWidget {
   const Card({
     Key? key,
-    required this.cardName,
+    required this.id,
+    required this.name,
+    required this.photo,
   }) : super(key: key);
-  final String cardName;
+  final String name;
+  final String photo;
+  final int id;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,8 +26,9 @@ class Card extends StatelessWidget {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start,
             // ignore: prefer_const_literals_to_create_immutables
             children: [
-              Text("$cardName\n",
-                  style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w600)),
+              Text("$name\n",
+                  style: const TextStyle(
+                      fontSize: 25, fontWeight: FontWeight.w600)),
               const Text(
                 "XXXX XXXX XXXX",
                 style: TextStyle(fontSize: 20),

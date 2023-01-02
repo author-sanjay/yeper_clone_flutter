@@ -183,6 +183,8 @@ class _ListState extends State<List> {
             ),
           ),
         ),
+        
+        
         GestureDetector(
           onTap: () {
             Navigator.push(
@@ -359,44 +361,7 @@ class _ListState extends State<List> {
             ),
           ),
         ),
-        GestureDetector(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 32),
-            padding: EdgeInsets.all(16),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(20))),
-            child: Row(
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(18))),
-                  child: Icon(
-                    Icons.contact_phone,
-                    color: Colors.black,
-                  ),
-                  padding: EdgeInsets.all(12),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        "Contact Us",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w300),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+      
         GestureDetector(
           onTap: () {
             _signOut();
