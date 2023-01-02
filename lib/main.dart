@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
+import 'package:yeper_user/Screens/LoginScreen/LoginScreen.dart';
 import 'package:yeper_user/Screens/OtpScreen/OtpScreen.dart';
 import 'package:yeper_user/constants.dart';
 import 'package:yeper_user/modals/UserModal.dart';
@@ -43,6 +45,6 @@ class _MyAppState extends State<MyApp> {
           textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: OtpScreen());
+        home: uid != null ? HomeScreen() : LoginScreen());
   }
 }

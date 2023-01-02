@@ -121,16 +121,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kprimarycolor,
-        elevation: 0,
-      ),
+      
       body: isloading
           ? Center(
               child: CircularProgressIndicator(),
             )
           : Body(),
-      drawer: drawer(),
+      // drawer: drawer(),
     );
   }
 }

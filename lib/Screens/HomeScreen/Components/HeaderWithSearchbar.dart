@@ -28,122 +28,36 @@ class _HeaderWithSearchbarState extends State<HeaderWithSearchbar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: kDefaultPadding * 2.5),
-      height: widget.size.height * 0.2,
-      child: Stack(
-        children: <Widget>[
-          Container(
-            height: widget.size.height * 0.2 - 27,
-            decoration: BoxDecoration(
-                color: kprimarycolor,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(36),
-                    bottomRight: Radius.circular(36))),
-            child: GestureDetector(
-              onTap: (() {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Profile(),
-                  ),
-                );
-              }),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.width * 0.1,
-                    vertical: MediaQuery.of(context).size.width * 0.05),
-                child: Container(
-                  child: Row(
-                    children: [
-                      Column(
-                        children: <Widget>[
-                          Text(
-                            "Welcome",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5
-                                ?.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 12),
-                          ),
-                          Text(
-                            user.name.toString().toUpperCase(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5
-                                ?.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 30),
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                      user.photo?.length==0?
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            vertical: MediaQuery.of(context).size.width * 0.05),
-                        child: CircleAvatar(
-                            radius: MediaQuery.of(context).size.width * 0.10,
-                            backgroundImage:
-                                AssetImage("assets/images/image_1.png")),
-                      ): Container(
-                              padding: EdgeInsets.symmetric(
-                                  vertical:
-                                      MediaQuery.of(context).size.width * 0.05),
-                              child: CircleAvatar(
-                                  radius:
-                                      MediaQuery.of(context).size.width * 0.10,
-                                  backgroundImage:
-                                      NetworkImage(user.photo.toString()),
-                            ),)
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                alignment: Alignment.center,
-                margin: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                height: 54,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
+      margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height*0.1-37),
+      height: MediaQuery.of(context).size.height*0.12,
+      decoration: BoxDecoration(
+        color: kprimarycolor,
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
+      boxShadow: [
                     BoxShadow(
-                        offset: Offset(0, 10),
-                        blurRadius: 50,
-                        color: kprimarycolor.withOpacity(0.23)),
-                  ],
-                ),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: TextField(
-                        onChanged: (value) {},
-                        decoration: InputDecoration(
-                          hintText: "Search Card",
-                          hintStyle:
-                              TextStyle(color: kprimarycolor.withOpacity(0.5)),
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                        ),
+                      color: Color.fromARGB(255, 58, 56, 56),
+                      offset: const Offset(
+                        5.0,
+                        5.0,
                       ),
-                    ),
-                    SvgPicture.asset("assets/icons/search.svg")
-                  ],
-                ),
-              )),
-        ],
+                      blurRadius: 30.0,
+                      spreadRadius: 2.0,
+                    ), ]
       ),
+      child: Padding(
+        padding: const EdgeInsets.only(left:kDefaultPadding, right: kDefaultPadding),
+        child: Row(
+          children: [
+            CircleAvatar(
+              backgroundImage: NetworkImage(user.photo.toString()),
+            ),
+            SizedBox(width: 20,),
+            Text("Hi,  ", style: TextStyle(color: Colors.white, fontSize: 20),),
+            Text(user.name.toString(), style: TextStyle(color: Colors.white, fontSize: 20),)
+          ],
+        ),
+      ),
+      
     );
   }
 }
