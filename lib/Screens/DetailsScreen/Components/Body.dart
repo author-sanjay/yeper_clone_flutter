@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/DetailsScreen/Components/IconsandImage.dart';
 import 'package:yeper_user/Screens/DetailsScreen/Components/OfferDetails.dart';
+import 'package:yeper_user/constants.dart';
 
 class Body extends StatelessWidget {
   Body(
@@ -30,16 +31,17 @@ class Body extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
-        children: <Widget>[
-          ImageAndIcons(
-            size: size,
-            actualprice: actualprice,
-            card: card,
-            earning: earning,
-            offerPrice: offer,
-            photo: photo,
-          ),
-          OfferDetails(Details: desc),
+        children: [
+          Container(
+            color: kprimarycolor,
+            height: MediaQuery.of(context).size.height * 0.1,
+            child: Row(children: [
+              IconButton(onPressed: (){}, icon: Icon(Icons.navigate_before, size: 40,color: Colors.white,)),
+              Spacer(),
+              Container(child: Text("Details", style: TextStyle(color: Colors.white),)),
+              Spacer(),
+            ]),
+          )
         ],
       ),
     );

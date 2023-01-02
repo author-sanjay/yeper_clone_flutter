@@ -35,7 +35,7 @@ class _HeaderWithSearchbarState extends State<HeaderWithSearchbar> {
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
       boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 58, 56, 56),
+                      color: Color.fromARGB(255, 108, 106, 106),
                       offset: const Offset(
                         5.0,
                         5.0,

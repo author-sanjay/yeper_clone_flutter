@@ -11,7 +11,7 @@ class TitleWithButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      padding: const EdgeInsets.only(bottom: kDefaultPadding, left: kDefaultPadding),
       child: Row(
         children: <Widget>[
           TextWithCustomUnderline(text: "Deals"),
