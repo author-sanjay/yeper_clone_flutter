@@ -40,6 +40,7 @@ class Body extends StatelessWidget {
                 height: 10,
               ),
               imageofproduct(),
+              SizedBox(height: 10,),
               
             ],
           ),
