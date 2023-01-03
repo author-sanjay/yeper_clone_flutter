@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
-
+import 'package:intl/intl.dart';
+import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import '../../../api.dart';
 
 class OrderBody extends StatefulWidget {
@@ -22,8 +23,9 @@ class OrderBody extends StatefulWidget {
       required this.link,
       required this.platform,
       required this.id,
-      required this.status});
-
+      required this.status,
+      required this.name});
+  String name;
   int orderid;
   int id;
   int actualprice;
@@ -43,11 +45,25 @@ class _OrderBodyState extends State<OrderBody> {
   // bool isloading = true;
   bool neworder = true;
   Future<void> update(int id, String txnid) async {
-    final json = jsonEncode({"order_status": "Placed", "platformtxnid": txnid});
+    var dt = DateTime.now();
+
+    var newFormat = DateFormat("dd-MM-yy");
+    String updatedDt = newFormat.format(dt);
+    final json = jsonEncode({
+      "order_status": "Placed",
+      "platformtxnid": txnid,
+      "product": widget.name,
+      "date": updatedDt,
+      "deal": widget.id,
+    });
     print(json);
     Map<String, String> headers = {"Content-type": "application/json"};
     var res = await http.post(
-        Uri.parse(api + "/orders/updatesingle/" + id.toString()),
+        Uri.parse(api +
+            "/orders/add/" +
+            user.id.toString() +
+            "/" +
+            widget.id.toString()),
         headers: headers,
         body: json);
 
@@ -132,13 +148,21 @@ class _OrderBodyState extends State<OrderBody> {
                       textAlign: TextAlign.center,
                       text: TextSpan(
                         children: [
-                          TextSpan(
-                            text: widget.orderid.toString(),
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.w300),
-                          ),
+                          widget.orderid == 0
+                              ? TextSpan(
+                                  text: "Not Placed",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w300),
+                                )
+                              : TextSpan(
+                                  text: widget.orderid.toString(),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w300),
+                                ),
                         ],
                       ),
                     ),
@@ -415,7 +439,7 @@ class _OrderBodyState extends State<OrderBody> {
                                       ),
                                     ),
                                     child: Text(
-                                      "Activate Order",
+                                      "Place Order",
                                       style: TextStyle(
                                           fontSize: 30,
                                           fontWeight: FontWeight.w300),

@@ -5,7 +5,7 @@ import 'package:yeper_user/Screens/DetailsScreen/Components/Body.dart';
 
 import 'Components/ActivateOffer.dart';
 
-class DetailsScreen extends StatelessWidget {
+class DetailsScreen extends StatefulWidget {
   DetailsScreen(
       {super.key,
       required this.actualprice,
@@ -16,7 +16,8 @@ class DetailsScreen extends StatelessWidget {
       required this.photo,
       required this.link,
       required this.platform,
-      required this.id});
+      required this.id,
+      required this.name});
   int id;
   int actualprice;
   String card;
@@ -26,20 +27,29 @@ class DetailsScreen extends StatelessWidget {
   String photo;
   String link;
   String platform;
+  String name;
+  // static late String pdtname;
+
+  @override
+  State<DetailsScreen> createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Body(
-          id: id,
-          actualprice: actualprice,
-          card: card,
-          desc: desc,
-          earning: earning,
-          offer: offer,
-          photo: photo,
-          key: key,
-          link: link,
-          platform: platform),
+          name: widget.name,
+          id: widget.id,
+          actualprice: widget.actualprice,
+          card: widget.card,
+          desc: widget.desc,
+          earning: widget.earning,
+          offer: widget.offer,
+          photo: widget.photo,
+          // key: key,
+          link: widget.link,
+          platform: widget.platform),
       // bottomNavigationBar: ActivateOffer(
       //     id: id,
       //     key: key,

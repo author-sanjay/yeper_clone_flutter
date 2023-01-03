@@ -43,6 +43,7 @@ class ItemCard extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => DetailsScreen(
+                name: itemname,
                 id: id,
                 link: link,
                 platform: platform,

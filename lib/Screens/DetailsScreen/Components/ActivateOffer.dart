@@ -65,25 +65,26 @@ class _ActivateOfferState extends State<ActivateOffer> {
     try {
       final results = jsonDecode(res.body);
       print(results);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => OrderConfirmation(
-            actualprice: widget.actualprice,
-            card: widget.card,
-            desc: widget.desc,
-            earning: widget.earning,
-            id: widget.id,
-            link: widget.link,
-            offer: widget.offer,
-            photo: widget.photo,
-            platform: widget.platform,
-            key: widget.key,
-            status: "Started",
-            orderid: results["id"],
-          ),
-        ),
-      );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => OrderConfirmation(
+      //       // name: "iphone",
+      //       actualprice: widget.actualprice,
+      //       card: widget.card,
+      //       desc: widget.desc,
+      //       earning: widget.earning,
+      //       id: widget.id,
+      //       link: widget.link,
+      //       offer: widget.offer,
+      //       photo: widget.photo,
+      //       platform: widget.platform,
+      //       key: widget.key,
+      //       status: "Started",
+      //       orderid: results["id"],
+      //     ),
+      //   ),
+      // );
     } catch (_) {
       print("failed");
     }
