@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
+import 'package:yeper_user/Screens/ReferalList/ReferralList.dart';
+import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/constants.dart';
 
 class Body extends StatelessWidget {
@@ -27,10 +30,15 @@ class Body extends StatelessWidget {
               
             ),
             Text("Your Referal Code is:\n ",style: TextStyle(fontSize: 20),),
-            Text("JG67FYN",style: TextStyle(fontSize: 35),),
+            Text(user.referalcode.toString().toUpperCase(),style: TextStyle(fontSize: 35),),
             GestureDetector(
               onTap: (() {
-                
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ReferralList()
+                  ),
+                );
               }),
               child: Container(
                 height: 50,

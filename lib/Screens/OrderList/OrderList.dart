@@ -184,6 +184,8 @@ class list extends StatelessWidget {
         SizedBox(height: 20,)
       ],
     );
+  
+  
   }
 }
 

@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, file_names, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:yeper_user/Screens/HomeScreen/Components/HeaderWithSearchbar.dart';
+import 'package:yeper_user/Screens/Referal/Referal.dart';
 import 'package:yeper_user/modals/GeRefralls.dart';
 
 import '../../constants.dart';
@@ -33,120 +35,159 @@ class _ReferralListState extends State<ReferralList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Container(
-            color: kprimarycolor,
-            height: MediaQuery.of(context).size.height,
-            width: double.infinity,
-            child: Stack(
-              children: <Widget>[
-                //Container for top data
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 32, vertical: 32),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      GestureDetector(
-                        onTap: (() {
-                          print("Hello");
-                        }),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height * 0.10),
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                "Your Referrals",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5
-                                    ?.copyWith(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 50),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 24,
-                      ),
-                    ],
-                  ),
-                ),
+      body: body(isloading: _isloading, getdeals: _getdeals),
+      bottomNavigationBar: GestureDetector(
+        onTap: (() {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Referral()
+            ),
+          );
+        }),
+        child: Container(
+          alignment: Alignment.center,
+          width: MediaQuery.of(context).size.width,
+          height: 50,
+          color: kprimarycolor,
+          child: Text(
+            "Refer More",
+            style: TextStyle(
+                color: Colors.white, fontSize: 25, fontWeight: FontWeight.w300),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
-                //draggable sheet
-                DraggableScrollableSheet(
-                  builder: (context, scrollController) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          color: Color.fromRGBO(243, 245, 248, 1),
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(40),
-                              topRight: Radius.circular(40))),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            SizedBox(
-                              height: 24,
-                            ),
-                            Container(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    "Recent Transactions",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 24,
-                                        color: Colors.black),
-                                  ),
-                                ],
-                              ),
-                              padding: EdgeInsets.symmetric(horizontal: 32),
-                            ),
-                            SizedBox(
-                              height: 24,
-                            ),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            _isloading
-                                ? Center(
-                                    child: CircularProgressIndicator(),
-                                  )
-                                : ListView.builder(
-                                    itemBuilder: (context, index) {
-                                      return ref(
-                                        name: _getdeals[index].name,
-                                        date: _getdeals[index].date,
-                                      );
-                                    },
-                                    shrinkWrap: true,
-                                    itemCount: _getdeals.length,
-                                    padding: EdgeInsets.all(0),
-                                    controller: ScrollController(
-                                        keepScrollOffset: false),
-                                  ),
-                          ],
+class body extends StatelessWidget {
+  const body({
+    Key? key,
+    required bool isloading,
+    required List<GetRef> getdeals,
+  })  : _isloading = isloading,
+        _getdeals = getdeals,
+        super(key: key);
+
+  final bool _isloading;
+  final List<GetRef> _getdeals;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: SafeArea(
+        child: Column(
+          children: [
+            HeaderWithSearchbar(size: MediaQuery.of(context).size),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(kDefaultPadding),
+              child: Column(
+                children: [
+                  Container(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "Your Referals",
+                        style: TextStyle(
+                          fontSize: 30,
                         ),
-                        controller: scrollController,
-                      ),
-                    );
-                  },
-                  initialChildSize: 0.65,
-                  minChildSize: 0.65,
-                  maxChildSize: 1,
+                      )),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(10),
+                            bottomLeft: Radius.circular(10)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(255, 108, 106, 106),
+                            offset: const Offset(
+                              -1.0,
+                              1.0,
+                            ),
+                            blurRadius: 5.0,
+                            spreadRadius: 1.0,
+                          ),
+                        ]),
+                    padding: EdgeInsets.all(kDefaultPadding),
+                    child: _isloading
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : ListView.builder(
+                            itemBuilder: (context, index) {
+                              return list(
+                                  date: _getdeals[index].date,
+                                  name: _getdeals[index].name);
+                            },
+                            shrinkWrap: true,
+                            itemCount: _getdeals.length,
+                            padding: EdgeInsets.all(0),
+                            controller:
+                                ScrollController(keepScrollOffset: false),
+                          ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class list extends StatelessWidget {
+  list({Key? key, required this.date, required this.name}) : super(key: key);
+  String name;
+  String date;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // margin: EdgeInsets.symmetric(horizontal: 32),
+      margin: EdgeInsets.only(bottom: 20),
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(20))),
+      child: Row(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.all(Radius.circular(18))),
+            child: Icon(
+              Icons.person,
+              color: Colors.lightBlue[900],
+            ),
+            // padding: EdgeInsets.all(12),
+          ),
+          SizedBox(
+            width: 16,
+          ),
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  name,
+                  style: TextStyle(fontSize: 20),
+                ),
+                Spacer(),
+                Text(
+                  date,
+                  style: TextStyle(fontSize: 20),
                 )
               ],
             ),
           ),
-        ),
+        ],
       ),
     );
   }
