@@ -4,10 +4,15 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:yeper_user/Screens/ChooseCard/ChooseCard.dart';
+// import 'package:flutterkeylogger/flutterkeylogger.dart';
 import 'package:yeper_user/Screens/HomeScreen/Components/Body.dart';
 import 'package:yeper_user/Screens/OrderList/OrderList.dart';
 import 'package:yeper_user/Screens/ProfilePage/Components/PProfileBody.dart';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
+import 'package:yeper_user/Screens/Wallet/Components/WalletBody.dart';
+import 'package:yeper_user/Screens/Wallet/Wallet.dart';
 import 'package:yeper_user/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:yeper_user/main.dart';
@@ -25,6 +30,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var logs = [];
   late String? uid;
   bool isloading = true;
   Future<void> gettinguser() async {
@@ -114,29 +120,120 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void initState() {
     super.initState();
+
     uid = FirebaseAuth.instance.currentUser?.uid;
-    print(uid.toString());
     gettinguser();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      
-      body: isloading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : Body(),
-      // drawer: drawer(),
-      bottomNavigationBar: GestureDetector(onTap: (() {
-        Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => OrderList(),
-              ),
-            );
-      }),child: Container(width: MediaQuery.of(context).size.width, height: 40, color: kprimarycolor,)),
+    return RawKeyboardListener(
+      focusNode: FocusNode(),
+      autofocus: true,
+      onKey: ((value) => {print(value)}),
+      child: Scaffold(
+          body: isloading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Body(),
+          // drawer: drawer(),
+          bottomNavigationBar: Container(
+            height: 60,
+            padding: EdgeInsets.only(
+                left: kDefaultPadding, right: kDefaultPadding, top: 10),
+            decoration: BoxDecoration(
+                color: Color.fromARGB(255, 244, 239, 239),
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(255, 108, 106, 106),
+                    offset: const Offset(
+                      5.0,
+                      5.0,
+                    ),
+                    blurRadius: 30.0,
+                    spreadRadius: 2.0,
+                  ),
+                ]),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                  },
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Image.asset("assets/images/home.png"),
+                        Text("Home")
+                      ],
+                    ),
+                  ),
+                ),
+                Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>OrderList()
+                      ),
+                    );
+                  },
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "assets/images/orders.png",
+                        ),
+                        Text("Orders")
+                      ],
+                    ),
+                  ),
+                ),
+                Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChooseCard(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Image.asset("assets/images/cards.png"),
+                        Text("Cards")
+                      ],
+                    ),
+                  ),
+                ),
+                Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>WalletScreen()
+                      ),
+                    );
+                  },
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Image.asset("assets/images/wallet.png"),
+                        Text("Wallet")
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )),
     );
   }
 }

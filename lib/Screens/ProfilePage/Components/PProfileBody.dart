@@ -79,7 +79,7 @@ class _ListState extends State<List> {
   Future<void> _signOut() async {
     await FirebaseAuth.instance.signOut();
 
-     Navigator.push(
+    Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => LoginScreen(),
@@ -142,7 +142,7 @@ class _ListState extends State<List> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Wallet(),
+                builder: (context) => WalletScreen(),
               ),
             );
           },
@@ -183,8 +183,6 @@ class _ListState extends State<List> {
             ),
           ),
         ),
-        
-        
         GestureDetector(
           onTap: () {
             Navigator.push(
@@ -361,7 +359,6 @@ class _ListState extends State<List> {
             ),
           ),
         ),
-      
         GestureDetector(
           onTap: () {
             _signOut();

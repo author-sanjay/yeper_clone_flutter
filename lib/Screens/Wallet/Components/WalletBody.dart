@@ -107,7 +107,7 @@ class _WalletBodyState extends State<WalletBody> {
                             ),
                             Text(
                               "Withdraw",
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.white, ),
                             )
                           ],
                         ),
