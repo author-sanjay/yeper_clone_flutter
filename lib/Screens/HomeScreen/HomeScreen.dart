@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/HomeScreen/Components/Body.dart';
+import 'package:yeper_user/Screens/OrderList/OrderList.dart';
 import 'package:yeper_user/Screens/ProfilePage/Components/PProfileBody.dart';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/constants.dart';
@@ -128,6 +129,14 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           : Body(),
       // drawer: drawer(),
+      bottomNavigationBar: GestureDetector(onTap: (() {
+        Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => OrderList(),
+              ),
+            );
+      }),child: Container(width: MediaQuery.of(context).size.width, height: 40, color: kprimarycolor,)),
     );
   }
 }

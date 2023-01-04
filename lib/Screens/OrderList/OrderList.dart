@@ -1,6 +1,8 @@
 // ignore_for_file: file_names, prefer_const_literals_to_create_immutables, unnecessary_string_interpolations, must_be_immutable, avoid_print, camel_case_types
 
 import 'package:flutter/material.dart';
+import 'package:yeper_user/Screens/DetailsScreen/Components/Body.dart';
+import 'package:yeper_user/Screens/HomeScreen/Components/HeaderWithSearchbar.dart';
 import 'package:yeper_user/Screens/OrderList/Orderpreview.dart';
 import 'package:yeper_user/modals/GetOrders.dart';
 import 'package:yeper_user/modals/GetOrdersapi.dart';
@@ -38,131 +40,150 @@ class _OrderListState extends State<OrderList> {
         body: // ignore_for_file: prefer_const_constructors, sort_child_properties_last
             SingleChildScrollView(
       child: SafeArea(
-        child: Container(
-          color: kprimarycolor,
-          height: MediaQuery.of(context).size.height,
-          width: double.infinity,
-          child: Stack(
-            children: <Widget>[
-              //Container for top data
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 32, vertical: 32),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: (() {}),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height * 0.10),
-                        child: Column(
-                          children: <Widget>[
-                            Row(
-                              children: [
-                                Text(
-                                  "Your \nOrders",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline5
-                                      ?.copyWith(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w200,
-                                        fontSize: 50,
-                                      ),
-                                ),
-                                Spacer(),
-                                Icon(
-                                  Icons.shopping_cart,
-                                  color: Colors.white,
-                                  size: 50,
-                                ),
-                              ],
-                            ),
-                          ],
+          child: Container(
+        child: Column(
+          children: [
+            HeaderWithSearchbar(size: MediaQuery.of(context).size),
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(kDefaultPadding),
+              child: Column(
+                children: [
+                  Container(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        'Your Orders',
+                        style: TextStyle(fontSize: 30),
+                      )),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  _isloading
+                      ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : ListView.builder(
+                          itemBuilder: (context, index) {
+                            return list(
+                                date: _getdeals[index].date,
+                                name: _getdeals[index].product,
+                                orderid: _getdeals[index].orderid.toString(),
+                                platforid: _getdeals[index].txn,
+                                status: _getdeals[index].orderstatus)
+                                ;
+                          },
+                          shrinkWrap: true,
+                          itemCount: _getdeals.length,
+                          padding: EdgeInsets.all(0),
+                          controller: ScrollController(keepScrollOffset: false),
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 24,
-                    ),
-                  ],
-                ),
+                ],
               ),
+            )
+          ],
+        ),
+      )),
+    ));
+  }
+}
 
-              //draggable sheet
-              DraggableScrollableSheet(
-                builder: (context, scrollController) {
-                  return Container(
-                    decoration: BoxDecoration(
-                        color: Color.fromRGBO(243, 245, 248, 1),
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(40),
-                            topRight: Radius.circular(40))),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          SizedBox(
-                            height: 24,
-                          ),
-                          Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  "Recent Orders",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 24,
-                                      color: Colors.black),
-                                ),
-                              ],
-                            ),
-                            padding: EdgeInsets.symmetric(horizontal: 32),
-                          ),
-                          SizedBox(
-                            height: 24,
-                          ),
-                          SizedBox(
-                            height: 16,
-                          ),
-                          _isloading
-                              ? Center(
-                                  child: CircularProgressIndicator(),
-                                )
-                              : ListView.builder(
-                                  itemBuilder: (context, index) {
-                                    return orderdetails(
-                                      name: _getdeals[index].product,
-                                      date: _getdeals[index].date,
-                                      status: _getdeals[index].orderstatus,
-                                      id: _getdeals[index].orderid,
-                                      deal: _getdeals[index].deal,
-                                      platformlink: _getdeals[index].txn,
-                                    );
-                                  },
-                                  shrinkWrap: true,
-                                  itemCount: _getdeals.length,
-                                  padding: EdgeInsets.all(0),
-                                  controller:
-                                      ScrollController(keepScrollOffset: false),
-                                ),
-                        ],
+class list extends StatelessWidget {
+  list(
+      {Key? key,
+      required this.date,
+      required this.name,
+      required this.orderid,
+      required this.platforid,
+      required this.status})
+      : super(key: key);
+  String name;
+  String orderid;
+  String status;
+  String platforid;
+  String date;
+  @override
+  Widget build(BuildContext context) {
+    var newname = name.split(" ");
+    return Column(
+      children: [
+        Container(
+          alignment: Alignment.topLeft,
+          decoration: BoxDecoration(
+              color: Color.fromARGB(255, 247, 246, 243),
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(10), bottomLeft: Radius.circular(10)),
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(255, 108, 106, 106),
+                  offset: const Offset(
+                    -1.0,
+                    1.0,
+                  ),
+                  blurRadius: 5.0,
+                  spreadRadius: 1.0,
+                ),
+              ]),
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            children: [
+              Container(
+                color: kprimarycolor,
+                alignment: Alignment.topLeft,
+                child: Text("l", style: TextStyle(fontSize: 50, fontWeight: FontWeight.w100),),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Container(
+                alignment: Alignment.centerRight,
+                padding: EdgeInsets.all(8),
+                width: MediaQuery.of(context).size.width * 0.80,
+                child: Row(children: [
+                  Container(
+                    child: Column(children: [
+                      Text(
+                        newname[0],
+                        style: TextStyle(fontSize: 30),
                       ),
-                      controller: scrollController,
-                    ),
-                  );
-                },
-                initialChildSize: 0.65,
-                minChildSize: 0.65,
-                maxChildSize: 1,
+                      Text(
+                        "Order id: $orderid",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      )
+                    ]),
+                  ),
+                  Spacer(),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    child: Column(children: [
+                      status=="Placed"?
+                      Container(decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 130, 234, 40),
+                                  borderRadius: BorderRadius.all(Radius.circular(10))), width: 80,child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(child: Text("$status", style: TextStyle(fontSize: 15),)),
+                      )): Container(decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 234, 82, 40),
+                                  borderRadius: BorderRadius.all(Radius.circular(10))), width: 80,child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(child: Text("$status", style: TextStyle(color: Colors.white, fontSize:15),)),
+                      )),
+                      SizedBox(height: 10,),
+                      Text("$date",style: TextStyle( fontSize:15,fontWeight: FontWeight.w600)),
+                      // Text("Platformid: $platforid")
+                    ]),
+                  )
+                ]),
               )
             ],
           ),
         ),
-      ),
-    ));
+        SizedBox(height: 20,)
+      ],
+    );
   }
 }
 

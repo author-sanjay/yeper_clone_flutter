@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:yeper_user/Screens/LoginScreen/LoginScreen.dart';
+import 'package:yeper_user/Screens/OrderList/OrderList.dart';
 import 'package:yeper_user/Screens/OtpScreen/OtpScreen.dart';
 import 'package:yeper_user/constants.dart';
 import 'package:yeper_user/modals/UserModal.dart';
@@ -45,6 +46,8 @@ class _MyAppState extends State<MyApp> {
           textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: uid != null ? HomeScreen() : LoginScreen());
+        home: uid != null ? HomeScreen() : LoginScreen()
+        ,
+        );
   }
 }

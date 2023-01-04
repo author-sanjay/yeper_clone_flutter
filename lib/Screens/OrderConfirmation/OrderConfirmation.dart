@@ -36,7 +36,7 @@ class OrderConfirmation extends StatelessWidget {
   String photo;
   String link;
   String platform;
-String name;
+  String name;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
