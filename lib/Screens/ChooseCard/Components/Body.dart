@@ -22,8 +22,8 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   late List<GetCard> _getdeals;
-  String name = "";
-  List _temp = [];
+  // String name = "";
+  // List _temp = [];
   bool _isloading = true;
 
   @override
@@ -32,45 +32,13 @@ class _BodyState extends State<Body> {
     getDeals();
   }
 
-  Future<void> getuser(String id) async {
-    // _getusers=await GetCardsapi.getbyname(Strinf id);
-    Map<String, String> headers = {"Content-type": "application/json"};
-    var json = jsonEncode({
-      // "name"
-    });
-    var res = await http.get(Uri.parse(api + "/cards/getbyname/" + id));
-    print(res.body);
-
-    // print(jsonDecode(res.body));
-    for (var i in jsonDecode(res.body)) {
-      _temp.add(i);
-      // print(i);
-    }
-    print(_temp);
-  }
-
-  Future<void> addcard(String id) async {
-    // _getusers=await GetCardsapi.getbyname(Strinf id);
-    Map<String, String> headers = {"Content-type": "application/json"};
-
-    var res =
-        await http.get(Uri.parse(api + "/user/addcards/" + user.id.toString()));
-    print(res.body);
-
-    // print(jsonDecode(res.body));
-    for (var i in jsonDecode(res.body)) {
-      _temp.add(i);
-      // print(i);
-    }
-    print(_temp);
-  }
-
   Future<void> getDeals() async {
-    _getdeals = await GetCardsapi.getDeals();
+    _getdeals = await GetCardsapi.getuser(user.id.toString());
     setState(() {
       _isloading = false;
     });
     print(_getdeals);
+    // print(_temp.length);
   }
 
   @override
@@ -78,81 +46,145 @@ class _BodyState extends State<Body> {
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
         child: SafeArea(
-      child: Column(
-        children: <Widget>[
-          HeaderWithSearchbar(size: size),
-          Container(
-            child: _temp.length == 0
-                ? Column(
-                    children: [
-                      Text("No Card Selected", style: TextStyle(fontSize: 20),),
-                      for (var i in _temp)
-                        Card(id: i.id, name: i.name, photo: i.photo)
-                    ],
+            child: _isloading
+                ? Center(
+                    child: CircularProgressIndicator(),
                   )
                 : Column(
                     children: [
-                      Text("Selected Cards"),
-                      for (var i in _temp)
-                        Card(id: i.id, name: i.name, photo: i.photo)
+                      HeaderWithSearchbar(size: size),
+                      Padding(
+                        padding: const EdgeInsets.all(kDefaultPadding),
+                        child: Column(
+                          children: [
+                            Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  "Your Cards",
+                                  style: TextStyle(fontSize: 20),
+                                )),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              child: _getdeals.length == 0
+                                  ? Column(
+                                      children: const [
+                                        Text(
+                                          "No Card Selected",
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                      ],
+                                    )
+                                  : Column(
+                                      children: [
+                                        for (var i in _getdeals)
+                                          Card(name: i.name, photo: i.photo)
+                                      ],
+                                    ),
+                            )
+                          ],
+                        ),
+                      )
                     ],
-                  ),
+                  )));
+  }
+}
+
+class old extends StatelessWidget {
+  const old({
+    Key? key,
+    required this.size,
+    required List temp,
+    required List<GetCard> getdeals,
+  })  : _temp = temp,
+        _getdeals = getdeals,
+        super(key: key);
+
+  final Size size;
+  final List _temp;
+  final List<GetCard> _getdeals;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        HeaderWithSearchbar(size: size),
+        Container(
+          child: _temp.length == 0
+              ? Column(
+                  children: [
+                    Text(
+                      "No Card Selected",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    for (var i in _temp) Card(name: i.name, photo: i.photo)
+                  ],
+                )
+              : Column(
+                  children: [
+                    Text("Selected Cards"),
+                    for (var i in _temp) Card(name: i.name, photo: i.photo)
+                  ],
+                ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+          "All Cards",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+        ),
+        for (var i in _getdeals)
+          Card(
+            // id: i.id,
+            photo: i.photo,
+            name: i.name,
+            // profit: i.earning.toDouble(),
+            // site: i.platform,
+            // image: i.images,
+            // link: i.offerlink,
+            // platform: i.platform,
+            // press: () {
+            //   // Navigator.push(
+            //   //   context,
+            //   //   MaterialPageRoute(
+            //   //     builder: (context) => DetailsScreen(),
+            //   //   ),
+            //   // );
+            // },
+            // actual: i.actual,
+            // desc: i.desc,
+            // offer: i.offer,
           ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            "All Cards",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
-          ),
-          for (var i in _getdeals)
-            Card(
-              id: i.id,
-              photo: i.photo,
-              name: i.name,
-              // profit: i.earning.toDouble(),
-              // site: i.platform,
-              // image: i.images,
-              // link: i.offerlink,
-              // platform: i.platform,
-              // press: () {
-              //   // Navigator.push(
-              //   //   context,
-              //   //   MaterialPageRoute(
-              //   //     builder: (context) => DetailsScreen(),
-              //   //   ),
-              //   // );
-              // },
-              // actual: i.actual,
-              // desc: i.desc,
-              // offer: i.offer,
-            ),
-        ],
-      ),
-    ));
+      ],
+    );
   }
 }
 
 class Card extends StatelessWidget {
   const Card({
     Key? key,
-    required this.id,
+    // required this.id,
     required this.name,
     required this.photo,
   }) : super(key: key);
   final String name;
   final String photo;
-  final int id;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {},
       child: Column(
         children: [
-          // Text(name),
+          Padding(
+            padding: const EdgeInsets.only(left:15.0, bottom: 10),
+            child: Container(alignment: Alignment.topLeft,child: Text(name, style: TextStyle(fontSize: 20),)),
+          ),
           Container(
-            width: MediaQuery.of(context).size.width * 0.7,
-            height: MediaQuery.of(context).size.width * 0.3,
+            width: MediaQuery.of(context).size.width * 0.8,
+            height: MediaQuery.of(context).size.width * 0.4,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.grey.shade300),
