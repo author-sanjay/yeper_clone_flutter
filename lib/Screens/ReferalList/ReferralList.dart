@@ -40,9 +40,7 @@ class _ReferralListState extends State<ReferralList> {
         onTap: (() {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => Referral()
-            ),
+            MaterialPageRoute(builder: (context) => Referral()),
           );
         }),
         child: Container(

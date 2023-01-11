@@ -177,9 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) =>OrderList()
-                      ),
+                      MaterialPageRoute(builder: (context) => OrderList()),
                     );
                   },
                   child: Container(
@@ -217,9 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) =>WalletScreen()
-                      ),
+                      MaterialPageRoute(builder: (context) => WalletScreen()),
                     );
                   },
                   child: Container(
