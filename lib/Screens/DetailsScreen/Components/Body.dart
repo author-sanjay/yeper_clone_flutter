@@ -1,8 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names, must_be_immutable
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names, must_be_immutable, unused_local_variable, sized_box_for_whitespace, camel_case_types, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
-import 'package:yeper_user/Screens/DetailsScreen/Components/IconsandImage.dart';
-import 'package:yeper_user/Screens/DetailsScreen/Components/OfferDetails.dart';
 import 'package:yeper_user/Screens/OrderConfirmation/OrderConfirmation.dart';
 import 'package:yeper_user/constants.dart';
 
@@ -33,7 +31,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var newname = name.split(" ");
-    String shortname = newname[0] + " " + newname[1];
+    String shortname = "${newname[0]} ${newname[1]}";
     Size size = MediaQuery.of(context).size;
     produtname = name;
     return SingleChildScrollView(

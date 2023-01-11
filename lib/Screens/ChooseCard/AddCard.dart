@@ -1,6 +1,6 @@
+// ignore_for_file: file_names, avoid_unnecessary_containers, unused_field
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:yeper_user/Screens/ChooseCard/ChooseCard.dart';
 import 'package:yeper_user/Screens/HomeScreen/Components/HeaderWithSearchbar.dart';
 import 'package:yeper_user/modals/GetCards.dart';
@@ -30,7 +30,6 @@ class _AddCardsState extends State<AddCards> {
     setState(() {
       _isloading = false;
     });
-    print(_getdeals);
     // print(_temp.length);
   }
 
@@ -38,7 +37,7 @@ class _AddCardsState extends State<AddCards> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: _isloading
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(),
               )
             : SingleChildScrollView(
@@ -53,13 +52,13 @@ class _AddCardsState extends State<AddCards> {
                           children: [
                             Container(
                                 alignment: Alignment.topLeft,
-                                child: Text(
+                                child: const Text(
                                   "Click on Cards to \nadd to your Profile",
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w500),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             for (var i in _getdeals)
@@ -94,7 +93,6 @@ class _CardState extends State<Card> {
   Future<void> addcard(int id) async {
     _getdeals = await GetCardsapi.addcard(id);
 
-    print(_getdeals);
     // print(_temp.length);
   }
 
@@ -104,7 +102,7 @@ class _CardState extends State<Card> {
       onTap: () {
         addcard(widget.id);
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ChooseCard()));
+            context, MaterialPageRoute(builder: (context) => const ChooseCard()));
       },
       child: Column(
         children: [
@@ -114,7 +112,7 @@ class _CardState extends State<Card> {
                 alignment: Alignment.topLeft,
                 child: Text(
                   widget.name,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 )),
           ),
           Container(
@@ -130,7 +128,7 @@ class _CardState extends State<Card> {
                   fit: BoxFit.cover,
                 )),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           )
         ],

@@ -1,7 +1,6 @@
-// ignore_for_file: file_names, prefer_const_literals_to_create_immutables, unnecessary_string_interpolations, must_be_immutable, avoid_print, camel_case_types
+// ignore_for_file: file_names, prefer_const_literals_to_create_immutables, unnecessary_string_interpolations, must_be_immutable, avoid_print, camel_case_types, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
-import 'package:yeper_user/Screens/DetailsScreen/Components/Body.dart';
 import 'package:yeper_user/Screens/HomeScreen/Components/HeaderWithSearchbar.dart';
 import 'package:yeper_user/Screens/OrderList/Orderpreview.dart';
 import 'package:yeper_user/modals/GetOrders.dart';

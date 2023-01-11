@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/DetailsScreen/Components/Body.dart';
 
-import 'Components/ActivateOffer.dart';
 
 class DetailsScreen extends StatefulWidget {
   DetailsScreen(

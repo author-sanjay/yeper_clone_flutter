@@ -1,22 +1,18 @@
-// ignore_for_file: prefer_const_constructors, file_names, camel_case_types
+// ignore_for_file: prefer_const_constructors, file_names, camel_case_types, prefer_interpolation_to_compose_strings, avoid_print, annotate_overrides, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:yeper_user/Screens/ChooseCard/ChooseCard.dart';
 // import 'package:flutterkeylogger/flutterkeylogger.dart';
 import 'package:yeper_user/Screens/HomeScreen/Components/Body.dart';
 import 'package:yeper_user/Screens/OrderList/OrderList.dart';
 import 'package:yeper_user/Screens/ProfilePage/Components/PProfileBody.dart';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
-import 'package:yeper_user/Screens/Wallet/Components/WalletBody.dart';
 import 'package:yeper_user/Screens/Wallet/Wallet.dart';
 import 'package:yeper_user/constants.dart';
 import 'package:http/http.dart' as http;
-import 'package:yeper_user/main.dart';
-import 'package:yeper_user/modals/UserModal.dart';
 
 import '../../api.dart';
 

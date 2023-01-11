@@ -1,16 +1,11 @@
-// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, file_names
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, file_names, avoid_print, prefer_is_empty, camel_case_types
 
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:yeper_user/Screens/ChooseCard/Components/Header.dart';
 import 'package:yeper_user/Screens/HomeScreen/Components/HeaderWithSearchbar.dart';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/modals/GetCards.dart';
 import 'package:yeper_user/modals/GetCardsapi.dart';
-import 'package:http/http.dart' as http;
-import '../../../api.dart';
 import '../../../constants.dart';
 
 class Body extends StatefulWidget {

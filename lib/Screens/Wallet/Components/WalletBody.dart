@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last, file_names, unused_import, prefer_const_literals_to_create_immutables, avoid_print, must_be_immutable, camel_case_types, unnecessary_string_interpolations
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, file_names, unused_import, prefer_const_literals_to_create_immutables, avoid_print, must_be_immutable, camel_case_types, unnecessary_string_interpolations, prefer_interpolation_to_compose_strings
 
 import 'dart:convert';
 

@@ -1,10 +1,6 @@
 // ignore_for_file: prefer_const_constructors, file_names, must_be_immutable, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
-import 'package:yeper_user/Screens/ChooseCard/Components/Body.dart';
-import 'package:yeper_user/Screens/DetailsScreen/Components/Body.dart';
-import 'package:yeper_user/Screens/DetailsScreen/DetailsSceen.dart';
-import 'package:yeper_user/Screens/HomeScreen/Components/Body.dart';
 import 'package:yeper_user/Screens/OrderConfirmation/Components/OrderBody.dart';
 
 class OrderConfirmation extends StatelessWidget {

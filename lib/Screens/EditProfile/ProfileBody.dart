@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, file_names, use_build_context_synchronously, unused_local_variable, prefer_interpolation_to_compose_strings
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, file_names, use_build_context_synchronously, unused_local_variable, prefer_interpolation_to_compose_strings, avoid_print, avoid_returning_null_for_void, duplicate_ignore, prefer_is_empty
 
 import 'dart:convert';
 
@@ -6,7 +6,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/EditProfile/EditProfile.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
-import 'package:yeper_user/Screens/LoginScreen/Components/Body.dart';
 import 'package:http/http.dart' as http;
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/api.dart';

@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:yeper_user/modals/GetOrders.dart';
-import 'package:yeper_user/modals/UserModal.dart';
 
 import '../Screens/Register/Detailsfields.dart';
 import '../api.dart';

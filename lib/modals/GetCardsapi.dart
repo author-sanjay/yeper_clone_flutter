@@ -1,9 +1,8 @@
-// ignore_for_file: unused_local_variable, no_leading_underscores_for_local_identifiers, prefer_interpolation_to_compose_strings, file_names
+// ignore_for_file: unused_local_variable, no_leading_underscores_for_local_identifiers, prefer_interpolation_to_compose_strings, file_names, avoid_print
 
 import 'dart:convert';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/modals/GetCards.dart';
-import 'package:yeper_user/modals/GetDeals.dart';
 import 'package:http/http.dart' as http;
 
 import '../api.dart';

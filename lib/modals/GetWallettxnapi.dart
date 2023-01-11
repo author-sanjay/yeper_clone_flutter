@@ -2,9 +2,7 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:yeper_user/Screens/LoginScreen/Components/Body.dart';
 import 'package:yeper_user/modals/GetWallettxn.dart';
-import 'package:yeper_user/modals/UserModal.dart';
 
 import '../Screens/Register/Detailsfields.dart';
 import '../api.dart';

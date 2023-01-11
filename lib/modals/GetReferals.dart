@@ -4,7 +4,6 @@ import 'dart:convert';
 
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/modals/GeRefralls.dart';
-import 'package:yeper_user/modals/GetDeals.dart';
 import 'package:http/http.dart' as http;
 
 import '../api.dart';
@@ -15,7 +14,6 @@ class GetRefapi {
     var res =
         await http.get(Uri.parse(api + "/refer/ofuser/" + user.id.toString()));
     List _temp = [];
-    print(jsonDecode(res.body));
     var result = jsonDecode(res.body);
     for (var i in result) {
       _temp.add(i);

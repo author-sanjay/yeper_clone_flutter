@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, file_names, use_build_context_synchronously, must_be_immutable, prefer_final_fields, prefer_interpolation_to_compose_strings, avoid_print
+// ignore_for_file: prefer_const_constructors, file_names, use_build_context_synchronously, must_be_immutable, prefer_final_fields, prefer_interpolation_to_compose_strings, avoid_print, depend_on_referenced_packages
 
 import 'dart:convert';
 
@@ -9,7 +9,6 @@ import '../../../constants.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
-import '../../OrderConfirmation/OrderConfirmation.dart';
 
 class ActivateOffer extends StatefulWidget {
   ActivateOffer(
