@@ -70,8 +70,10 @@ class _OrderListState extends State<OrderList> {
                                 name: _getdeals[index].product,
                                 orderid: _getdeals[index].orderid.toString(),
                                 platforid: _getdeals[index].txn,
-                                status: _getdeals[index].orderstatus)
-                                ;
+                                status: _getdeals[index].orderstatus,
+                                deal: _getdeals[index].deal);
+                            
+                                
                           },
                           shrinkWrap: true,
                           itemCount: _getdeals.length,
@@ -95,8 +97,9 @@ class list extends StatelessWidget {
       required this.name,
       required this.orderid,
       required this.platforid,
-      required this.status})
+      required this.status,required this.deal})
       : super(key: key);
+      int deal;
   String name;
   String orderid;
   String status;
@@ -105,83 +108,91 @@ class list extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var newname = name.split(" ");
-    return Column(
-      children: [
-        Container(
-          alignment: Alignment.topLeft,
-          decoration: BoxDecoration(
-              color: Color.fromARGB(255, 247, 246, 243),
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(10), bottomLeft: Radius.circular(10)),
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 108, 106, 106),
-                  offset: const Offset(
-                    -1.0,
-                    1.0,
-                  ),
-                  blurRadius: 5.0,
-                  spreadRadius: 1.0,
-                ),
-              ]),
-          width: MediaQuery.of(context).size.width,
-          child: Row(
-            children: [
-              Container(
-                color: kprimarycolor,
-                alignment: Alignment.topLeft,
-                child: Text("l", style: TextStyle(fontSize: 50, fontWeight: FontWeight.w100),),
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Container(
-                alignment: Alignment.centerRight,
-                padding: EdgeInsets.all(8),
-                width: MediaQuery.of(context).size.width * 0.80,
-                child: Row(children: [
-                  Container(
-                    child: Column(children: [
-                      Text(
-                        newname[0],
-                        style: TextStyle(fontSize: 30),
+    return GestureDetector(
+      onTap: ()=>{
+        Navigator.push(context,MaterialPageRoute(builder: (context) => OrderPreview(orderid: int.parse(orderid)  , id: deal, status: status, txn: platforid),),)
+      },
+      child: Container(
+        width:MediaQuery.of(context).size.width,
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.topLeft,
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 247, 246, 243),
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(10), bottomLeft: Radius.circular(10)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(255, 108, 106, 106),
+                      offset: const Offset(
+                        -1.0,
+                        1.0,
                       ),
-                      Text(
-                        "Order id: $orderid",
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      )
-                    ]),
+                      blurRadius: 5.0,
+                      spreadRadius: 1.0,
+                    ),
+                  ]),
+              width: MediaQuery.of(context).size.width,
+              child: Row(
+                children: [
+                  Container(
+                    color: kprimarycolor,
+                    alignment: Alignment.topLeft,
+                    child: Text("l", style: TextStyle(fontSize: 50, fontWeight: FontWeight.w100),),
                   ),
-                  Spacer(),
+                  SizedBox(
+                    width: 20,
+                  ),
                   Container(
                     alignment: Alignment.centerRight,
-                    child: Column(children: [
-                      status=="Placed"?
-                      Container(decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 130, 234, 40),
-                                  borderRadius: BorderRadius.all(Radius.circular(10))), width: 80,child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(child: Text("$status", style: TextStyle(fontSize: 15),)),
-                      )): Container(decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 234, 82, 40),
-                                  borderRadius: BorderRadius.all(Radius.circular(10))), width: 80,child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(child: Text("$status", style: TextStyle(color: Colors.white, fontSize:15),)),
-                      )),
-                      SizedBox(height: 10,),
-                      Text("$date",style: TextStyle( fontSize:15,fontWeight: FontWeight.w600)),
-                      // Text("Platformid: $platforid")
+                    padding: EdgeInsets.all(8),
+                    width: MediaQuery.of(context).size.width * 0.75,
+                    child: Row(children: [
+                      Container(
+                        child: Column(children: [
+                          Text(
+                            newname[0],
+                            style: TextStyle(fontSize: 30),
+                          ),
+                          Text(
+                            "Order id: $orderid",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          )
+                        ]),
+                      ),
+                      Spacer(),
+                      Container(
+                        alignment: Alignment.centerRight,
+                        child: Column(children: [
+                          status=="Placed"?
+                          Container(decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 130, 234, 40),
+                                      borderRadius: BorderRadius.all(Radius.circular(10))), width: 80,child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(child: Text("$status", style: TextStyle(fontSize: 15),)),
+                          )): Container(decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 234, 82, 40),
+                                      borderRadius: BorderRadius.all(Radius.circular(10))), width: 80,child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(child: Text("$status", style: TextStyle(color: Colors.white, fontSize:15),)),
+                          )),
+                          SizedBox(height: 10,),
+                          Text("$date",style: TextStyle( fontSize:15,fontWeight: FontWeight.w600)),
+                          // Text("Platformid: $platforid")
+                        ]),
+                      )
                     ]),
                   )
-                ]),
-              )
-            ],
-          ),
+                ],
+              ),
+            ),
+            SizedBox(height: 20,)
+          ],
         ),
-        SizedBox(height: 20,)
-      ],
+      ),
     );
   
   

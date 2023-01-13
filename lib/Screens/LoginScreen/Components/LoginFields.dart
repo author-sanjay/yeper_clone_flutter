@@ -35,7 +35,7 @@ class _TextFieldsState extends State<TextFields> {
                 "Login With",
                 style: TextStyle(
                   fontSize: 30,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w300,
                 ),
               )),
           SizedBox(
@@ -44,7 +44,7 @@ class _TextFieldsState extends State<TextFields> {
           Container(
             alignment: Alignment.topLeft,
             child: Text("Mobile Number",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500)),
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w300)),
           ),
           SizedBox(
             height: 10,

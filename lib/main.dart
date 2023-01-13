@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:yeper_user/Screens/LoginScreen/LoginScreen.dart';
+import 'package:yeper_user/Screens/Register/Register.dart';
 import 'package:yeper_user/constants.dart';
 import 'package:yeper_user/modals/UserModal.dart';
 

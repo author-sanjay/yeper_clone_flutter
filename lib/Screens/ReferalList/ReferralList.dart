@@ -35,7 +35,7 @@ class _ReferralListState extends State<ReferralList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: body(isloading: _isloading, getdeals: _getdeals),
+      body: _isloading?Center(child: CircularProgressIndicator(),): body(isloading: _isloading, getdeals: _getdeals),
       bottomNavigationBar: GestureDetector(
         onTap: (() {
           Navigator.push(
@@ -75,7 +75,7 @@ class body extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: SafeArea(
-        child: Column(
+        child: _isloading?Center(child: CircularProgressIndicator(),): Column(
           children: [
             HeaderWithSearchbar(size: MediaQuery.of(context).size),
             SizedBox(

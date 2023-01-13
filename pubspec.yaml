@@ -44,6 +44,8 @@ dependencies:
   provider:
   firebase_storage:
   file_picker:
+  social_share: ^2.3.1
+  dotted_border: ^2.0.0+3
 
 dev_dependencies:
   flutter_test:
