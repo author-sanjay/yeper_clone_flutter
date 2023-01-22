@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_svg/svg.dart';
 import 'package:yeper_user/Screens/Register/RegisterVerify.dart';
 
 class RegisterOtp extends StatelessWidget {
@@ -20,7 +19,7 @@ class RegisterOtp extends StatelessWidget {
           child: Center(
               child: Column(
             children: <Widget>[
-             Spacer(),
+              Spacer(),
               Image(image: AssetImage("assets/images/logo.png")),
               Spacer(),
               RegisterVerify(),
@@ -30,6 +29,5 @@ class RegisterOtp extends StatelessWidget {
         ),
       ),
     );
-   
   }
 }

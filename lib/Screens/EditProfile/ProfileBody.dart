@@ -9,6 +9,7 @@ import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/api.dart';
+import 'package:yeper_user/constants.dart';
 
 import '../../Storage.dart';
 
@@ -74,7 +75,7 @@ class _ProfileBodyState extends State<ProfileBody> {
     final Storage storage = Storage();
     return SingleChildScrollView(
       child: Container(
-        color: Color.fromARGB(255, 181, 114, 20),
+        color: kprimarycolor,
         height: MediaQuery.of(context).size.height,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

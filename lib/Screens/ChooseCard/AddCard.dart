@@ -101,8 +101,8 @@ class _CardState extends State<Card> {
     return GestureDetector(
       onTap: () {
         addcard(widget.id);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const ChooseCard()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const ChooseCard()));
       },
       child: Column(
         children: [

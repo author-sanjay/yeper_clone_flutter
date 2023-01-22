@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/DetailsScreen/Components/Body.dart';
 
-
 class DetailsScreen extends StatefulWidget {
   DetailsScreen(
       {super.key,
@@ -34,6 +33,11 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

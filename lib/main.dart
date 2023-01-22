@@ -4,9 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yeper_user/Screens/ChooseLogin/ChooseLogin.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:yeper_user/Screens/LoginScreen/LoginScreen.dart';
-import 'package:yeper_user/Screens/Register/Register.dart';
+import 'package:yeper_user/Screens/SplashScreen/SplashScreen.dart';
 import 'package:yeper_user/constants.dart';
 import 'package:yeper_user/modals/UserModal.dart';
 
@@ -27,26 +28,26 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late final String? uid;
+  // late final String? uid;
   @override
   void initState() {
     super.initState();
-    uid = FirebaseAuth.instance.currentUser?.uid;
+    // uid = FirebaseAuth.instance.currentUser?.uid;
+    // uid = null;
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: "Yeper Client",
-        theme: ThemeData(
-          scaffoldBackgroundColor: kbackgroundColor,
-          primaryColor: kprimarycolor,
-          textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: uid != null ? HomeScreen() : LoginScreen()
-        ,
-        );
+      debugShowCheckedModeBanner: false,
+      title: "Yeper Client",
+      theme: ThemeData(
+        scaffoldBackgroundColor: kbackgroundColor,
+        primaryColor: kprimarycolor,
+        textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: SplashScreen(),
+    );
   }
 }

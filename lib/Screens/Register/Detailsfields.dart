@@ -118,7 +118,7 @@ class _DetailsFieldsState extends State<DetailsFields> {
                       DetailsFields.name = value;
                     },
                     decoration: const InputDecoration(labelText: "Name"),
-                    keyboardType: TextInputType.number,
+                    
                   ),
                   SizedBox(height: 10),
                   TextField(
@@ -126,7 +126,7 @@ class _DetailsFieldsState extends State<DetailsFields> {
                       DetailsFields.email = value;
                     },
                     decoration: const InputDecoration(labelText: "Email"),
-                    keyboardType: TextInputType.number,
+                    
                   ),
                   SizedBox(height: 10),
                   TextField(
@@ -135,7 +135,7 @@ class _DetailsFieldsState extends State<DetailsFields> {
                       DetailsFields.address = value;
                     },
                     decoration: const InputDecoration(labelText: "Address"),
-                    keyboardType: TextInputType.number,
+                    
                   ),
                   SizedBox(height: 10),
                   TextField(
@@ -144,7 +144,7 @@ class _DetailsFieldsState extends State<DetailsFields> {
                     },
                     decoration:
                         const InputDecoration(labelText: "Bank Account"),
-                    keyboardType: TextInputType.number,
+                    
                   ),
                   SizedBox(height: 10),
                   TextField(
@@ -152,7 +152,7 @@ class _DetailsFieldsState extends State<DetailsFields> {
                       DetailsFields.bankname = value;
                     },
                     decoration: const InputDecoration(labelText: "Bank Name"),
-                    keyboardType: TextInputType.number,
+                    // keyboardType: TextInputType.number,
                   ),
                   SizedBox(height: 10),
                   TextField(
@@ -160,7 +160,7 @@ class _DetailsFieldsState extends State<DetailsFields> {
                       DetailsFields.ifsc = value;
                     },
                     decoration: const InputDecoration(labelText: "IFSC"),
-                    keyboardType: TextInputType.number,
+                    // keyboardType: TextInputType.number,
                   ),
                   SizedBox(height: 20),
                   TextField(
@@ -169,7 +169,7 @@ class _DetailsFieldsState extends State<DetailsFields> {
                     },
                     decoration:
                         const InputDecoration(labelText: "Referal Code"),
-                    keyboardType: TextInputType.number,
+                    // keyboardType: TextInputType.number,
                   ),
                   SizedBox(height: 20),
                   GestureDetector(

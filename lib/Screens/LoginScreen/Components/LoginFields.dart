@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yeper_user/Screens/OtpScreen/OtpScreen.dart';
+import 'package:yeper_user/Screens/Register/Register.dart';
 
 import '../../../constants.dart';
 
@@ -15,7 +16,7 @@ class TextFields extends StatefulWidget {
   static String verify = "";
   static bool checked = false;
   static bool loading = false;
-
+  static String phone_number = "";
   @override
   State<TextFields> createState() => _TextFieldsState();
 }
@@ -23,7 +24,6 @@ class TextFields extends StatefulWidget {
 class _TextFieldsState extends State<TextFields> {
   @override
   Widget build(BuildContext context) {
-    late String phone_number;
     return Padding(
       padding: const EdgeInsets.all(18.0),
       child: Container(
@@ -61,7 +61,12 @@ class _TextFieldsState extends State<TextFields> {
             alignment: Alignment.topLeft,
             child: TextField(
               onChanged: (value) {
-                phone_number = value;
+                TextFields.phone_number = value;
+                // setState(() {
+                //   phone_number = value;
+                //   print(phone_number);
+                // });
+                print(TextFields.phone_number);
               },
               keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
@@ -96,54 +101,67 @@ class _TextFieldsState extends State<TextFields> {
             height: 20,
           ),
           TextFields.checked
-                  ? Center(
-                      child: GestureDetector(
-                      onTap: (() async {
-                        await FirebaseAuth.instance.verifyPhoneNumber(
-                          phoneNumber: "+91" + phone_number,
-                          verificationCompleted:
-                              (PhoneAuthCredential credential) {},
-                          verificationFailed: (FirebaseAuthException e) {},
-                          codeSent: (String verificationId, int? resendToken) {
-                            TextFields.verify = verificationId;
-                            TextFields.loading = true;
-                            
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => OtpScreen(),
-                              ),
-                            );
-                          },
-                          codeAutoRetrievalTimeout: (String verificationId) {},
+              ? Center(
+                  child: GestureDetector(
+                  onTap: (() async {
+                    await FirebaseAuth.instance.verifyPhoneNumber(
+                      phoneNumber: "+91" + TextFields.phone_number,
+                      verificationCompleted:
+                          (PhoneAuthCredential credential) {},
+                      verificationFailed: (FirebaseAuthException e) {
+                        print(e);
+                      },
+                      codeSent: (String verificationId, int? resendToken) {
+                        TextFields.verify = verificationId;
+                        TextFields.loading = true;
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => OtpScreen(),
+                          ),
                         );
-                      }),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              color: kprimarycolor,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          width: MediaQuery.of(context).size.width,
-                          height: 50,
-                          child: Center(
-                              child: Text(
-                            "Get OTP",
-                            style: TextStyle(color: Colors.white, fontSize: 23),
-                          ))),
-                    ))
-                  : Center(
-                      child: Container(
-                          decoration: BoxDecoration(
-                              color: kopacity,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          width: MediaQuery.of(context).size.width,
-                          height: 50,
-                          child: Center(
-                              child: Text(
-                            "Please Accept T&C",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          )))),
+                      },
+                      codeAutoRetrievalTimeout: (String verificationId) {},
+                    );
+                  }),
+                  child: Container(
+                      decoration: BoxDecoration(
+                          color: kprimarycolor,
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      width: MediaQuery.of(context).size.width,
+                      height: 50,
+                      child: Center(
+                          child: Text(
+                        "Get OTP",
+                        style: TextStyle(color: Colors.white, fontSize: 23),
+                      ))),
+                ))
+              : Center(
+                  child: Container(
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 104, 104, 157),
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      width: MediaQuery.of(context).size.width,
+                      height: 50,
+                      child: Center(
+                          child: Text(
+                        "Please Accept T&C",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      )))),
+          Padding(
+            padding: const EdgeInsets.only(top: 18.0),
+            child: GestureDetector(
+                onTap: (() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Register(),
+                    ),
+                  );
+                }),
+                child: Container(child: Text("Dont Have Account? Create One"))),
+          )
         ]),
       ),
     );

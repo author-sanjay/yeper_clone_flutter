@@ -35,7 +35,11 @@ class _ReferralListState extends State<ReferralList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _isloading?Center(child: CircularProgressIndicator(),): body(isloading: _isloading, getdeals: _getdeals),
+      body: _isloading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : body(isloading: _isloading, getdeals: _getdeals),
       bottomNavigationBar: GestureDetector(
         onTap: (() {
           Navigator.push(
@@ -75,67 +79,80 @@ class body extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: SafeArea(
-        child: _isloading?Center(child: CircularProgressIndicator(),): Column(
-          children: [
-            HeaderWithSearchbar(size: MediaQuery.of(context).size),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(kDefaultPadding),
-              child: Column(
+        child: _isloading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Column(
                 children: [
-                  Container(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Your Referals",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      )),
+                  HeaderWithSearchbar(size: MediaQuery.of(context).size),
                   SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(255, 108, 106, 106),
-                            offset: const Offset(
-                              -1.0,
-                              1.0,
-                            ),
-                            blurRadius: 5.0,
-                            spreadRadius: 1.0,
-                          ),
-                        ]),
-                    padding: EdgeInsets.all(kDefaultPadding),
-                    child: _isloading
-                        ? Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : ListView.builder(
-                            itemBuilder: (context, index) {
-                              return list(
-                                  date: _getdeals[index].date,
-                                  name: _getdeals[index].name);
-                            },
-                            shrinkWrap: true,
-                            itemCount: _getdeals.length,
-                            padding: EdgeInsets.all(0),
-                            controller:
-                                ScrollController(keepScrollOffset: false),
-                          ),
-                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(kDefaultPadding),
+                    child: Column(
+                      children: [
+                        Container(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Your Referals",
+                              style: TextStyle(
+                                fontSize: 30,
+                              ),
+                            )),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        _getdeals.isEmpty
+                            ? Padding(
+                                padding: const EdgeInsets.all(28.0),
+                                child: Text(
+                                  "You Dont have Any Referrals. Please Share The app to Earn 10% on earning of Your Friend",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              )
+                            : Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(10),
+                                        bottomLeft: Radius.circular(10)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            Color.fromARGB(255, 108, 106, 106),
+                                        offset: const Offset(
+                                          -1.0,
+                                          1.0,
+                                        ),
+                                        blurRadius: 5.0,
+                                        spreadRadius: 1.0,
+                                      ),
+                                    ]),
+                                padding: EdgeInsets.all(kDefaultPadding),
+                                child: _isloading
+                                    ? Center(
+                                        child: CircularProgressIndicator(),
+                                      )
+                                    : ListView.builder(
+                                        itemBuilder: (context, index) {
+                                          return list(
+                                              date: _getdeals[index].date,
+                                              name: _getdeals[index].name);
+                                        },
+                                        shrinkWrap: true,
+                                        itemCount: _getdeals.length,
+                                        padding: EdgeInsets.all(0),
+                                        controller: ScrollController(
+                                            keepScrollOffset: false),
+                                      ),
+                              ),
+                      ],
+                    ),
+                  )
                 ],
               ),
-            )
-          ],
-        ),
       ),
     );
   }

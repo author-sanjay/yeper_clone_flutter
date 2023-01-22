@@ -10,7 +10,7 @@ import '../api.dart';
 class Getdealsapi {
   static Future<List<GetDeals>> getDeals() async {
     Map<String, String> headers = {"Content-type": "application/json"};
-    var res = await http.get(Uri.parse(api + "/deals/getall"));
+    var res = await http.get(Uri.parse(api + "/deals/getactive"));
     List _temp = [];
     // print(jsonDecode(res.body));
     for (var i in jsonDecode(res.body)) {

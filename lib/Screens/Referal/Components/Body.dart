@@ -4,9 +4,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:social_share/social_share.dart';
-import 'package:yeper_user/Screens/ReferalList/ReferralList.dart';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
-import 'package:yeper_user/constants.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});
@@ -46,8 +44,7 @@ class Body extends StatelessWidget {
             GestureDetector(
               onTap: (() async {
                 SocialShare.shareOptions(
-                    "Hi, Do you have an credit Card? And Want to earn rewards with it? Come!!! Join Us in Uitilizing your credit card. DOnt Forget To Use My Code  " +
-                        user.referalcode.toString());
+                    "Hi, Do you have an credit Card? And Want to earn rewards with it? Come!!! Join Us in Uitilizing your credit card. DOnt Forget To Use My Code  ${user.referalcode}");
                 // Navigator.push(
                 //   context,
                 //   MaterialPageRoute(

@@ -1,7 +1,6 @@
 // ignore_for_file: file_names, prefer_const_constructors, empty_statements, dead_code
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:yeper_user/Screens/Register/Registerfields.dart';
 
 class RegisterBody extends StatelessWidget {
@@ -18,7 +17,7 @@ class RegisterBody extends StatelessWidget {
           color: Colors.white,
           child: Center(
               child: Column(
-            children: <Widget>[
+            children: const <Widget>[
               Spacer(),
               Image(image: AssetImage("assets/images/logo.png")),
               Spacer(),

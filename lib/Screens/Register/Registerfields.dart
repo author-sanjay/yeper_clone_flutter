@@ -2,14 +2,22 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:yeper_user/Screens/LoginScreen/LoginScreen.dart';
 import 'package:yeper_user/Screens/Register/OtpScreenRegister.dart';
 
 import '../../constants.dart';
 
-class Registerfields extends StatelessWidget {
+class Registerfields extends StatefulWidget {
   const Registerfields({super.key});
   static String verify = "";
   static String phone_number = "";
+
+  @override
+  State<Registerfields> createState() => _RegisterfieldsState();
+}
+
+class _RegisterfieldsState extends State<Registerfields> {
+  bool loading = false;
   @override
   Widget build(BuildContext context) {
     late String phone_number;
@@ -50,6 +58,9 @@ class Registerfields extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20),
             child: GestureDetector(
               onTap: (() async {
+                setState(() {
+                  loading = true;
+                });
                 await FirebaseAuth.instance.verifyPhoneNumber(
                   phoneNumber: "+91" + phone_number,
                   verificationCompleted: (PhoneAuthCredential credential) {},
@@ -72,11 +83,20 @@ class Registerfields extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: kprimarycolor,
                     borderRadius: BorderRadius.circular(20)),
-                child: Center(
-                    child: Text(
-                  "Send Code",
-                  style: TextStyle(color: Colors.white, fontSize: 17),
-                )),
+                child: loading
+                    ? Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    : Center(
+                        child: Text(
+                        "Send Code",
+                        style: TextStyle(color: Colors.white, fontSize: 17),
+                      )),
               ),
             ),
           ),
@@ -102,6 +122,25 @@ class Registerfields extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(top: 18.0),
+            child: GestureDetector(
+              onTap: (() {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginScreen(),
+                  ),
+                );
+              }),
+              child: Center(
+                child: Text(
+                  "Already Have Account? Login!!!",
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

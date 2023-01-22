@@ -45,7 +45,10 @@ class _BodyState extends State<Body> {
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : Wrap(
+                : _getdeals.isEmpty?Padding(
+                  padding: const EdgeInsets.all(50.0),
+                  child: Center(child: Flexible(child: Text("No Active Deals Please Check after Some time",style: TextStyle(fontSize: 20),)),),
+                ) :Wrap(
                     children: [
                       for (var i in _getdeals)
                         ItemCard(

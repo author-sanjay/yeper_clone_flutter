@@ -3,6 +3,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:yeper_user/Screens/DetailsScreen/Components/Body.dart';
+import 'package:yeper_user/Screens/HomeScreen/Components/HeaderWithSearchbar.dart';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/Screens/Wallet/Components/Header.dart';
 import 'package:yeper_user/constants.dart';
@@ -10,6 +12,7 @@ import 'package:yeper_user/modals/GetWallettxn.dart';
 import 'package:yeper_user/modals/GetWallettxnapi.dart';
 import 'package:http/http.dart' as http;
 import '../../../api.dart';
+import '../../ProfilePage/Profile.dart';
 
 class WalletBody extends StatefulWidget {
   const WalletBody({super.key});
@@ -65,14 +68,44 @@ class _WalletBodyState extends State<WalletBody> {
                 margin: EdgeInsets.symmetric(horizontal: 32, vertical: 32),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  
+
                   children: <Widget>[
+
                     GestureDetector(
                       onTap: (() {}),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         margin: EdgeInsets.only(top: size.height * 0.05),
                         child: Column(
+                          // crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+                            
+                              Row(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage:
+                                        NetworkImage(user.photo.toString()),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Text(
+                                    "Hi,  ",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  Text(
+                                    user.name.toString(),
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                 
+                                     
+                                ],
+                              ),
+                            SizedBox(height: 30,),
+
                             Text(
                               "Your Balance",
                               style: Theme.of(context)
@@ -81,7 +114,7 @@ class _WalletBodyState extends State<WalletBody> {
                                   ?.copyWith(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w300,
-                                      fontSize: 20),
+                                      fontSize: 15),
                             ),
                             _isloading
                                 ? Center(
@@ -95,20 +128,9 @@ class _WalletBodyState extends State<WalletBody> {
                                         ?.copyWith(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 50),
+                                            fontSize: 30),
                                   ),
-                            SizedBox(
-                              height: 25,
-                            ),
-                            Icon(
-                              Icons.paypal,
-                              color: Colors.white,
-                              size: 50,
-                            ),
-                            Text(
-                              "Withdraw",
-                              style: TextStyle(color: Colors.white, ),
-                            )
+                           
                           ],
                         ),
                       ),
@@ -205,7 +227,9 @@ class txndetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.symmetric(horizontal: 32),
+      height: MediaQuery.of(context).size.height*0.12,
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
           color: Colors.white,
@@ -229,21 +253,24 @@ class txndetails extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  "Payment",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.grey[900]),
-                ),
+Text(
+                    "Payment",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.grey[900]),
+                  ),
+                
                 incoming
-                    ? Text(
-                        "Payment from CCredit",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.grey[500]),
-                      )
+                    ? Flexible(
+                      child: Text(
+                          "Payment from CCredit",
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.grey[500]),
+                        ),
+                    )
                     : Text(
                         "Paid to you",
                         style: TextStyle(
@@ -272,13 +299,13 @@ class txndetails extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                           color: Colors.red),
                     ),
-              Text(
-                "$date",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.grey[500]),
-              ),
+              // Text(
+              //   "$date",
+              //   style: TextStyle(
+              //       fontSize: 15,
+              //       fontWeight: FontWeight.w700,
+              //       color: Colors.grey[500]),
+              // ),
             ],
           ),
         ],

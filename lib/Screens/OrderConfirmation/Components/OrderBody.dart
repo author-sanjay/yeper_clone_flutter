@@ -79,7 +79,7 @@ class _OrderBodyState extends State<OrderBody> {
     }
   }
 
-  late String orderidofplatform;
+  String? orderidofplatform;
   @override
   void initState() {
     // getdeals(widget.orderid);
@@ -233,7 +233,7 @@ class _OrderBodyState extends State<OrderBody> {
                                   text: widget.platform,
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 30,
+                                      fontSize: 25,
                                       fontWeight: FontWeight.w400),
                                 ),
                               ],
@@ -454,12 +454,13 @@ class _OrderBodyState extends State<OrderBody> {
                                         ));
                                       } else {
                                         update(
-                                            widget.orderid, orderidofplatform);
+                                            widget.orderid, orderidofplatform.toString());
+                                            setState(() {
+                                          widget.status = "Placed";
+                                        });
                                       }
 
-                                      setState(() {
-                                        widget.status = "Placed";
-                                      });
+                                      
                                     },
                                     style: ButtonStyle(
                                       backgroundColor:

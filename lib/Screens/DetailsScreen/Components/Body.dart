@@ -31,7 +31,8 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var newname = name.split(" ");
-    String shortname = "${newname[0]} ${newname[1]}";
+    String shortname = newname[0];
+
     Size size = MediaQuery.of(context).size;
     produtname = name;
     return SingleChildScrollView(
@@ -46,7 +47,7 @@ class Body extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              imageofproduct(),
+              imageofproduct(photos: photo),
               SizedBox(
                 height: 30,
               ),
@@ -438,18 +439,15 @@ class titileanddesc extends StatelessWidget {
 }
 
 class imageofproduct extends StatelessWidget {
-  const imageofproduct({
-    Key? key,
-  }) : super(key: key);
-
+  imageofproduct({Key? key, required this.photos}) : super(key: key);
+  String photos;
   @override
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.3,
       width: MediaQuery.of(context).size.width,
       // color: Colors.cyan,
-      child: Image(
-          image: AssetImage("assets/images/image (1).jpg"), fit: BoxFit.cover),
+      child: Image(image: NetworkImage(photos), fit: BoxFit.cover),
     );
   }
 }
