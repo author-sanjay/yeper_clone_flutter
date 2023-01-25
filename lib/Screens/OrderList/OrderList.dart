@@ -1,11 +1,15 @@
 // ignore_for_file: file_names, prefer_const_literals_to_create_immutables, unnecessary_string_interpolations, must_be_immutable, avoid_print, camel_case_types, avoid_unnecessary_containers
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/HomeScreen/Components/HeaderWithSearchbar.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:yeper_user/Screens/OrderList/Orderpreview.dart';
+import 'package:yeper_user/api.dart';
 import 'package:yeper_user/modals/GetOrders.dart';
 import 'package:yeper_user/modals/GetOrdersapi.dart';
+import 'package:http/http.dart' as http;
 
 import '../../constants.dart';
 
@@ -108,7 +112,7 @@ class orderlistbody extends StatelessWidget {
   }
 }
 
-class list extends StatelessWidget {
+class list extends StatefulWidget {
   list(
       {Key? key,
       required this.date,
@@ -124,133 +128,168 @@ class list extends StatelessWidget {
   String status;
   String platforid;
   String date;
+
+  @override
+  State<list> createState() => _listState();
+}
+
+class _listState extends State<list> {
+  bool loading = true;
+  late String photo;
+  late String name;
+  late String spent;
+  late String earn;
+  late String uget;
+
+  Future<void> getdeal() async {
+    Map<String, String> headers = {"Content-type": "application/json"};
+    var res = await http.get(
+        Uri.parse(api + '/deals/getsingle/' + widget.deal.toString()),
+        headers: headers);
+    var result = jsonDecode(res.body);
+    photo = result["photourl"].toString();
+    name = result["product_name"].toString();
+    spent = result["actual_price"].toString();
+    uget = result["offer_price"].toString();
+    earn = result["user_earning"].toString();
+    setState(() {
+      loading = false;
+    });
+    print(name);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getdeal();
+  }
+
   @override
   Widget build(BuildContext context) {
-    var newname = name.split(" ");
-    return GestureDetector(
-      onTap: () => {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => OrderPreview(
-                orderid: int.parse(orderid),
-                id: deal,
-                status: status,
-                txn: platforid),
-          ),
-        )
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          children: [
-            Container(
-              alignment: Alignment.topLeft,
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 247, 246, 243),
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(10)),
+    var newname = widget.name.split(" ");
+    return loading
+        ? Center(child: CircularProgressIndicator())
+        : GestureDetector(
+            onTap: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => OrderPreview(
+                      orderid: int.parse(widget.orderid),
+                      id: widget.deal,
+                      status: widget.status,
+                      txn: widget.platforid),
+                ),
+              )
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                // height: MediaQuery.of(context).size.height * 0.4,
+                decoration: BoxDecoration(
+                  color: Colors.white,
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 108, 106, 106),
-                      offset: const Offset(
-                        -1.0,
-                        1.0,
-                      ),
-                      blurRadius: 5.0,
-                      spreadRadius: 1.0,
-                    ),
-                  ]),
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                children: [
-                  Container(
-                    color: kprimarycolor,
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      "l",
-                      style:
-                          TextStyle(fontSize: 50, fontWeight: FontWeight.w100),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    padding: EdgeInsets.all(8),
-                    width: MediaQuery.of(context).size.width * 0.75,
-                    child: Row(children: [
-                      Container(
-                        child: Column(children: [
-                          Text(
-                            newname[0],
-                            style: TextStyle(fontSize: 30),
-                          ),
-                          Text(
-                            "Order id: $orderid",
-                            style: TextStyle(
-                              fontSize: 20,
+                        offset: Offset(0, 5),
+                        blurRadius: 10,
+                        color: kprimarycolor.withOpacity(0.23)),
+                  ],
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                        width: MediaQuery.of(context).size.width * 0.3,
+                        height: MediaQuery.of(context).size.height * 0.2,
+                        child: Image(
+                          image: NetworkImage(photo),
+                          fit: BoxFit.contain,
+                        )),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0, top: 10),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        height: MediaQuery.of(context).size.height * 0.2,
+                        alignment: Alignment.topLeft,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                name.toUpperCase(),
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             ),
-                          )
-                        ]),
-                      ),
-                      Spacer(),
-                      Container(
-                        alignment: Alignment.centerRight,
-                        child: Column(children: [
-                          status == "Placed"
-                              ? Container(
-                                  decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 130, 234, 40),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10))),
-                                  width: 80,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Center(
-                                        child: Text(
-                                      "$status",
-                                      style: TextStyle(fontSize: 15),
-                                    )),
-                                  ))
-                              : Container(
-                                  decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 234, 82, 40),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10))),
-                                  width: 80,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Center(
-                                        child: Text(
-                                      "$status",
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Flexible(
+                              child: Text(
+                                "Accepted on " + widget.date,
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                            Spacer(),
+                            Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("You Spent"),
+                                    Text(
+                                      spent,
                                       style: TextStyle(
-                                          color: Colors.white, fontSize: 15),
-                                    )),
-                                  )),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text("$date",
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600)),
-                          // Text("Platformid: $platforid")
-                        ]),
-                      )
-                    ]),
-                  )
-                ],
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w700),
+                                    )
+                                  ],
+                                ),
+                                Spacer(),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("You Get"),
+                                    Text(
+                                      uget,
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w700),
+                                    )
+                                  ],
+                                ),
+                                Spacer(),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("You Earn"),
+                                    Text(
+                                      earn,
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w700),
+                                    )
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            )
-          ],
-        ),
-      ),
-    );
+          );
   }
 }
 
