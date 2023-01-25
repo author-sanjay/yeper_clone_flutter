@@ -8,6 +8,8 @@ import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:yeper_user/Screens/LoginScreen/LoginScreen.dart';
 import 'package:yeper_user/constants.dart';
 
+import '../Register/Register.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -32,10 +34,10 @@ class _SplashScreenState extends State<SplashScreen> {
                         builder: (context) => HomeScreen(),
                       ),
                     )
-                  : Navigator.pushReplacement(
+                  : Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
+                        builder: (context) => Register(),
                       ),
                     )
             });

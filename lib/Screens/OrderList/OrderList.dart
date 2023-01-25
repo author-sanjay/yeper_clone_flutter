@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/HomeScreen/Components/HeaderWithSearchbar.dart';
+import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:yeper_user/Screens/OrderList/Orderpreview.dart';
 import 'package:yeper_user/modals/GetOrders.dart';
 import 'package:yeper_user/modals/GetOrdersapi.dart';
@@ -37,7 +38,26 @@ class _OrderListState extends State<OrderList> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: // ignore_for_file: prefer_const_constructors, sort_child_properties_last
-            SingleChildScrollView(
+            orderlistbody(isloading: _isloading, getdeals: _getdeals),
+        bottomNavigationBar: bottomnavbar());
+  }
+}
+
+class orderlistbody extends StatelessWidget {
+  const orderlistbody({
+    Key? key,
+    required bool isloading,
+    required List<GetOrders> getdeals,
+  })  : _isloading = isloading,
+        _getdeals = getdeals,
+        super(key: key);
+
+  final bool _isloading;
+  final List<GetOrders> _getdeals;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
       child: SafeArea(
           child: Container(
         child: Column(
@@ -72,8 +92,6 @@ class _OrderListState extends State<OrderList> {
                                 platforid: _getdeals[index].txn,
                                 status: _getdeals[index].orderstatus,
                                 deal: _getdeals[index].deal);
-                            
-                                
                           },
                           shrinkWrap: true,
                           itemCount: _getdeals.length,
@@ -86,7 +104,7 @@ class _OrderListState extends State<OrderList> {
           ],
         ),
       )),
-    ));
+    );
   }
 }
 
@@ -97,9 +115,10 @@ class list extends StatelessWidget {
       required this.name,
       required this.orderid,
       required this.platforid,
-      required this.status,required this.deal})
+      required this.status,
+      required this.deal})
       : super(key: key);
-      int deal;
+  int deal;
   String name;
   String orderid;
   String status;
@@ -109,11 +128,20 @@ class list extends StatelessWidget {
   Widget build(BuildContext context) {
     var newname = name.split(" ");
     return GestureDetector(
-      onTap: ()=>{
-        Navigator.push(context,MaterialPageRoute(builder: (context) => OrderPreview(orderid: int.parse(orderid)  , id: deal, status: status, txn: platforid),),)
+      onTap: () => {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OrderPreview(
+                orderid: int.parse(orderid),
+                id: deal,
+                status: status,
+                txn: platforid),
+          ),
+        )
       },
       child: Container(
-        width:MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
             Container(
@@ -121,7 +149,8 @@ class list extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Color.fromARGB(255, 247, 246, 243),
                   borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(10), bottomLeft: Radius.circular(10)),
+                      topRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(10)),
                   boxShadow: [
                     BoxShadow(
                       color: Color.fromARGB(255, 108, 106, 106),
@@ -139,7 +168,11 @@ class list extends StatelessWidget {
                   Container(
                     color: kprimarycolor,
                     alignment: Alignment.topLeft,
-                    child: Text("l", style: TextStyle(fontSize: 50, fontWeight: FontWeight.w100),),
+                    child: Text(
+                      "l",
+                      style:
+                          TextStyle(fontSize: 50, fontWeight: FontWeight.w100),
+                    ),
                   ),
                   SizedBox(
                     width: 20,
@@ -167,20 +200,42 @@ class list extends StatelessWidget {
                       Container(
                         alignment: Alignment.centerRight,
                         child: Column(children: [
-                          status=="Placed"?
-                          Container(decoration: BoxDecoration(
+                          status == "Placed"
+                              ? Container(
+                                  decoration: BoxDecoration(
                                       color: Color.fromARGB(255, 130, 234, 40),
-                                      borderRadius: BorderRadius.all(Radius.circular(10))), width: 80,child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(child: Text("$status", style: TextStyle(fontSize: 15),)),
-                          )): Container(decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
+                                  width: 80,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Center(
+                                        child: Text(
+                                      "$status",
+                                      style: TextStyle(fontSize: 15),
+                                    )),
+                                  ))
+                              : Container(
+                                  decoration: BoxDecoration(
                                       color: Color.fromARGB(255, 234, 82, 40),
-                                      borderRadius: BorderRadius.all(Radius.circular(10))), width: 80,child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(child: Text("$status", style: TextStyle(color: Colors.white, fontSize:15),)),
-                          )),
-                          SizedBox(height: 10,),
-                          Text("$date",style: TextStyle( fontSize:15,fontWeight: FontWeight.w600)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
+                                  width: 80,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Center(
+                                        child: Text(
+                                      "$status",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 15),
+                                    )),
+                                  )),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text("$date",
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w600)),
                           // Text("Platformid: $platforid")
                         ]),
                       )
@@ -189,13 +244,13 @@ class list extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20,)
+            SizedBox(
+              height: 20,
+            )
           ],
         ),
       ),
     );
-  
-  
   }
 }
 

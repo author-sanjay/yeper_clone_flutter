@@ -1,24 +1,24 @@
 // ignore_for_file: prefer_const_constructors, file_names, must_be_immutable, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:yeper_user/Screens/OrderConfirmation/Components/OrderBody.dart';
 
 class OrderConfirmation extends StatelessWidget {
-  OrderConfirmation({
-    super.key,
-    required this.orderid,
-    required this.actualprice,
-    required this.card,
-    required this.earning,
-    required this.offer,
-    required this.desc,
-    required this.photo,
-    required this.link,
-    required this.platform,
-    required this.id,
-    required this.status,
-    required this.name
-  });
+  OrderConfirmation(
+      {super.key,
+      required this.orderid,
+      required this.actualprice,
+      required this.card,
+      required this.earning,
+      required this.offer,
+      required this.desc,
+      required this.photo,
+      required this.link,
+      required this.platform,
+      required this.id,
+      required this.status,
+      required this.name});
   // });
   // String productname;
   String status;
@@ -52,6 +52,7 @@ class OrderConfirmation extends StatelessWidget {
         status: status,
         key: key,
       )),
+      // bottomNavigationBar: bottomnavbar(),
     );
   }
 }

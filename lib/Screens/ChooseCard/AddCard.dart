@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/ChooseCard/ChooseCard.dart';
 import 'package:yeper_user/Screens/HomeScreen/Components/HeaderWithSearchbar.dart';
+import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:yeper_user/modals/GetCards.dart';
 import 'package:yeper_user/modals/GetCardsapi.dart';
 
@@ -69,7 +70,8 @@ class _AddCardsState extends State<AddCards> {
                     ],
                   ),
                 )),
-              ));
+              ),
+        bottomNavigationBar: bottomnavbar());
   }
 }
 

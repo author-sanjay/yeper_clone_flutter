@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
+
 class TitleWithButton extends StatelessWidget {
   const TitleWithButton({
     Key? key,
@@ -11,11 +12,11 @@ class TitleWithButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: kDefaultPadding, left: kDefaultPadding),
+      padding:
+          const EdgeInsets.only(bottom: kDefaultPadding, left: kDefaultPadding),
       child: Row(
         children: <Widget>[
-          TextWithCustomUnderline(text: "Deals"),
-          
+          // TextWithCustomUnderline(text: "Deals"),
         ],
       ),
     );

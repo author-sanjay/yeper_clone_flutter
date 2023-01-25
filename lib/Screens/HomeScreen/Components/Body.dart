@@ -37,44 +37,55 @@ class _BodyState extends State<Body> {
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: SafeArea(
-        child: Column(
-          children: <Widget>[
-            HeaderWithSearchbar(size: size),
-            TitleWithButton(),
-            _isloading
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : _getdeals.isEmpty?Padding(
-                  padding: const EdgeInsets.all(50.0),
-                  child: Center(child: Flexible(child: Text("No Active Deals Please Check after Some time",style: TextStyle(fontSize: 20),)),),
-                ) :Wrap(
-                    children: [
-                      for (var i in _getdeals)
-                        ItemCard(
-                          id: i.id,
-                          cardname: i.card,
-                          itemname: i.name,
-                          profit: i.earning.toDouble(),
-                          site: i.platform,
-                          image: i.images,
-                          link: i.offerlink,
-                          platform: i.platform,
-                          press: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => DetailsScreen(),
-                            //   ),
-                            // );
-                          },
-                          actual: i.actual,
-                          desc: i.desc,
-                          offer: i.offer,
-                        ),
-                    ],
-                  )
-          ],
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            children: <Widget>[
+              HeaderWithSearchbar(size: size),
+              TitleWithButton(),
+              _isloading
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : _getdeals.isEmpty
+                      ? Padding(
+                          padding: const EdgeInsets.all(50.0),
+                          child: Center(
+                            child: Flexible(
+                                child: Text(
+                              "No Active Deals Please Check after Some time",
+                              style: TextStyle(fontSize: 20),
+                            )),
+                          ),
+                        )
+                      : Wrap(
+                          children: [
+                            for (var i in _getdeals)
+                              ItemCard(
+                                id: i.id,
+                                cardname: i.card,
+                                itemname: i.name,
+                                profit: i.earning.toDouble(),
+                                site: i.platform,
+                                image: i.images,
+                                link: i.offerlink,
+                                platform: i.platform,
+                                press: () {
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => DetailsScreen(),
+                                  //   ),
+                                  // );
+                                },
+                                actual: i.actual,
+                                desc: i.desc,
+                                offer: i.offer,
+                              ),
+                          ],
+                        )
+            ],
+          ),
         ),
       ),
     );

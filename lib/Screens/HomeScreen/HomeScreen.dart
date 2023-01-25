@@ -134,98 +134,106 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               : Body(),
           // drawer: drawer(),
-          bottomNavigationBar: Container(
-            height: 60,
-            padding: EdgeInsets.only(
-                left: kDefaultPadding, right: kDefaultPadding, top: 10),
-            decoration: BoxDecoration(
-                color: Color.fromARGB(255, 244, 239, 239),
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromARGB(255, 108, 106, 106),
-                    offset: const Offset(
-                      5.0,
-                      5.0,
-                    ),
-                    blurRadius: 30.0,
-                    spreadRadius: 2.0,
-                  ),
-                ]),
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()));
-                  },
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Image.asset("assets/images/home.png"),
-                        Text("Home")
-                      ],
-                    ),
-                  ),
-                ),
-                Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => OrderList()),
-                    );
-                  },
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          "assets/images/orders.png",
-                        ),
-                        Text("Orders")
-                      ],
-                    ),
-                  ),
-                ),
-                Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ChooseCard(),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Image.asset("assets/images/cards.png"),
-                        Text("Cards")
-                      ],
-                    ),
-                  ),
-                ),
-                Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => WalletScreen()),
-                    );
-                  },
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Image.asset("assets/images/wallet.png"),
-                        Text("Wallet")
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+          bottomNavigationBar: bottomnavbar()),
+    );
+  }
+}
+
+class bottomnavbar extends StatelessWidget {
+  const bottomnavbar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 60,
+      padding: EdgeInsets.only(
+          left: kDefaultPadding, right: kDefaultPadding, top: 10),
+      decoration: BoxDecoration(
+          color: Color.fromARGB(255, 244, 239, 239),
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromARGB(255, 108, 106, 106),
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 30.0,
+              spreadRadius: 2.0,
             ),
-          )),
+          ]),
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()));
+            },
+            child: Container(
+              child: Column(
+                children: [Image.asset("assets/images/home.png"), Text("Home")],
+              ),
+            ),
+          ),
+          Spacer(),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => OrderList()),
+              );
+            },
+            child: Container(
+              child: Column(
+                children: [
+                  Image.asset(
+                    "assets/images/orders.png",
+                  ),
+                  Text("Orders")
+                ],
+              ),
+            ),
+          ),
+          Spacer(),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChooseCard(),
+                ),
+              );
+            },
+            child: Container(
+              child: Column(
+                children: [
+                  Image.asset("assets/images/cards.png"),
+                  Text("Cards")
+                ],
+              ),
+            ),
+          ),
+          Spacer(),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => WalletScreen()),
+              );
+            },
+            child: Container(
+              child: Column(
+                children: [
+                  Image.asset("assets/images/wallet.png"),
+                  Text("Wallet")
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

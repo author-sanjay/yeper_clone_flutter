@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:intl/intl.dart';
@@ -43,7 +44,29 @@ class OrderBody extends StatefulWidget {
 
 class _OrderBodyState extends State<OrderBody> {
   // bool isloading = true;
-  bool neworder = true;
+
+  bool neworder = false;
+  Future<void> _launchURLBrowser() async {
+    var url = Uri.parse("https://www.geeksforgeeks.org/");
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Future<void> urll() async {
+    String url = widget.link;
+    var urllaunchable = await canLaunchUrl(Uri.parse(url));
+    if (urllaunchable) {
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+
+      //launch is from url_launcher package to launch URL
+    } else {
+      print("URL can't be launched.");
+    }
+  }
+
   Future<void> update(int id, String txnid) async {
     var dt = DateTime.now();
 
@@ -301,7 +324,7 @@ class _OrderBodyState extends State<OrderBody> {
                           : GestureDetector(
                               child: Text("Don't Have one? click here"),
                               onTap: () {
-                                deals();
+                                urll();
                               },
                             ),
                       SizedBox(
@@ -425,25 +448,23 @@ class _OrderBodyState extends State<OrderBody> {
                         child: Column(
                           children: [
                             neworder
-                                ? ElevatedButton(
-                                    onPressed: () {
-                                      deals();
-                                      setState(() {
-                                        neworder = false;
-                                      });
-                                    },
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                        Color.fromARGB(255, 7, 66, 88),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      "Place Order",
-                                      style: TextStyle(
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.w300),
-                                    ))
+                                ? Link(
+                                    uri: Uri.parse(widget.link),
+                                    builder: ((context, followLink) =>
+                                        ElevatedButton(
+                                            onPressed: followLink,
+                                            style: ButtonStyle(
+                                              backgroundColor:
+                                                  MaterialStateProperty.all(
+                                                Color.fromARGB(255, 7, 66, 88),
+                                              ),
+                                            ),
+                                            child: Text(
+                                              "Place Order",
+                                              style: TextStyle(
+                                                  fontSize: 30,
+                                                  fontWeight: FontWeight.w300),
+                                            ))))
                                 : ElevatedButton(
                                     onPressed: () {
                                       if (orderidofplatform == null) {
@@ -453,14 +474,12 @@ class _OrderBodyState extends State<OrderBody> {
                                               "Please enter Platform order id"),
                                         ));
                                       } else {
-                                        update(
-                                            widget.orderid, orderidofplatform.toString());
-                                            setState(() {
+                                        update(widget.orderid,
+                                            orderidofplatform.toString());
+                                        setState(() {
                                           widget.status = "Placed";
                                         });
                                       }
-
-                                      
                                     },
                                     style: ButtonStyle(
                                       backgroundColor:
@@ -469,7 +488,7 @@ class _OrderBodyState extends State<OrderBody> {
                                       ),
                                     ),
                                     child: Text(
-                                      "Claim It",
+                                      "Place Order",
                                       style: TextStyle(
                                           fontSize: 30,
                                           fontWeight: FontWeight.w300),

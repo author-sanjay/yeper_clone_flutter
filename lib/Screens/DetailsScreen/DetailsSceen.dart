@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/DetailsScreen/Components/Body.dart';
+import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 
 class DetailsScreen extends StatefulWidget {
   DetailsScreen(
@@ -53,6 +54,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           // key: key,
           link: widget.link,
           platform: widget.platform),
+      bottomNavigationBar: bottomnavbar(),
       // bottomNavigationBar: ActivateOffer(
       //     id: id,
       //     key: key,

@@ -58,17 +58,29 @@ class ItemCard extends StatelessWidget {
         );
       },
       child: Container(
+        decoration:
+            BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20))),
         margin: EdgeInsets.only(
             left: kDefaultPadding * 0.4,
-            top: kDefaultPadding / 2,
+            top: kDefaultPadding * 0.4,
             bottom: kDefaultPadding * 2.5),
         width: size.width * 0.45,
         child: Column(
           children: <Widget>[
-            Image.network(
-              image,
-              fit: BoxFit.cover,
+            Container(
               height: size.height * 0.25,
+              decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                        offset: Offset(10, 5),
+                        blurRadius: 5,
+                        color: kprimarycolor.withOpacity(0.23)),
+                  ],
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20)),
+                  image: DecorationImage(
+                      image: NetworkImage(image), fit: BoxFit.cover)),
             ),
             Container(
               padding: EdgeInsets.all(kDefaultPadding / 2),
@@ -76,8 +88,8 @@ class ItemCard extends StatelessWidget {
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
-                        offset: Offset(0, 10),
-                        blurRadius: 50,
+                        offset: Offset(10, 5),
+                        blurRadius: 5,
                         color: kprimarycolor.withOpacity(0.23)),
                   ],
                   borderRadius: BorderRadius.only(
@@ -92,12 +104,10 @@ class ItemCard extends StatelessWidget {
                             text: TextSpan(children: [
                           TextSpan(
                               text: "$itemname\n".toUpperCase(),
-                              style: Theme.of(context).textTheme.button),
-                          TextSpan(
-                              text: "$cardname\n".toUpperCase(),
                               style: TextStyle(
-                                color: kprimarycolor.withOpacity(0.9),
-                              ))
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 17,
+                                  color: Colors.black)),
                         ])),
                       )
                     ],
@@ -111,12 +121,11 @@ class ItemCard extends StatelessWidget {
                           child: Column(
                             children: <Widget>[
                               Text(
-                                "Earn",
-                                style: TextStyle(color: Colors.green),
-                              ),
-                              Text(
-                                "\$ $profit",
-                                style: TextStyle(color: Colors.green),
+                                "₹ $profit",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700),
                               ),
                             ],
                           ),
@@ -126,7 +135,7 @@ class ItemCard extends StatelessWidget {
                           alignment: Alignment.center,
                           child: Column(
                             children: <Widget>[
-                              Text("$site"),
+                              Text("on $cardname \ncredit ard"),
                             ],
                           ),
                         )

@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names, must_be_immutable, unused_local_variable, sized_box_for_whitespace, camel_case_types, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:yeper_user/Screens/OrderConfirmation/OrderConfirmation.dart';
 import 'package:yeper_user/constants.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   Body(
       {super.key,
       required this.actualprice,
@@ -28,13 +31,48 @@ class Body extends StatelessWidget {
   String link;
   String platform;
   static late String produtname;
+
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
-    var newname = name.split(" ");
+    var newname = widget.name.split(" ");
     String shortname = newname[0];
 
     Size size = MediaQuery.of(context).size;
-    produtname = name;
+    var produtname = newname;
+
+    Future<void> urll() async {
+      String url = widget.link;
+      var urllaunchable = await canLaunchUrl(Uri.parse(url));
+      if (urllaunchable) {
+        await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication)
+            .then((value) => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => OrderConfirmation(
+                        orderid: 0,
+                        actualprice: widget.actualprice,
+                        card: widget.card,
+                        earning: widget.earning,
+                        offer: widget.offer,
+                        desc: widget.desc,
+                        photo: widget.photo,
+                        link: widget.link,
+                        platform: widget.platform,
+                        id: widget.id,
+                        status: "UnPlaced",
+                        name: widget.name),
+                  ),
+                )); //launch is from url_launcher package to launch URL
+      } else {
+        print("URL can't be launched.");
+      }
+    }
+
     return SingleChildScrollView(
       child: SafeArea(
         child: Container(
@@ -42,58 +80,58 @@ class Body extends StatelessWidget {
           child: Column(
             children: [
               headerwithname(
-                name: name,
+                name: widget.name,
               ),
               SizedBox(
                 height: 5,
               ),
-              imageofproduct(photos: photo),
+              imageofproduct(photos: widget.photo),
               SizedBox(
                 height: 30,
               ),
-              titileanddesc(shortname: shortname, photo: photo, desc: desc),
+              titileanddesc(
+                shortname: shortname,
+                photo: widget.photo,
+                desc: widget.desc,
+                platform: widget.platform,
+              ),
               SizedBox(
                 height: 10,
               ),
               pricedetails(
-                  actualprice: actualprice, offer: offer, earning: earning),
+                  actualprice: widget.actualprice,
+                  offer: widget.offer,
+                  earning: widget.earning),
               SizedBox(
                 height: 20,
               ),
-              GestureDetector(
-                onTap: (() {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => OrderConfirmation(
-                            name: name,
-                            orderid: 0,
-                            actualprice: actualprice,
-                            card: card,
-                            earning: earning,
-                            offer: offer,
-                            desc: desc,
-                            photo: photo,
-                            link: link,
-                            platform: platform,
-                            id: id,
-                            status: "Unplaced")),
-                  );
-                }),
-                child: Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.all(kDefaultPadding),
-                  width: MediaQuery.of(context).size.width,
-                  color: kprimarycolor,
-                  child: Text(
-                    "ORDER NOW",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700),
+              Padding(
+                padding: const EdgeInsets.only(left: 18.0, right: 18.0),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(kprimarycolor),
+                  ),
+                  onPressed: () {
+                    urll();
+                  },
+                  child: Center(
+                    child: Container(
+                      color: kprimarycolor,
+                      width: MediaQuery.of(context).size.width,
+                      height: 50,
+                      child: Center(
+                          child: Text(
+                        "Order Now",
+                        style: TextStyle(fontSize: 20),
+                      )),
+                    ),
                   ),
                 ),
               ),
+              SizedBox(
+                height: 20,
+              )
             ],
           ),
         ),
@@ -149,12 +187,12 @@ class pricedetails extends StatelessWidget {
                     child: Row(
                       children: [
                         Container(
-                          width: 8,
+                          width: 4,
                           color: kprimarycolor,
                           child: Text(
                             "j",
                             style: TextStyle(
-                                fontSize: 50, fontWeight: FontWeight.w200),
+                                fontSize: 50, fontWeight: FontWeight.w100),
                           ),
                         ),
                         SizedBox(
@@ -176,8 +214,8 @@ class pricedetails extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "Rs $actualprice",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                    "₹ $actualprice",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                   SizedBox(
                     height: 10,
@@ -211,7 +249,7 @@ class pricedetails extends StatelessWidget {
                     child: Row(
                       children: [
                         Container(
-                          width: 8,
+                          width: 4,
                           color: kprimarycolor,
                           child: Text(
                             "j",
@@ -237,9 +275,12 @@ class pricedetails extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    "Rs $offer",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  Center(
+                    child: Text(
+                      "₹ $offer",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
                   ),
                   SizedBox(
                     height: 10,
@@ -273,7 +314,7 @@ class pricedetails extends StatelessWidget {
                     child: Row(
                       children: [
                         Container(
-                          width: 8,
+                          width: 4,
                           color: kprimarycolor,
                           child: Text(
                             "j",
@@ -300,8 +341,8 @@ class pricedetails extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "Rs $earning",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                    "₹ $earning",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                   SizedBox(
                     height: 10,
@@ -317,13 +358,14 @@ class pricedetails extends StatelessWidget {
 }
 
 class titileanddesc extends StatelessWidget {
-  const titileanddesc({
-    Key? key,
-    required this.shortname,
-    required this.photo,
-    required this.desc,
-  }) : super(key: key);
-
+  const titileanddesc(
+      {Key? key,
+      required this.shortname,
+      required this.photo,
+      required this.desc,
+      required this.platform})
+      : super(key: key);
+  final String platform;
   final String shortname;
   final String photo;
   final String desc;
@@ -364,16 +406,33 @@ class titileanddesc extends StatelessWidget {
                         child: Text(
                           "l",
                           style: TextStyle(
-                              fontSize: 40, fontWeight: FontWeight.w300),
+                              fontSize: 20, fontWeight: FontWeight.w300),
                         ),
                       ),
                       SizedBox(
                         width: 10,
                       ),
-                      Container(
-                        child: Text(
-                          shortname,
-                          style: TextStyle(fontSize: 20),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 18.0),
+                        child: Column(
+                          children: [
+                            Container(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                shortname.toUpperCase(),
+                                style: TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Text(
+                                platform,
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ],
                         ),
                       )
                     ]),
@@ -420,12 +479,16 @@ class titileanddesc extends StatelessWidget {
                       child: Text(
                         "Description",
                         style: TextStyle(
-                            fontSize: 23, fontWeight: FontWeight.w500),
+                            fontSize: 20, fontWeight: FontWeight.w500),
                       )),
-                  Container(
-                    child: Text(
-                      desc,
-                      style: TextStyle(fontSize: 15),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12.0),
+                    child: Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        desc,
+                        style: TextStyle(fontSize: 15),
+                      ),
                     ),
                   )
                 ],
