@@ -30,6 +30,7 @@ class _WalletBodyState extends State<WalletBody> {
 
     var result = jsonDecode(res.body);
     balance = result;
+    print(balance);
     setState(() {});
   }
 
@@ -68,10 +69,7 @@ class _WalletBodyState extends State<WalletBody> {
                 margin: EdgeInsets.symmetric(horizontal: 32, vertical: 32),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  
-
                   children: <Widget>[
-
                     GestureDetector(
                       onTap: (() {}),
                       child: Container(
@@ -80,32 +78,30 @@ class _WalletBodyState extends State<WalletBody> {
                         child: Column(
                           // crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            
-                              Row(
-                                children: [
-                                  CircleAvatar(
-                                    backgroundImage:
-                                        NetworkImage(user.photo.toString()),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(
-                                    "Hi,  ",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                  Text(
-                                    user.name.toString(),
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                 
-                                     
-                                ],
-                              ),
-                            SizedBox(height: 30,),
-
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage:
+                                      NetworkImage(user.photo.toString()),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  "Hi,  ",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                ),
+                                Text(
+                                  user.name.toString(),
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
                             Text(
                               "Your Balance",
                               style: Theme.of(context)
@@ -130,7 +126,6 @@ class _WalletBodyState extends State<WalletBody> {
                                             fontWeight: FontWeight.w500,
                                             fontSize: 30),
                                   ),
-                           
                           ],
                         ),
                       ),
@@ -229,7 +224,7 @@ class txndetails extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.symmetric(horizontal: 32),
-      height: MediaQuery.of(context).size.height*0.12,
+      height: MediaQuery.of(context).size.height * 0.12,
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
           color: Colors.white,
@@ -253,24 +248,23 @@ class txndetails extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-Text(
-                    "Payment",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.grey[900]),
-                  ),
-                
+                Text(
+                  "Payment",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey[900]),
+                ),
                 incoming
                     ? Flexible(
-                      child: Text(
+                        child: Text(
                           "Payment from CCredit",
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
                               color: Colors.grey[500]),
                         ),
-                    )
+                      )
                     : Text(
                         "Paid to you",
                         style: TextStyle(
