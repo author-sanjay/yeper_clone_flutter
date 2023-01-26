@@ -42,25 +42,39 @@ class _OrderListState extends State<OrderList> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: // ignore_for_file: prefer_const_constructors, sort_child_properties_last
-            orderlistbody(isloading: _isloading, getdeals: _getdeals),
+            _isloading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : orderlistbody(getdeals: _getdeals),
         bottomNavigationBar: bottomnavbar());
   }
 }
 
-class orderlistbody extends StatelessWidget {
-  const orderlistbody({
+class orderlistbody extends StatefulWidget {
+  orderlistbody({
     Key? key,
-    required bool isloading,
+    // required bool isloading,
     required List<GetOrders> getdeals,
-  })  : _isloading = isloading,
-        _getdeals = getdeals,
+  })  : _getdeals = getdeals,
         super(key: key);
 
-  final bool _isloading;
   final List<GetOrders> _getdeals;
 
   @override
+  State<orderlistbody> createState() => _orderlistbodyState();
+}
+
+class _orderlistbodyState extends State<orderlistbody> {
+  bool _isloading = true;
+
+  @override
   Widget build(BuildContext context) {
+    if (widget._getdeals.isNotEmpty) {
+      setState(() {
+        _isloading = false;
+      });
+    }
     return SingleChildScrollView(
       child: SafeArea(
           child: Container(
@@ -90,15 +104,16 @@ class orderlistbody extends StatelessWidget {
                       : ListView.builder(
                           itemBuilder: (context, index) {
                             return list(
-                                date: _getdeals[index].date,
-                                name: _getdeals[index].product,
-                                orderid: _getdeals[index].orderid.toString(),
-                                platforid: _getdeals[index].txn,
-                                status: _getdeals[index].orderstatus,
-                                deal: _getdeals[index].deal);
+                                date: widget._getdeals[index].date,
+                                name: widget._getdeals[index].product,
+                                orderid:
+                                    widget._getdeals[index].orderid.toString(),
+                                platforid: widget._getdeals[index].txn,
+                                status: widget._getdeals[index].orderstatus,
+                                deal: widget._getdeals[index].deal);
                           },
                           shrinkWrap: true,
-                          itemCount: _getdeals.length,
+                          itemCount: widget._getdeals.length,
                           padding: EdgeInsets.all(0),
                           controller: ScrollController(keepScrollOffset: false),
                         ),
@@ -197,95 +212,101 @@ class _listState extends State<list> {
                   ],
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                        width: MediaQuery.of(context).size.width * 0.3,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        child: Image(
-                          image: NetworkImage(photo),
-                          fit: BoxFit.contain,
-                        )),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 18.0, top: 10),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        alignment: Alignment.topLeft,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                name.toUpperCase(),
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Flexible(
-                              child: Text(
-                                "Accepted on " + widget.date,
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ),
-                            Spacer(),
-                            Row(
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("You Spent"),
-                                    Text(
-                                      spent,
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w700),
-                                    )
-                                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          child: Image(
+                            image: NetworkImage(photo),
+                            fit: BoxFit.contain,
+                          )),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 18.0, top: 10),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          alignment: Alignment.topLeft,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  name.toUpperCase(),
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500),
                                 ),
-                                Spacer(),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("You Get"),
-                                    Text(
-                                      uget,
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w700),
-                                    )
-                                  ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Flexible(
+                                child: Text(
+                                  "Accepted on " + widget.date,
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400),
                                 ),
-                                Spacer(),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("You Earn"),
-                                    Text(
-                                      earn,
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w700),
-                                    )
-                                  ],
-                                )
-                              ],
-                            )
-                          ],
+                              ),
+                              Spacer(),
+                              Row(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text("You Spent"),
+                                      Text(
+                                        spent,
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w700),
+                                      )
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text("You Get"),
+                                      Text(
+                                        uget,
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w700),
+                                      )
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text("You Earn"),
+                                      Text(
+                                        earn,
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w700),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -328,7 +349,7 @@ class orderdetails extends StatelessWidget {
       }),
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 32),
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.only(top: 16),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(20))),

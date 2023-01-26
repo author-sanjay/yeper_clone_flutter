@@ -29,13 +29,20 @@ class _ProfileBodyState extends State<ProfileBody> {
             child: Column(
               children: <Widget>[
                 user.photo?.length == 0
-                    ? CircleAvatar(
-                        radius: MediaQuery.of(context).size.width * 0.15 + 2,
-                        backgroundColor: Colors.black,
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage("assets/images/logo.png"),
-                          radius: MediaQuery.of(context).size.width * 0.15,
-                        ),
+                    ? Row(
+                        children: [
+                          CircleAvatar(
+                            radius:
+                                MediaQuery.of(context).size.width * 0.15 + 2,
+                            backgroundColor: Colors.black,
+                            child: CircleAvatar(
+                              backgroundImage:
+                                  AssetImage("assets/images/logo.png"),
+                              radius: MediaQuery.of(context).size.width * 0.15,
+                            ),
+                          ),
+                          // Text(user.name.toString())
+                        ],
                       )
                     : CircleAvatar(
                         radius: MediaQuery.of(context).size.width * 0.15 + 2,
@@ -50,6 +57,13 @@ class _ProfileBodyState extends State<ProfileBody> {
                   user.name.toString(),
                   style: TextStyle(
                       fontSize: 25,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w300),
+                ),
+                Text(
+                  user.email.toString(),
+                  style: TextStyle(
+                      fontSize: 20,
                       color: Colors.black,
                       fontWeight: FontWeight.w300),
                 ),
