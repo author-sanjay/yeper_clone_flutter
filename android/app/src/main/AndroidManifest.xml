@@ -14,7 +14,7 @@ xmlns:tools="http://schemas.android.com/tools"
 </intent>
 </queries>
    <application
-        android:label="yeper_user"
+        android:label="CReward"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         
