@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/modals/GeRefralls.dart';
 import 'package:http/http.dart' as http;
@@ -10,9 +11,14 @@ import '../api.dart';
 
 class GetRefapi {
   static Future<List<GetRef>> getDeals() async {
-    Map<String, String> headers = {"Content-type": "application/json"};
-    var res =
-        await http.get(Uri.parse(api + "/refer/ofuser/" + user.id.toString()));
+    String token = user.token.toString();
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + PasswordLogin.token,
+    };
+    var res = await http.get(
+        Uri.parse(api + "/refer/ofuser/" + user.id.toString()),
+        headers: headers);
     List _temp = [];
     var result = jsonDecode(res.body);
     for (var i in result) {

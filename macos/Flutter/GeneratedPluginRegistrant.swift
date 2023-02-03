@@ -8,7 +8,7 @@ import Foundation
 import firebase_auth
 import firebase_core
 import firebase_storage
-import path_provider_macos
+import path_provider_foundation
 import smart_auth
 import url_launcher_macos
 

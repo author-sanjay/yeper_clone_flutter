@@ -22,7 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    uid = FirebaseAuth.instance.currentUser?.uid;
+    // uid = FirebaseAuth.instance.currentUser?.uid;
+    uid = null;
 
     Timer(
         Duration(seconds: 2),

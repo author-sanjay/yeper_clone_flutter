@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
 import 'package:yeper_user/Screens/OrderConfirmation/Components/OrderBody.dart';
 import 'package:http/http.dart' as http;
 import 'package:yeper_user/Screens/OrderList/Body.dart';
@@ -29,7 +30,9 @@ class _OrderPreviewState extends State<OrderPreview> {
   bool _isloading = true;
   Future<void> getdeal(id) async {
     // final json = jsonEncode({"order_status": "Placed", "platformtxnid": txnid});
-    Map<String, String> headers = {"Content-type": "application/json"};
+    Map<String, String> headers = {"Content-type": "application/json",
+      "Authorization": "Bearer " + PasswordLogin.token,
+    };
     var res = await http.get(
       Uri.parse(api + "/deals/getsingle/" + id.toString()),
       headers: headers,

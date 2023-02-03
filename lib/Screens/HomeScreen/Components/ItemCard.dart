@@ -36,6 +36,7 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    String newname = itemname.split(" ")[0];
 
     return GestureDetector(
       onTap: () {
@@ -103,7 +104,7 @@ class ItemCard extends StatelessWidget {
                         child: RichText(
                             text: TextSpan(children: [
                           TextSpan(
-                              text: "$itemname\n".toUpperCase(),
+                              text: newname.toUpperCase(),
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 17,
@@ -114,6 +115,7 @@ class ItemCard extends StatelessWidget {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 10),
+                    // height: MediaQuery.of(context).size.height * 0.,
                     child: Row(
                       children: <Widget>[
                         Container(
@@ -124,7 +126,7 @@ class ItemCard extends StatelessWidget {
                                 "₹ $profit",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 18,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w700),
                               ),
                             ],

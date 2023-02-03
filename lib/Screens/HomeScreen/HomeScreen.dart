@@ -10,6 +10,7 @@ import 'package:yeper_user/Screens/HomeScreen/Components/Body.dart';
 import 'package:yeper_user/Screens/OrderList/OrderList.dart';
 import 'package:yeper_user/Screens/ProfilePage/Components/PProfileBody.dart';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
+import 'package:yeper_user/Screens/Register/Register.dart';
 import 'package:yeper_user/Screens/Wallet/Wallet.dart';
 import 'package:yeper_user/constants.dart';
 import 'package:http/http.dart' as http;
@@ -30,7 +31,11 @@ class _HomeScreenState extends State<HomeScreen> {
   late String? uid;
   bool isloading = true;
   Future<void> gettinguser() async {
-    Map<String, String> headers = {"Content-type": "application/json"};
+    String token = user.token.toString();
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + user.token.toString(),
+    };
     var res = await http.get(
         Uri.parse(api + "/user/getsingle/" + uid.toString()),
         headers: headers);
@@ -42,7 +47,12 @@ class _HomeScreenState extends State<HomeScreen> {
       user.id = result["uid"];
       print(user.id);
     } catch (e) {
-      print(e);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Register(),
+        ),
+      );
     }
     try {
       user.name = result["name"];

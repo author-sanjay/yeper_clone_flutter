@@ -8,6 +8,7 @@ import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:intl/intl.dart';
+import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import '../../../api.dart';
 
@@ -80,7 +81,10 @@ class _OrderBodyState extends State<OrderBody> {
       "deal": widget.id,
     });
     print(json);
-    Map<String, String> headers = {"Content-type": "application/json"};
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + PasswordLogin.token,
+    };
     var res = await http.post(
         Uri.parse(api +
             "/orders/add/" +

@@ -9,7 +9,6 @@ import '../../../constants.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
-
 class ActivateOffer extends StatefulWidget {
   ActivateOffer(
       {Key? key,
@@ -121,11 +120,13 @@ class _ActivateOfferState extends State<ActivateOffer> {
                   child: RichText(
                       text: TextSpan(
                           text: "Activate Offer",
-                          style:
-                              Theme.of(context).textTheme.headline4?.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                  ))),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w400,
+                              ))),
                 ),
         ),
       ),

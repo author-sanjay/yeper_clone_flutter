@@ -11,7 +11,11 @@ import '../api.dart';
 
 class GetOrdersapi {
   static Future<List<GetOrders>> getOrders() async {
-    Map<String, String> headers = {"Content-type": "application/json"};
+    String token = user.token.toString();
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": "Bearer $token"
+    };
     var res = await http.get(
         Uri.parse(api + "/orders/getsingle/" + user.id.toString()),
         headers: headers);

@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
 import 'package:yeper_user/modals/GetWallettxn.dart';
 
 import '../Screens/Register/Detailsfields.dart';
@@ -9,7 +10,11 @@ import '../api.dart';
 
 class Gettxnapi {
   static Future<List<Gettxn>> getDeals() async {
-    Map<String, String> headers = {"Content-type": "application/json"};
+    String token = user.token.toString();
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + PasswordLogin.token,
+    };
     var res = await http.get(
         Uri.parse(api + "/txn/getsingle/" + user.id.toString()),
         headers: headers);

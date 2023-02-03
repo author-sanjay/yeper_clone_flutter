@@ -48,7 +48,7 @@ class _RegisterfieldsState extends State<Registerfields> {
           ),
           TextField(
             onChanged: (value) {
-              phone_number = value;
+              Registerfields.phone_number = value;
             },
             decoration: new InputDecoration(labelText: "Phone Number"),
             keyboardType: TextInputType.number,
@@ -62,7 +62,7 @@ class _RegisterfieldsState extends State<Registerfields> {
                   loading = true;
                 });
                 await FirebaseAuth.instance.verifyPhoneNumber(
-                  phoneNumber: "+91" + phone_number,
+                  phoneNumber: "+91" + Registerfields.phone_number,
                   verificationCompleted: (PhoneAuthCredential credential) {},
                   verificationFailed: (FirebaseAuthException e) {},
                   codeSent: (String verificationId, int? resendToken) {

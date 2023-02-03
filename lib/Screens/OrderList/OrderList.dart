@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/HomeScreen/Components/HeaderWithSearchbar.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
+import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
 import 'package:yeper_user/Screens/OrderList/Orderpreview.dart';
 import 'package:yeper_user/api.dart';
 import 'package:yeper_user/modals/GetOrders.dart';
@@ -157,7 +158,10 @@ class _listState extends State<list> {
   late String uget;
 
   Future<void> getdeal() async {
-    Map<String, String> headers = {"Content-type": "application/json"};
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + PasswordLogin.token,
+    };
     var res = await http.get(
         Uri.parse(api + '/deals/getsingle/' + widget.deal.toString()),
         headers: headers);
@@ -219,7 +223,7 @@ class _listState extends State<list> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                          width: MediaQuery.of(context).size.width * 0.3,
+                          width: MediaQuery.of(context).size.width * 0.28,
                           height: MediaQuery.of(context).size.height * 0.2,
                           child: Image(
                             image: NetworkImage(photo),
@@ -238,7 +242,7 @@ class _listState extends State<list> {
                                 child: Text(
                                   name.toUpperCase(),
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 15,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w500),
                                 ),
@@ -250,56 +254,59 @@ class _listState extends State<list> {
                                 child: Text(
                                   "Accepted on " + widget.date,
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 12,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400),
                                 ),
                               ),
                               Spacer(),
-                              Row(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text("You Spent"),
-                                      Text(
-                                        spent,
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w700),
-                                      )
-                                    ],
-                                  ),
-                                  Spacer(),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text("You Get"),
-                                      Text(
-                                        uget,
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w700),
-                                      )
-                                    ],
-                                  ),
-                                  Spacer(),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text("You Earn"),
-                                      Text(
-                                        earn,
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w700),
-                                      )
-                                    ],
-                                  )
-                                ],
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Row(
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text("Spent"),
+                                        Text(
+                                          spent,
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w700),
+                                        )
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text("Recieve"),
+                                        Text(
+                                          uget,
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w700),
+                                        )
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text("Earn"),
+                                        Text(
+                                          earn,
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w700),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
                               )
                             ],
                           ),

@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/DetailsScreen/Components/Body.dart';
 import 'package:yeper_user/Screens/HomeScreen/Components/HeaderWithSearchbar.dart';
+import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/Screens/Wallet/Components/Header.dart';
 import 'package:yeper_user/constants.dart';
@@ -23,7 +24,10 @@ class WalletBody extends StatefulWidget {
 
 class _WalletBodyState extends State<WalletBody> {
   Future<void> getbalance() async {
-    Map<String, String> headers = {"Content-type": "application/json"};
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + PasswordLogin.token,
+    };
     var res = await http.get(
         Uri.parse(api + "/user/getwalletbalance/" + user.id.toString()),
         headers: headers);

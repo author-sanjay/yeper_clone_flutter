@@ -2,17 +2,15 @@
 
 import 'dart:convert';
 import 'dart:math';
-
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
+import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
 import 'package:yeper_user/Screens/Register/Registerfields.dart';
 import 'package:yeper_user/api.dart';
 import 'package:yeper_user/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:yeper_user/modals/UserModal.dart';
-
 import 'RegisterVerify.dart';
 
 const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -34,7 +32,9 @@ class DetailsFields extends StatefulWidget {
   static var bankname;
   static var ifsc;
   static var referal;
-
+  static var password;
+  static var gst;
+  static var pan;
   @override
   State<DetailsFields> createState() => _DetailsFieldsState();
 }
@@ -53,10 +53,19 @@ class _DetailsFieldsState extends State<DetailsFields> {
         "acnumber": int.parse(DetailsFields.bankaccount),
         "bankname": DetailsFields.bankname,
         "idfc": DetailsFields.ifsc,
-        "referalCode": getRandomString(6)
+        "referalCode": getRandomString(6),
+        "password": DetailsFields.password,
+        "gst": DetailsFields.gst,
+        "pan": DetailsFields.pan
       });
-      var res = await http.post(Uri.parse(api + "/user/add"),
-          headers: headers, body: json);
+      var res = await http
+          .post(Uri.parse(api + "/user/add"), headers: headers, body: json)
+          .then((value) => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PasswordLogin(),
+                ),
+              ));
       var result = jsonDecode(res.body);
       Provider.of<Users>(context, listen: false).signin(
           RegisterVerify.uid,
@@ -70,7 +79,8 @@ class _DetailsFieldsState extends State<DetailsFields> {
           DetailsFields.bankname,
           // jsonDecode(result["wallet"])["id"],
           "",
-          DetailsFields.ifsc);
+          DetailsFields.ifsc,
+          "");
 
       // user.acnumber = result["acnumber"];
       // user.address = DetailsFields.address;
@@ -84,12 +94,12 @@ class _DetailsFieldsState extends State<DetailsFields> {
       // user.referalcode = result["referalCode"];
       // user.referedby = "referedby";
 
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomeScreen(),
-        ),
-      );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => HomeScreen(),
+      //   ),
+      // );
     }
 
     return SingleChildScrollView(
@@ -97,7 +107,7 @@ class _DetailsFieldsState extends State<DetailsFields> {
           child: Center(
               child: Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        // height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
             Text(
@@ -118,7 +128,6 @@ class _DetailsFieldsState extends State<DetailsFields> {
                       DetailsFields.name = value;
                     },
                     decoration: const InputDecoration(labelText: "Name"),
-                    
                   ),
                   SizedBox(height: 10),
                   TextField(
@@ -126,7 +135,14 @@ class _DetailsFieldsState extends State<DetailsFields> {
                       DetailsFields.email = value;
                     },
                     decoration: const InputDecoration(labelText: "Email"),
-                    
+                  ),
+                  SizedBox(height: 10),
+                  TextField(
+                    onChanged: (value) {
+                      DetailsFields.password = value;
+                    },
+                    decoration:
+                        const InputDecoration(labelText: "Create Password"),
                   ),
                   SizedBox(height: 10),
                   TextField(
@@ -135,7 +151,6 @@ class _DetailsFieldsState extends State<DetailsFields> {
                       DetailsFields.address = value;
                     },
                     decoration: const InputDecoration(labelText: "Address"),
-                    
                   ),
                   SizedBox(height: 10),
                   TextField(
@@ -144,7 +159,6 @@ class _DetailsFieldsState extends State<DetailsFields> {
                     },
                     decoration:
                         const InputDecoration(labelText: "Bank Account"),
-                    
                   ),
                   SizedBox(height: 10),
                   TextField(
@@ -163,6 +177,21 @@ class _DetailsFieldsState extends State<DetailsFields> {
                     // keyboardType: TextInputType.number,
                   ),
                   SizedBox(height: 20),
+                  TextField(
+                    onChanged: (value) {
+                      DetailsFields.gst = value;
+                    },
+                    decoration: const InputDecoration(
+                        labelText: "GST Number (Optional)"),
+                  ),
+                  SizedBox(height: 10),
+                  TextField(
+                    onChanged: (value) {
+                      DetailsFields.pan = value;
+                    },
+                    decoration: const InputDecoration(labelText: "PAN Number"),
+                  ),
+                  SizedBox(height: 10),
                   TextField(
                     onChanged: (value) {
                       DetailsFields.referal = value;

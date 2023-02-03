@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/EditProfile/EditProfile.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:http/http.dart' as http;
+import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/api.dart';
 import 'package:yeper_user/constants.dart';
@@ -21,7 +22,10 @@ class ProfileBody extends StatefulWidget {
 }
 
 class _ProfileBodyState extends State<ProfileBody> {
-  Map<String, String> headers = {"Content-type": "application/json"};
+  Map<String, String> headers = {
+    "Content-type": "application/json",
+    "Authorization": "Bearer " + PasswordLogin.token,
+  };
   Future<void> post(String? email, String? phonenumber, String? ac,
       String? bankname, String? idfc, String? photo) async {
     // print("$email  $phonenumber $ac $bankname $idfc $photo");
@@ -127,32 +131,38 @@ class _ProfileBodyState extends State<ProfileBody> {
                                 });
                               }));
                             }),
-                            child: 
-                             user.photo?.length==0?
-                  CircleAvatar(
-                    radius: MediaQuery.of(context).size.width * 0.2,
-                    backgroundColor: Colors.black,
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage("assets/images/logo.png"),
-                      radius: MediaQuery.of(context).size.width * 0.02,
-                    ),
-                  ): CircleAvatar(
-                          radius: MediaQuery.of(context).size.width * 0.2,
-                          backgroundColor: Colors.black,
-                          child: CircleAvatar(
-                            backgroundImage:
-                                NetworkImage(user.photo.toString()),
-                            radius: MediaQuery.of(context).size.width * 0.2,
-                          ),
-                        ),
-                           
+                            child: user.photo?.length == 0
+                                ? CircleAvatar(
+                                    radius:
+                                        MediaQuery.of(context).size.width * 0.2,
+                                    backgroundColor: Colors.black,
+                                    child: CircleAvatar(
+                                      backgroundImage:
+                                          AssetImage("assets/images/logo.png"),
+                                      radius:
+                                          MediaQuery.of(context).size.width *
+                                              0.02,
+                                    ),
+                                  )
+                                : CircleAvatar(
+                                    radius:
+                                        MediaQuery.of(context).size.width * 0.2,
+                                    backgroundColor: Colors.black,
+                                    child: CircleAvatar(
+                                      backgroundImage:
+                                          NetworkImage(user.photo.toString()),
+                                      radius:
+                                          MediaQuery.of(context).size.width *
+                                              0.2,
+                                    ),
+                                  ),
                           ),
                         )),
 
                     SizedBox(
                       height: 10,
                     ),
-                    Text("Sanjay Kumar",
+                    Text(user.name.toString(),
                         style: TextStyle(
                             fontSize: 23,
                             color: Colors.white,

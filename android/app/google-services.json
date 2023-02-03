@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "898639630100",
-    "project_id": "yeper-d41df",
-    "storage_bucket": "yeper-d41df.appspot.com"
+    "project_number": "408323260658",
+    "project_id": "creward-6c52c",
+    "storage_bucket": "creward-6c52c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:898639630100:android:83a4a0deacc4a582c07c01",
+        "mobilesdk_app_id": "1:408323260658:android:6469e2480aa88ed138d06b",
         "android_client_info": {
-          "package_name": "com.example.yeper_user"
+          "package_name": "com.artic.creward"
         }
       },
       "oauth_client": [
         {
-          "client_id": "898639630100-emmapc7rqca05t92jnu89elo0819lht5.apps.googleusercontent.com",
+          "client_id": "408323260658-hr9ls9l9aq9452drbpkfifhtshfh818g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDdUJfH_FmVbq4ISo08cD-sbEzmxzLM8Rw"
+          "current_key": "AIzaSyDTjpHd7fJ1QrwVpgDEHdY1MnTazYyxLPU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "898639630100-emmapc7rqca05t92jnu89elo0819lht5.apps.googleusercontent.com",
+              "client_id": "408323260658-hr9ls9l9aq9452drbpkfifhtshfh818g.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

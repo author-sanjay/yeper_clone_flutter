@@ -1,4 +1,4 @@
-package com.example.yeper_user
+package com.artic.creward
 
 import io.flutter.embedding.android.FlutterActivity
 

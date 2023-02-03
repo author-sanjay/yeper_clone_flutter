@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-
 import 'package:flutter/cupertino.dart';
 
 class Wallet {
@@ -20,6 +19,7 @@ class Users extends ChangeNotifier {
   late String? acnumber;
   late String? bankname;
   // late Wallet wallet;
+  late String? token;
   late String? photo;
   late String? idfc;
 
@@ -39,6 +39,7 @@ class Users extends ChangeNotifier {
       String referedby,
       String acnumber,
       String bankname,
+      String token,
       // Wallet wallet,
       String photo,
       String idfc) {
@@ -51,6 +52,7 @@ class Users extends ChangeNotifier {
     referedby = referedby;
     acnumber = acnumber;
     bankname = bankname;
+    token = token;
     // wallet = wallet;
     photo = photo;
     idfc = idfc;
