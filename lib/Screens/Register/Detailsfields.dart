@@ -50,13 +50,9 @@ class _DetailsFieldsState extends State<DetailsFields> {
         "email": DetailsFields.email,
         "phonenumber": Registerfields.phone_number,
         "address": DetailsFields.address,
-        "acnumber": int.parse(DetailsFields.bankaccount),
-        "bankname": DetailsFields.bankname,
-        "idfc": DetailsFields.ifsc,
         "referalCode": getRandomString(6),
         "password": DetailsFields.password,
-        "gst": DetailsFields.gst,
-        "pan": DetailsFields.pan
+        "referralof": DetailsFields.referal
       });
       var res = await http
           .post(Uri.parse(api + "/user/add"), headers: headers, body: json)
@@ -66,6 +62,7 @@ class _DetailsFieldsState extends State<DetailsFields> {
                   builder: (context) => PasswordLogin(),
                 ),
               ));
+
       var result = jsonDecode(res.body);
       Provider.of<Users>(context, listen: false).signin(
           RegisterVerify.uid,
@@ -155,45 +152,6 @@ class _DetailsFieldsState extends State<DetailsFields> {
                   SizedBox(height: 10),
                   TextField(
                     onChanged: (value) {
-                      DetailsFields.bankaccount = value;
-                    },
-                    decoration:
-                        const InputDecoration(labelText: "Bank Account"),
-                  ),
-                  SizedBox(height: 10),
-                  TextField(
-                    onChanged: (value) {
-                      DetailsFields.bankname = value;
-                    },
-                    decoration: const InputDecoration(labelText: "Bank Name"),
-                    // keyboardType: TextInputType.number,
-                  ),
-                  SizedBox(height: 10),
-                  TextField(
-                    onChanged: (value) {
-                      DetailsFields.ifsc = value;
-                    },
-                    decoration: const InputDecoration(labelText: "IFSC"),
-                    // keyboardType: TextInputType.number,
-                  ),
-                  SizedBox(height: 20),
-                  TextField(
-                    onChanged: (value) {
-                      DetailsFields.gst = value;
-                    },
-                    decoration: const InputDecoration(
-                        labelText: "GST Number (Optional)"),
-                  ),
-                  SizedBox(height: 10),
-                  TextField(
-                    onChanged: (value) {
-                      DetailsFields.pan = value;
-                    },
-                    decoration: const InputDecoration(labelText: "PAN Number"),
-                  ),
-                  SizedBox(height: 10),
-                  TextField(
-                    onChanged: (value) {
                       DetailsFields.referal = value;
                     },
                     decoration:
@@ -227,6 +185,7 @@ class _DetailsFieldsState extends State<DetailsFields> {
             ),
           ],
         ),
+     
       ))),
     );
   }

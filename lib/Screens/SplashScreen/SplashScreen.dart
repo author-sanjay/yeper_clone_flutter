@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
+import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
 import 'package:yeper_user/Screens/LoginScreen/LoginScreen.dart';
 import 'package:yeper_user/constants.dart';
 
@@ -22,8 +23,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // uid = FirebaseAuth.instance.currentUser?.uid;
-    uid = null;
+    uid = FirebaseAuth.instance.currentUser?.uid;
+    // uid = null;
 
     Timer(
         Duration(seconds: 2),
@@ -32,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   ? Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomeScreen(),
+                        builder: (context) => PasswordLogin(),
                       ),
                     )
                   : Navigator.push(

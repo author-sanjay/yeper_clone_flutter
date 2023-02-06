@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/ChooseCard/ChooseCard.dart';
 import 'package:yeper_user/Screens/EditProfile/EditProfile.dart';
+import 'package:yeper_user/Screens/KYC/Kyc.dart';
 import 'package:yeper_user/Screens/LoginScreen/LoginScreen.dart';
 import 'package:yeper_user/Screens/OrderList/OrderList.dart';
 import 'package:yeper_user/Screens/ReferalList/ReferralList.dart';
@@ -325,6 +326,52 @@ class _ListState extends State<List> {
                     children: <Widget>[
                       Text(
                         "Manage Cards",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w300),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => KYC(),
+              ),
+            );
+          },
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 32),
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(18))),
+                  child: Icon(
+                    Icons.document_scanner,
+                    color: Colors.black,
+                  ),
+                  padding: EdgeInsets.all(12),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Manage KYC",
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.w300),
                       )

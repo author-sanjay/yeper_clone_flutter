@@ -105,13 +105,16 @@ class _orderlistbodyState extends State<orderlistbody> {
                       : ListView.builder(
                           itemBuilder: (context, index) {
                             return list(
-                                date: widget._getdeals[index].date,
-                                name: widget._getdeals[index].product,
-                                orderid:
-                                    widget._getdeals[index].orderid.toString(),
-                                platforid: widget._getdeals[index].txn,
-                                status: widget._getdeals[index].orderstatus,
-                                deal: widget._getdeals[index].deal);
+                              date: widget._getdeals[index].date,
+                              name: widget._getdeals[index].product,
+                              orderid:
+                                  widget._getdeals[index].orderid.toString(),
+                              platforid: widget._getdeals[index].txn,
+                              status: widget._getdeals[index].orderstatus,
+                              deal: widget._getdeals[index].deal,
+                              dropdownvalue:
+                                  widget._getdeals[index].orderstatus,
+                            );
                           },
                           shrinkWrap: true,
                           itemCount: widget._getdeals.length,
@@ -136,7 +139,8 @@ class list extends StatefulWidget {
       required this.orderid,
       required this.platforid,
       required this.status,
-      required this.deal})
+      required this.deal,
+      required this.dropdownvalue})
       : super(key: key);
   int deal;
   String name;
@@ -144,7 +148,7 @@ class list extends StatefulWidget {
   String status;
   String platforid;
   String date;
-
+  String dropdownvalue;
   @override
   State<list> createState() => _listState();
 }
@@ -183,6 +187,8 @@ class _listState extends State<list> {
     getdeal();
   }
 
+  var items = ['Placed', 'Cancelled', 'Out For Delivery', 'Completed'];
+
   @override
   Widget build(BuildContext context) {
     var newname = widget.name.split(" ");
@@ -203,118 +209,240 @@ class _listState extends State<list> {
             },
             child: Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                // height: MediaQuery.of(context).size.height * 0.4,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                        offset: Offset(0, 5),
-                        blurRadius: 10,
-                        color: kprimarycolor.withOpacity(0.23)),
-                  ],
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          width: MediaQuery.of(context).size.width * 0.28,
-                          height: MediaQuery.of(context).size.height * 0.2,
-                          child: Image(
-                            image: NetworkImage(photo),
-                            fit: BoxFit.contain,
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 18.0, top: 10),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          height: MediaQuery.of(context).size.height * 0.2,
-                          alignment: Alignment.topLeft,
-                          child: Column(
+              child: Column(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    // height: MediaQuery.of(context).size.height * 0.4,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0, 5),
+                            blurRadius: 10,
+                            color: kprimarycolor.withOpacity(0.23)),
+                      ],
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Flexible(
-                                child: Text(
-                                  name.toUpperCase(),
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Flexible(
-                                child: Text(
-                                  "Accepted on " + widget.date,
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ),
-                              Spacer(),
                               Container(
-                                width: MediaQuery.of(context).size.width * 0.5,
-                                child: Row(
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text("Spent"),
-                                        Text(
-                                          spent,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.28,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.2,
+                                  child: Image(
+                                    image: NetworkImage(photo),
+                                    fit: BoxFit.contain,
+                                  )),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 18.0, top: 10),
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.5,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.2,
+                                  alignment: Alignment.topLeft,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Flexible(
+                                        child: Text(
+                                          name.toUpperCase(),
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Flexible(
+                                        child: Text(
+                                          "Accepted on " + widget.date,
                                           style: TextStyle(
                                               fontSize: 12,
-                                              fontWeight: FontWeight.w700),
-                                        )
-                                      ],
-                                    ),
-                                    Spacer(),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text("Recieve"),
-                                        Text(
-                                          uget,
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w700),
-                                        )
-                                      ],
-                                    ),
-                                    Spacer(),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text("Earn"),
-                                        Text(
-                                          earn,
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w700),
-                                        )
-                                      ],
-                                    )
-                                  ],
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.5,
+                                        child: Row(
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text("Spent"),
+                                                Text(
+                                                  spent,
+                                                  style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                                )
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text("Recieve"),
+                                                Text(
+                                                  uget,
+                                                  style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                                )
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text("Earn"),
+                                                Text(
+                                                  earn,
+                                                  style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               )
                             ],
                           ),
-                        ),
-                      )
-                    ],
+                          Container(
+                              width: MediaQuery.of(context).size.width,
+                              alignment: Alignment.center,
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 38.0),
+                                          child: Text("Status"),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 38.0),
+                                          child: DropdownButton(
+                                            // Initial Value
+                                            value: widget.dropdownvalue,
+
+                                            // Down Arrow Icon
+                                            icon: const Icon(
+                                                Icons.keyboard_arrow_down),
+
+                                            // Array list of items
+                                            items: items.map((String items) {
+                                              return DropdownMenuItem(
+                                                value: items,
+                                                child: Text(items),
+                                              );
+                                            }).toList(),
+                                            // After selecting the desired option,it will
+                                            // change button value to selected value
+                                            onChanged: (String? newValue) {
+                                              print(newValue.toString());
+                                              widget.dropdownvalue =
+                                                  newValue.toString();
+                                              setState(() {});
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    widget.dropdownvalue == 'Out For Delivery'
+                                        ? Row(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 18.0),
+                                                child: Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.5,
+                                                  height: 50,
+                                                  child: TextField(
+                                                    onChanged: (value) {
+                                                      // DetailsFields.name = value;
+                                                    },
+                                                    decoration:
+                                                        const InputDecoration(
+                                                            labelText:
+                                                                "OTP for Delivery"),
+                                                    // keyboardType: Ke,
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 18.0),
+                                                child: GestureDetector(
+                                                  onTap: () => {},
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                        Radius.circular(10),
+                                                      ),
+                                                      color: kprimarycolor,
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: Text(
+                                                        "Save",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        : SizedBox(
+                                            height: 1,
+                                          )
+                                  ],
+                                ),
+                              )),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
           );

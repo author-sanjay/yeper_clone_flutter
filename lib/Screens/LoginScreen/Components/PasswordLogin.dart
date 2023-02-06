@@ -13,7 +13,7 @@ import 'package:http/http.dart' as http;
 
 class PasswordLogin extends StatefulWidget {
   const PasswordLogin({super.key});
-  static var password;
+  static late String password;
   static late String token;
   @override
   State<PasswordLogin> createState() => _PasswordLoginState();
@@ -36,18 +36,21 @@ class body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<void> auth() async {
+    String password = "";
+    Future<void> auth(String password) async {
       Map<String, String> headers = {"Content-type": "application/json"};
+      print(FirebaseAuth.instance.currentUser?.uid.toString());
       var json = jsonEncode({
-        "uid": FirebaseAuth.instance.currentUser!.uid.toString(),
-        "password": PasswordLogin.password,
+        "uid": FirebaseAuth.instance.currentUser?.uid.toString(),
+        "password": password
       });
       var res = await http.post(Uri.parse(api + "/user/authenticate"),
-          headers: headers, body: json);
+          body: json, headers: headers);
       // print(res.statusCode);
       // print(res.body);
+      print(res.toString());
       PasswordLogin.token = res.body;
-      print(PasswordLogin.token);
+      // print(res.statusCode);
       if (res.statusCode == 403) {
         Navigator.push(
           context,
@@ -108,7 +111,9 @@ class body extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: TextField(
                       onChanged: (value) {
+                        password = value;
                         PasswordLogin.password = value;
+                        print(PasswordLogin.password);
                       },
                       decoration: const InputDecoration(labelText: "Password"),
                     ),
@@ -117,7 +122,7 @@ class body extends StatelessWidget {
               ),
               Center(
                 child: GestureDetector(
-                  onTap: () => {auth()},
+                  onTap: () => {auth(password.toString())},
                   child: Container(
                     margin: EdgeInsets.all(20.0),
                     width: MediaQuery.of(context).size.width,

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/ChooseCard/ChooseCard.dart';
 // import 'package:flutterkeylogger/flutterkeylogger.dart';
 import 'package:yeper_user/Screens/HomeScreen/Components/Body.dart';
+import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
 import 'package:yeper_user/Screens/OrderList/OrderList.dart';
 import 'package:yeper_user/Screens/ProfilePage/Components/PProfileBody.dart';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
     String token = user.token.toString();
     Map<String, String> headers = {
       "Content-type": "application/json",
-      "Authorization": "Bearer " + user.token.toString(),
+      "Authorization": "Bearer " + PasswordLogin.token,
     };
     var res = await http.get(
         Uri.parse(api + "/user/getsingle/" + uid.toString()),
@@ -118,6 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (e) {
       print(e);
     }
+    user.token = PasswordLogin.token;
 
     setState(() {
       isloading = false;
