@@ -1,8 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names, must_be_immutable, unused_local_variable, sized_box_for_whitespace, camel_case_types, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:url_launcher/link.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 import 'package:yeper_user/Screens/OrderConfirmation/OrderConfirmation.dart';
 import 'package:yeper_user/constants.dart';

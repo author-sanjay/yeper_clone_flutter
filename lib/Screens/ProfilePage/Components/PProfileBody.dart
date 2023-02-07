@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, file_names, sized_box_for_whitespace, sort_child_properties_last, avoid_unnecessary_containers, prefer_is_empty, use_build_context_synchronously
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:yeper_user/Screens/ChooseCard/ChooseCard.dart';
 import 'package:yeper_user/Screens/EditProfile/EditProfile.dart';
 import 'package:yeper_user/Screens/KYC/Kyc.dart';
@@ -104,6 +105,16 @@ class List extends StatefulWidget {
 }
 
 class _ListState extends State<List> {
+  Future<void> urll() async {
+    String url = "wa.me/919009363000";
+    var urllaunchable = await canLaunchUrl(Uri.parse(url));
+    if (urllaunchable) {
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    } else {
+      print("URL can't be launched.");
+    }
+  }
+
   Future<void> _signOut() async {
     await FirebaseAuth.instance.signOut();
 
@@ -396,6 +407,9 @@ class _ListState extends State<List> {
           ),
         ),
         GestureDetector(
+          onTap: () {
+            urll();
+          },
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 32),
             padding: EdgeInsets.all(16),
