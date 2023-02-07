@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:http/http.dart' as http;
+import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
+import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
+import 'package:yeper_user/api.dart';
 import 'package:yeper_user/constants.dart';
 
 class KYC extends StatelessWidget {
@@ -35,6 +39,32 @@ class kycbody extends StatefulWidget {
 }
 
 class _kycbodyState extends State<kycbody> {
+  Future<void> update(
+      String ac, String bank, String ifsc, String gst, String pan) async {
+    final json = jsonEncode({
+      "acnumber": ac,
+      "bankname": bank,
+      "idfc": ifsc,
+      "gst": gst,
+      "pan": pan
+    });
+    print(json);
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + PasswordLogin.token,
+    };
+    var res =
+        await http.post(Uri.parse(api + "/kyc"), headers: headers, body: json);
+    if (res.statusCode == 200) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(

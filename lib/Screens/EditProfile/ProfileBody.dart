@@ -47,14 +47,14 @@ class _ProfileBodyState extends State<ProfileBody> {
       final result = jsonDecode(res.body);
       print(result);
 
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => HomeScreen(),
         ),
       );
     } catch (_) {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => EditProfile(),

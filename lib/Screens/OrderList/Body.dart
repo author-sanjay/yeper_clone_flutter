@@ -1,9 +1,13 @@
 // ignore_for_file: prefer_const_constructors, file_names, prefer_const_literals_to_create_immutables, use_build_context_synchronously, unnecessary_import, must_be_immutable, avoid_unnecessary_containers, sort_child_properties_last, sized_box_for_whitespace
 
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-
+import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
+import 'package:yeper_user/api.dart';
+import 'package:yeper_user/constants.dart';
+import 'package:http/http.dart' as http;
 
 class PreviewBody extends StatefulWidget {
   PreviewBody(
@@ -18,7 +22,8 @@ class PreviewBody extends StatefulWidget {
       required this.platform,
       required this.id,
       required this.status,
-      required this.txn});
+      required this.txn,
+      required this.dropdownvalue});
   String txn;
   int orderid;
   int id;
@@ -28,7 +33,7 @@ class PreviewBody extends StatefulWidget {
   int offer;
   String desc;
   String photo;
-
+  String dropdownvalue;
   String platform;
   String status;
   @override
@@ -44,6 +49,24 @@ class _PreviewBodyState extends State<PreviewBody> {
     super.initState();
   }
 
+  Future<void> otp(int id, String status, String courier, String otp) async {
+    final json = jsonEncode(
+        {"status": status, "courier": courier, "otp": int.parse(otp)});
+    print(json);
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + PasswordLogin.token,
+    };
+    var res = await http.post(Uri.parse(api + "/addotp"),
+        headers: headers, body: json);
+
+    print(res.statusCode);
+  }
+
+  String otpcode = "";
+  String courier = "Others";
+  var items = ['Placed', 'Cancelled', 'Out For Delivery', 'Completed'];
+  var co = ['E-Kart', 'Delhivery', 'Bluedart', 'Fedex', 'IndiaPost', 'Others'];
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -64,7 +87,7 @@ class _PreviewBodyState extends State<PreviewBody> {
           ),
           Container(
             // color: Color.fromARGB(255, 95, 15, 148),
-            height: MediaQuery.of(context).size.height * 0.35,
+            height: MediaQuery.of(context).size.height * 0.30,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
                 color: Color.fromARGB(255, 7, 66, 88),
@@ -74,7 +97,7 @@ class _PreviewBodyState extends State<PreviewBody> {
           ),
           Container(
             child: Positioned(
-              top: MediaQuery.of(context).size.height * 0.18,
+              top: MediaQuery.of(context).size.height * 0.12,
               left: MediaQuery.of(context).size.width * 0.30,
               width: MediaQuery.of(context).size.width * 0.4,
               height: MediaQuery.of(context).size.height * 0.25,
@@ -87,7 +110,7 @@ class _PreviewBodyState extends State<PreviewBody> {
           ),
           Container(
             child: Positioned(
-                top: MediaQuery.of(context).size.height * 0.20,
+                top: MediaQuery.of(context).size.height * 0.15,
                 left: MediaQuery.of(context).size.width * 0.05,
                 child: Column(
                   children: [
@@ -117,7 +140,7 @@ class _PreviewBodyState extends State<PreviewBody> {
           ),
           Container(
             child: Positioned(
-                top: MediaQuery.of(context).size.height * 0.20,
+                top: MediaQuery.of(context).size.height * 0.15,
                 left: MediaQuery.of(context).size.width * 0.77,
                 child: Column(
                   children: [
@@ -147,7 +170,7 @@ class _PreviewBodyState extends State<PreviewBody> {
           ),
           Container(
             child: Positioned(
-                top: MediaQuery.of(context).size.height * 0.10,
+                top: MediaQuery.of(context).size.height * 0.05,
                 left: MediaQuery.of(context).size.width * 0.20,
                 child: Column(
                   children: [
@@ -163,7 +186,7 @@ class _PreviewBodyState extends State<PreviewBody> {
           ),
           Container(
             child: Positioned(
-                top: MediaQuery.of(context).size.height * 0.45,
+                top: MediaQuery.of(context).size.height * 0.40,
                 left: MediaQuery.of(context).size.width * 0.05,
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.93,
@@ -227,8 +250,11 @@ class _PreviewBodyState extends State<PreviewBody> {
                         height: MediaQuery.of(context).size.height * 0.01,
                       ),
                       Container(
-                        color: Colors.white,
-                        child: Text(widget.txn.toUpperCase(), style:  TextStyle(fontSize: 25),)),
+                          color: Colors.white,
+                          child: Text(
+                            widget.txn.toUpperCase(),
+                            style: TextStyle(fontSize: 25),
+                          )),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.01),
                       GestureDetector(
@@ -242,7 +268,7 @@ class _PreviewBodyState extends State<PreviewBody> {
                       ),
                       Text(
                         "Order Summary",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 16),
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.02,
@@ -256,7 +282,7 @@ class _PreviewBodyState extends State<PreviewBody> {
                                 Text(
                                   "You Pay",
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Spacer(),
@@ -268,7 +294,7 @@ class _PreviewBodyState extends State<PreviewBody> {
                                         text: widget.actualprice.toString(),
                                         style: TextStyle(
                                             color: Colors.black,
-                                            fontSize: 25,
+                                            fontSize: 20,
                                             fontWeight: FontWeight.w300),
                                       ),
                                     ],
@@ -278,7 +304,7 @@ class _PreviewBodyState extends State<PreviewBody> {
                                 Text(
                                   "You Get",
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Spacer(),
@@ -290,7 +316,7 @@ class _PreviewBodyState extends State<PreviewBody> {
                                         text: widget.offer.toString(),
                                         style: TextStyle(
                                             color: Colors.black,
-                                            fontSize: 25,
+                                            fontSize: 20,
                                             fontWeight: FontWeight.w300),
                                       ),
                                     ],
@@ -306,7 +332,7 @@ class _PreviewBodyState extends State<PreviewBody> {
                                 Text(
                                   "Card",
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Spacer(),
@@ -318,7 +344,7 @@ class _PreviewBodyState extends State<PreviewBody> {
                                         text: widget.card.toUpperCase(),
                                         style: TextStyle(
                                             color: Colors.black,
-                                            fontSize: 25,
+                                            fontSize: 20,
                                             fontWeight: FontWeight.w300),
                                       ),
                                     ],
@@ -328,7 +354,7 @@ class _PreviewBodyState extends State<PreviewBody> {
                                 Text(
                                   "Profit",
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Spacer(),
@@ -340,7 +366,7 @@ class _PreviewBodyState extends State<PreviewBody> {
                                         text: widget.earning.toString(),
                                         style: TextStyle(
                                             color: Colors.black,
-                                            fontSize: 25,
+                                            fontSize: 20,
                                             fontWeight: FontWeight.w300),
                                       ),
                                     ],
@@ -351,8 +377,127 @@ class _PreviewBodyState extends State<PreviewBody> {
                           ],
                         ),
                       ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.03),
+
+                      Container(
+                        child: Row(
+                          children: [
+                            Center(
+                              child: Container(
+                                margin: EdgeInsets.only(top: 15, left: 0),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "Status",
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(left: 0),
+                                      child: DropdownButton(
+                                        // Initial Value
+                                        value: widget.dropdownvalue,
+
+                                        // Down Arrow Icon
+                                        icon: const Icon(
+                                            Icons.keyboard_arrow_down),
+
+                                        // Array list of items
+                                        items: items.map((String items) {
+                                          return DropdownMenuItem(
+                                            value: items,
+                                            child: Text(items),
+                                          );
+                                        }).toList(),
+                                        // After selecting the desired option,it will
+                                        // change button value to selected value
+                                        onChanged: (String? newValue) {
+                                          print(newValue.toString());
+                                          widget.dropdownvalue =
+                                              newValue.toString();
+                                          setState(() {});
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Container(
+                                margin: EdgeInsets.only(top: 15, left: 10),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "Courier",
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.4,
+                                      margin: EdgeInsets.only(left: 10),
+                                      child: DropdownButton(
+                                        // Initial Value
+                                        value: courier,
+
+                                        // Down Arrow Icon
+                                        icon: const Icon(
+                                            Icons.keyboard_arrow_down),
+
+                                        // Array list of items
+                                        items: co.map((String items) {
+                                          return DropdownMenuItem(
+                                            value: items,
+                                            child: Text(items),
+                                          );
+                                        }).toList(),
+                                        // After selecting the desired option,it will
+                                        // change button value to selected value
+                                        onChanged: (String? newValue) {
+                                          print(newValue.toString());
+                                          courier = newValue.toString();
+                                          setState(() {});
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+
+                      // SizedBox(
+                      // height: MediaQuery.of(context).size.height * 0.02),
+                      Container(
+                        child: TextField(
+                          onChanged: (value) {
+                            // DetailsFields.email = value;
+                            otpcode = value;
+                            setState(() {});
+                          },
+                          decoration:
+                              const InputDecoration(labelText: "Delivery OTP"),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          otp(widget.id, widget.dropdownvalue, courier,
+                              otpcode);
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(top: 35),
+                          decoration: BoxDecoration(
+                              color: kprimarycolor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 10),
+                          child: Text(
+                            "Save",
+                            style: TextStyle(fontSize: 18, color: Colors.white),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 )),

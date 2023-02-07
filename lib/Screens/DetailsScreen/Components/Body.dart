@@ -50,7 +50,7 @@ class _BodyState extends State<Body> {
       var urllaunchable = await canLaunchUrl(Uri.parse(url));
       if (urllaunchable) {
         await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication)
-            .then((value) => Navigator.push(
+            .then((value) => Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (context) => OrderConfirmation(

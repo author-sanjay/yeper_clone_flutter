@@ -22,26 +22,53 @@ class _ProfileBodyState extends State<ProfileBody> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
+        alignment: Alignment.center,
         color: Colors.white,
         width: MediaQuery.of(context).size.width,
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 40),
             child: Column(
               children: <Widget>[
                 user.photo?.length == 0
                     ? Row(
                         children: [
-                          CircleAvatar(
-                            radius:
-                                MediaQuery.of(context).size.width * 0.15 + 2,
-                            backgroundColor: Colors.black,
+                          Container(
+                            margin: EdgeInsets.only(left: 35),
                             child: CircleAvatar(
-                              backgroundImage:
-                                  AssetImage("assets/images/logo.png"),
-                              radius: MediaQuery.of(context).size.width * 0.15,
+                              radius:
+                                  MediaQuery.of(context).size.width * 0.12 + 2,
+                              backgroundColor: Colors.black,
+                              child: CircleAvatar(
+                                backgroundImage:
+                                    AssetImage("assets/images/logo.png"),
+                                radius:
+                                    MediaQuery.of(context).size.width * 0.12,
+                              ),
                             ),
                           ),
+                          Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Column(
+                              children: [
+                                Text(
+                                  user.name.toString(),
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                                Text(
+                                  user.email.toString(),
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                              ],
+                            ),
+                          ),
+
                           // Text(user.name.toString())
                         ],
                       )
@@ -54,20 +81,6 @@ class _ProfileBodyState extends State<ProfileBody> {
                         ),
                       ),
                 SizedBox(height: 2),
-                Text(
-                  user.name.toString(),
-                  style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w300),
-                ),
-                Text(
-                  user.email.toString(),
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w300),
-                ),
                 SizedBox(height: 2),
                 Container(
                   child: List(),
@@ -94,7 +107,7 @@ class _ListState extends State<List> {
   Future<void> _signOut() async {
     await FirebaseAuth.instance.signOut();
 
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => LoginScreen(),
@@ -108,7 +121,7 @@ class _ListState extends State<List> {
       children: [
         GestureDetector(
           onTap: (() {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => EditProfile(),
@@ -154,7 +167,7 @@ class _ListState extends State<List> {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => WalletScreen(),
@@ -200,7 +213,7 @@ class _ListState extends State<List> {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => OrderList(),
@@ -246,7 +259,7 @@ class _ListState extends State<List> {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => ReferralList(),
@@ -292,7 +305,7 @@ class _ListState extends State<List> {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => ChooseCard(),

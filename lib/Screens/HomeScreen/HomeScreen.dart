@@ -180,7 +180,7 @@ class bottomnavbar extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.push(context,
+              Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => HomeScreen()));
             },
             child: Container(
@@ -192,7 +192,7 @@ class bottomnavbar extends StatelessWidget {
           Spacer(),
           GestureDetector(
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => OrderList()),
               );
@@ -211,7 +211,7 @@ class bottomnavbar extends StatelessWidget {
           Spacer(),
           GestureDetector(
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ChooseCard(),
@@ -230,7 +230,7 @@ class bottomnavbar extends StatelessWidget {
           Spacer(),
           GestureDetector(
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => WalletScreen()),
               );

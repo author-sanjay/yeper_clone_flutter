@@ -30,7 +30,8 @@ class _OrderPreviewState extends State<OrderPreview> {
   bool _isloading = true;
   Future<void> getdeal(id) async {
     // final json = jsonEncode({"order_status": "Placed", "platformtxnid": txnid});
-    Map<String, String> headers = {"Content-type": "application/json",
+    Map<String, String> headers = {
+      "Content-type": "application/json",
       "Authorization": "Bearer " + PasswordLogin.token,
     };
     var res = await http.get(
@@ -92,6 +93,7 @@ class _OrderPreviewState extends State<OrderPreview> {
               orderid: widget.orderid,
               status: widget.status,
               key: widget.key,
+              dropdownvalue: widget.status,
             )),
     );
   }

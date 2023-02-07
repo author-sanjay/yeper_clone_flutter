@@ -196,7 +196,7 @@ class _listState extends State<list> {
         ? Center(child: CircularProgressIndicator())
         : GestureDetector(
             onTap: () => {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => OrderPreview(
@@ -335,109 +335,6 @@ class _listState extends State<list> {
                               )
                             ],
                           ),
-                          Container(
-                              width: MediaQuery.of(context).size.width,
-                              alignment: Alignment.center,
-                              child: Center(
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 38.0),
-                                          child: Text("Status"),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 38.0),
-                                          child: DropdownButton(
-                                            // Initial Value
-                                            value: widget.dropdownvalue,
-
-                                            // Down Arrow Icon
-                                            icon: const Icon(
-                                                Icons.keyboard_arrow_down),
-
-                                            // Array list of items
-                                            items: items.map((String items) {
-                                              return DropdownMenuItem(
-                                                value: items,
-                                                child: Text(items),
-                                              );
-                                            }).toList(),
-                                            // After selecting the desired option,it will
-                                            // change button value to selected value
-                                            onChanged: (String? newValue) {
-                                              print(newValue.toString());
-                                              widget.dropdownvalue =
-                                                  newValue.toString();
-                                              setState(() {});
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    widget.dropdownvalue == 'Out For Delivery'
-                                        ? Row(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 18.0),
-                                                child: Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.5,
-                                                  height: 50,
-                                                  child: TextField(
-                                                    onChanged: (value) {
-                                                      // DetailsFields.name = value;
-                                                    },
-                                                    decoration:
-                                                        const InputDecoration(
-                                                            labelText:
-                                                                "OTP for Delivery"),
-                                                    // keyboardType: Ke,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 18.0),
-                                                child: GestureDetector(
-                                                  onTap: () => {},
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                        Radius.circular(10),
-                                                      ),
-                                                      color: kprimarycolor,
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              10.0),
-                                                      child: Text(
-                                                        "Save",
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            color:
-                                                                Colors.white),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
-                                            ],
-                                          )
-                                        : SizedBox(
-                                            height: 1,
-                                          )
-                                  ],
-                                ),
-                              )),
                         ],
                       ),
                     ),
@@ -470,7 +367,7 @@ class orderdetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (() {
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => OrderPreview(

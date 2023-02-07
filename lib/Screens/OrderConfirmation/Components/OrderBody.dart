@@ -97,7 +97,7 @@ class _OrderBodyState extends State<OrderBody> {
     try {
       final results = jsonDecode(res.body);
       print(results);
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
       );
