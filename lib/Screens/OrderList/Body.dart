@@ -33,7 +33,7 @@ class PreviewBody extends StatefulWidget {
   int offer;
   String desc;
   String photo;
-  String dropdownvalue;
+  String? dropdownvalue;
   String platform;
   String status;
   @override
@@ -69,6 +69,8 @@ class _PreviewBodyState extends State<PreviewBody> {
   var co = ['E-Kart', 'Delhivery', 'Bluedart', 'Fedex', 'IndiaPost', 'Others'];
   @override
   Widget build(BuildContext context) {
+    // widget.dropdownvalue = "Placed";
+
     return Center(
       child: Stack(
         children: [
@@ -475,14 +477,15 @@ class _PreviewBodyState extends State<PreviewBody> {
                             otpcode = value;
                             setState(() {});
                           },
+                          keyboardType: TextInputType.number,
                           decoration:
                               const InputDecoration(labelText: "Delivery OTP"),
                         ),
                       ),
                       GestureDetector(
                         onTap: () {
-                          otp(widget.id, widget.dropdownvalue, courier,
-                              otpcode);
+                          otp(widget.id, widget.dropdownvalue.toString(),
+                              courier, otpcode);
                         },
                         child: Container(
                           margin: EdgeInsets.only(top: 35),

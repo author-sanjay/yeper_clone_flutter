@@ -122,7 +122,8 @@ class _BodyState extends State<Body> {
                       child: Center(
                           child: Text(
                         "Order Now",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w300),
                       )),
                     ),
                   ),
@@ -207,14 +208,14 @@ class pricedetails extends StatelessWidget {
                   Center(
                       child: Text(
                     "You Will Spend",
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(fontSize: 12),
                   )),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
                     "₹ $actualprice",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                   SizedBox(
                     height: 10,
@@ -269,7 +270,7 @@ class pricedetails extends StatelessWidget {
                   Center(
                       child: Text(
                     "You Will Get",
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(fontSize: 12),
                   )),
                   SizedBox(
                     height: 10,
@@ -278,7 +279,7 @@ class pricedetails extends StatelessWidget {
                     child: Text(
                       "₹ $offer",
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                   ),
                   SizedBox(
@@ -334,14 +335,14 @@ class pricedetails extends StatelessWidget {
                   Center(
                       child: Text(
                     "Your Earning",
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(fontSize: 12),
                   )),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
                     "₹ $earning",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                   SizedBox(
                     height: 10,
@@ -414,13 +415,14 @@ class titileanddesc extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 18.0),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
                               alignment: Alignment.topLeft,
                               child: Text(
                                 shortname.toUpperCase(),
                                 style: TextStyle(
-                                    fontSize: 25, fontWeight: FontWeight.w500),
+                                    fontSize: 18, fontWeight: FontWeight.w500),
                               ),
                             ),
                             Padding(
@@ -428,7 +430,7 @@ class titileanddesc extends StatelessWidget {
                               child: Text(
                                 platform,
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w400),
+                                    fontSize: 15, fontWeight: FontWeight.w400),
                               ),
                             ),
                           ],

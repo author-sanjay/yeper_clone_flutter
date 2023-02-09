@@ -37,6 +37,7 @@ class ItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     String newname = itemname.split(" ")[0];
+    String card = cardname.split(" ")[0];
 
     return GestureDetector(
       onTap: () {
@@ -137,7 +138,10 @@ class ItemCard extends StatelessWidget {
                           alignment: Alignment.center,
                           child: Column(
                             children: <Widget>[
-                              Text("on $cardname \ncredit ard"),
+                              Text(
+                                "on $card \ncredit ard",
+                                style: TextStyle(fontSize: 10),
+                              )
                             ],
                           ),
                         )

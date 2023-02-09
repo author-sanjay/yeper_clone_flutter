@@ -93,7 +93,7 @@ class _OrderPreviewState extends State<OrderPreview> {
               orderid: widget.orderid,
               status: widget.status,
               key: widget.key,
-              dropdownvalue: widget.status,
+              dropdownvalue: widget.status.toString(),
             )),
     );
   }

@@ -74,7 +74,7 @@ class _OrderBodyState extends State<OrderBody> {
     var newFormat = DateFormat("dd-MM-yy");
     String updatedDt = newFormat.format(dt);
     final json = jsonEncode({
-      "order_status": "Placed",
+      "status": "Placed",
       "platformtxnid": txnid,
       "product": widget.name,
       "date": updatedDt,
@@ -260,7 +260,7 @@ class _OrderBodyState extends State<OrderBody> {
                                   text: widget.platform,
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 25,
+                                      fontSize: 20,
                                       fontWeight: FontWeight.w400),
                                 ),
                               ],
@@ -282,7 +282,7 @@ class _OrderBodyState extends State<OrderBody> {
                                   "Status: ",
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 20,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w400),
                                 ),
                                 RichText(
@@ -293,7 +293,7 @@ class _OrderBodyState extends State<OrderBody> {
                                         text: widget.status,
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 25,
+                                            fontSize: 16,
                                             fontWeight: FontWeight.w300),
                                       ),
                                     ],
@@ -350,8 +350,8 @@ class _OrderBodyState extends State<OrderBody> {
                                 Text(
                                   "You Pay",
                                   style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
                                 ),
                                 Spacer(),
                                 RichText(
@@ -362,7 +362,7 @@ class _OrderBodyState extends State<OrderBody> {
                                         text: widget.actualprice.toString(),
                                         style: TextStyle(
                                             color: Colors.black,
-                                            fontSize: 25,
+                                            fontSize: 18,
                                             fontWeight: FontWeight.w300),
                                       ),
                                     ],
@@ -372,7 +372,7 @@ class _OrderBodyState extends State<OrderBody> {
                                 Text(
                                   "You Get",
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Spacer(),
@@ -384,7 +384,7 @@ class _OrderBodyState extends State<OrderBody> {
                                         text: widget.offer.toString(),
                                         style: TextStyle(
                                             color: Colors.black,
-                                            fontSize: 25,
+                                            fontSize: 16,
                                             fontWeight: FontWeight.w300),
                                       ),
                                     ],
@@ -400,7 +400,7 @@ class _OrderBodyState extends State<OrderBody> {
                                 Text(
                                   "Card",
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Spacer(),
@@ -412,7 +412,7 @@ class _OrderBodyState extends State<OrderBody> {
                                         text: widget.card.toUpperCase(),
                                         style: TextStyle(
                                             color: Colors.black,
-                                            fontSize: 25,
+                                            fontSize: 16,
                                             fontWeight: FontWeight.w300),
                                       ),
                                     ],
@@ -422,7 +422,7 @@ class _OrderBodyState extends State<OrderBody> {
                                 Text(
                                   "Profit",
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Spacer(),
@@ -434,7 +434,7 @@ class _OrderBodyState extends State<OrderBody> {
                                         text: widget.earning.toString(),
                                         style: TextStyle(
                                             color: Colors.black,
-                                            fontSize: 25,
+                                            fontSize: 16,
                                             fontWeight: FontWeight.w300),
                                       ),
                                     ],
@@ -466,7 +466,7 @@ class _OrderBodyState extends State<OrderBody> {
                                             child: Text(
                                               "Place Order",
                                               style: TextStyle(
-                                                  fontSize: 30,
+                                                  fontSize: 20,
                                                   fontWeight: FontWeight.w300),
                                             ))))
                                 : ElevatedButton(

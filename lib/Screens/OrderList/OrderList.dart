@@ -47,7 +47,19 @@ class _OrderListState extends State<OrderList> {
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : orderlistbody(getdeals: _getdeals),
+                : _getdeals.isEmpty
+                    ? Column(
+                        children: [
+                          HeaderWithSearchbar(
+                              size: MediaQuery.of(context).size),
+                          Container(
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height * 0.7,
+                              child: Text("Sorry You Dont have Any Orders\n")),
+                        ],
+                      )
+                    : orderlistbody(getdeals: _getdeals),
         bottomNavigationBar: bottomnavbar());
   }
 }
@@ -102,25 +114,32 @@ class _orderlistbodyState extends State<orderlistbody> {
                       ? Center(
                           child: CircularProgressIndicator(),
                         )
-                      : ListView.builder(
-                          itemBuilder: (context, index) {
-                            return list(
-                              date: widget._getdeals[index].date,
-                              name: widget._getdeals[index].product,
-                              orderid:
-                                  widget._getdeals[index].orderid.toString(),
-                              platforid: widget._getdeals[index].txn,
-                              status: widget._getdeals[index].orderstatus,
-                              deal: widget._getdeals[index].deal,
-                              dropdownvalue:
-                                  widget._getdeals[index].orderstatus,
-                            );
-                          },
-                          shrinkWrap: true,
-                          itemCount: widget._getdeals.length,
-                          padding: EdgeInsets.all(0),
-                          controller: ScrollController(keepScrollOffset: false),
-                        ),
+                      : widget._getdeals.isEmpty
+                          ? Text("Sorry, You hve Not Ordered Anything")
+                          : ListView.builder(
+                              itemBuilder: (context, index) {
+                                return list(
+                                  date: widget._getdeals[index].date.toString(),
+                                  name: widget._getdeals[index].product
+                                      .toString(),
+                                  orderid: widget._getdeals[index].orderid
+                                      .toString(),
+                                  platforid:
+                                      widget._getdeals[index].txn.toString(),
+                                  status: widget._getdeals[index].orderstatus
+                                      .toString(),
+                                  deal: widget._getdeals[index].deal.toString(),
+                                  dropdownvalue: widget
+                                      ._getdeals[index].orderstatus
+                                      .toString(),
+                                );
+                              },
+                              shrinkWrap: true,
+                              itemCount: widget._getdeals.length,
+                              padding: EdgeInsets.all(0),
+                              controller:
+                                  ScrollController(keepScrollOffset: false),
+                            ),
                 ],
               ),
             )
@@ -142,7 +161,7 @@ class list extends StatefulWidget {
       required this.deal,
       required this.dropdownvalue})
       : super(key: key);
-  int deal;
+  String deal;
   String name;
   String orderid;
   String status;
@@ -201,7 +220,7 @@ class _listState extends State<list> {
                 MaterialPageRoute(
                   builder: (context) => OrderPreview(
                       orderid: int.parse(widget.orderid),
-                      id: widget.deal,
+                      id: int.parse(widget.deal),
                       status: widget.status,
                       txn: widget.platforid),
                 ),
