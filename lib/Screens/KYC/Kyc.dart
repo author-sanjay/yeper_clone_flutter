@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
+import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/api.dart';
 import 'package:yeper_user/constants.dart';
 
@@ -88,46 +89,131 @@ class _kycbodyState extends State<kycbody> {
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Column(
                 children: [
-                  TextField(
-                    onChanged: (value) {
-                      kycbody.acnumber = value;
-                    },
-                    decoration:
-                        const InputDecoration(labelText: "Account Number"),
-                  ),
+                  if (user.acnumber != null)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Account Number",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        TextField(
+                          onChanged: (value) {
+                            kycbody.acnumber = value;
+                          },
+                          decoration: InputDecoration(labelText: user.acnumber),
+                        )
+                      ],
+                    )
+                  else
+                    TextField(
+                      onChanged: (value) {
+                        kycbody.acnumber = value;
+                      },
+                      decoration:
+                          const InputDecoration(labelText: "Account Number"),
+                    ),
                   SizedBox(height: 10),
-                  TextField(
-                    onChanged: (value) {
-                      kycbody.bankname = value;
-                    },
-                    decoration: const InputDecoration(labelText: "Bank Name"),
-                  ),
+                  user.bankname != null
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Bank Name",
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            TextField(
+                              onChanged: (value) {
+                                kycbody.acnumber = value;
+                              },
+                              decoration:
+                                  InputDecoration(labelText: user.bankname),
+                            )
+                          ],
+                        )
+                      : TextField(
+                          onChanged: (value) {
+                            kycbody.bankname = value;
+                          },
+                          decoration:
+                              const InputDecoration(labelText: "Bank Name"),
+                        ),
                   SizedBox(height: 10),
-                  TextField(
-                    onChanged: (value) {
-                      kycbody.ifsc = value;
-                    },
-                    decoration: const InputDecoration(labelText: "Bank IFSC"),
-                  ),
+                  user.idfc != null
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "IFSC Code",
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            TextField(
+                              onChanged: (value) {
+                                kycbody.acnumber = value;
+                              },
+                              decoration: InputDecoration(labelText: user.idfc),
+                            )
+                          ],
+                        )
+                      : TextField(
+                          onChanged: (value) {
+                            kycbody.ifsc = value;
+                          },
+                          decoration:
+                              const InputDecoration(labelText: "Bank IFSC"),
+                        ),
                   SizedBox(height: 10),
-                  TextField(
-                    onChanged: (value) {
-                      // phone_number = value;
-                      // DetailsFields.address = value;
-                      kycbody.gst = value;
-                    },
-                    decoration: const InputDecoration(
-                        labelText: "GST Number (Optional)"),
-                  ),
+                  user.gst != null
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "GST Number",
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            TextField(
+                              onChanged: (value) {
+                                kycbody.acnumber = value;
+                              },
+                              decoration: InputDecoration(labelText: user.gst),
+                            )
+                          ],
+                        )
+                      : TextField(
+                          onChanged: (value) {
+                            // phone_number = value;
+                            // DetailsFields.address = value;
+                            kycbody.gst = value;
+                          },
+                          decoration: const InputDecoration(
+                              labelText: "GST Number (Optional)"),
+                        ),
                   SizedBox(height: 10),
-                  TextField(
-                    onChanged: (value) {
-                      // DetailsFields.referal = value;
-                      kycbody.pan = value;
-                    },
-                    decoration: const InputDecoration(labelText: "Pan Number"),
-                    // keyboardType: TextInputType.number,
-                  ),
+                  user.pan != null
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Pan Number",
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            TextField(
+                              onChanged: (value) {
+                                kycbody.acnumber = value;
+                              },
+                              decoration: InputDecoration(labelText: user.pan),
+                            )
+                          ],
+                        )
+                      : TextField(
+                          onChanged: (value) {
+                            // DetailsFields.referal = value;
+                            kycbody.pan = value;
+                          },
+                          decoration:
+                              const InputDecoration(labelText: "Pan Number"),
+                          // keyboardType: TextInputType.number,
+                        ),
                   SizedBox(height: 20),
                   GestureDetector(
                     onTap: (() {

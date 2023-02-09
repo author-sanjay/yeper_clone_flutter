@@ -201,7 +201,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                                     email = value;
                                   },
                                   decoration:
-                                      InputDecoration(labelText: "Email"),
+                                      InputDecoration(labelText: user.email),
                                 ),
                               ],
                             ),
@@ -243,7 +243,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                                     phonenumber = value;
                                   },
                                   decoration: InputDecoration(
-                                      labelText: "Phone Number"),
+                                      labelText: user.phonenumber),
                                 ),
                               ],
                             ),
@@ -285,8 +285,8 @@ class _ProfileBodyState extends State<ProfileBody> {
                                   onChanged: (value) {
                                     acnumber = value;
                                   },
-                                  decoration: InputDecoration(
-                                      labelText: "Bank A/C Number"),
+                                  decoration:
+                                      InputDecoration(labelText: user.acnumber),
                                 ),
                               ],
                             ),
@@ -329,7 +329,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                                     bankname = value;
                                   },
                                   decoration:
-                                      InputDecoration(labelText: "Bank Name"),
+                                      InputDecoration(labelText: user.bankname),
                                 ),
                               ],
                             ),
@@ -372,7 +372,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                                     idfc = value;
                                   },
                                   decoration:
-                                      InputDecoration(labelText: "IDFC Code"),
+                                      InputDecoration(labelText: user.idfc),
                                 ),
                               ],
                             ),

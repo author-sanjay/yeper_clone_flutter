@@ -77,7 +77,9 @@ class _DetailsFieldsState extends State<DetailsFields> {
           // jsonDecode(result["wallet"])["id"],
           "",
           DetailsFields.ifsc,
-          "");
+          "",
+          result["gst"],
+          result["pan"]);
 
       // user.acnumber = result["acnumber"];
       // user.address = DetailsFields.address;
@@ -185,7 +187,6 @@ class _DetailsFieldsState extends State<DetailsFields> {
             ),
           ],
         ),
-     
       ))),
     );
   }

@@ -120,6 +120,21 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (e) {
       print(e);
     }
+
+    try {
+      user.gst = result["gst"];
+      print(user.gst);
+    } catch (e) {
+      print(e);
+    }
+
+    try {
+      user.pan = result["pan"];
+      print(user.pan);
+    } catch (e) {
+      print(e);
+    }
+
     user.token = PasswordLogin.token;
 
     setState(() {
@@ -141,7 +156,6 @@ class _HomeScreenState extends State<HomeScreen> {
       autofocus: true,
       onKey: ((value) => {print(value)}),
       child: Scaffold(
-          
           body: isloading
               ? Center(
                   child: CircularProgressIndicator(),

@@ -51,18 +51,19 @@ class _ProfileBodyState extends State<ProfileBody> {
                           Container(
                             margin: EdgeInsets.only(left: 20),
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   user.name.toString(),
                                   style: TextStyle(
-                                      fontSize: 25,
+                                      fontSize: 20,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w300),
                                 ),
                                 Text(
                                   user.email.toString(),
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 12,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w300),
                                 ),
@@ -106,7 +107,7 @@ class List extends StatefulWidget {
 
 class _ListState extends State<List> {
   Future<void> urll() async {
-    String url = "wa.me/919009363000";
+    String url = "http://wa.me/919009363000";
     var urllaunchable = await canLaunchUrl(Uri.parse(url));
     if (urllaunchable) {
       await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
