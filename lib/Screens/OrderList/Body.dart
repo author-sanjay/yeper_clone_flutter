@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
 import 'package:yeper_user/api.dart';
 import 'package:yeper_user/constants.dart';
@@ -50,17 +51,40 @@ class _PreviewBodyState extends State<PreviewBody> {
   }
 
   Future<void> otp(int id, String status, String courier, String otp) async {
-    final json = jsonEncode(
-        {"status": status, "courier": courier, "otp": int.parse(otp)});
-    print(json);
-    Map<String, String> headers = {
-      "Content-type": "application/json",
-      "Authorization": "Bearer " + PasswordLogin.token,
-    };
-    var res = await http.post(Uri.parse(api + "/addotp"),
-        headers: headers, body: json);
+    if (otp == "") {
+      final json = jsonEncode({"status": status, "courier": courier});
+      print(json);
+      Map<String, String> headers = {
+        "Content-type": "application/json",
+        "Authorization": "Bearer " + PasswordLogin.token,
+      };
+      var res = await http.post(Uri.parse(api + "/addotp"),
+          headers: headers, body: json);
 
-    print(res.statusCode);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(),
+        ),
+      );
+    } else {
+      final json = jsonEncode(
+          {"status": status, "courier": courier, "otp": int.parse(otp)});
+      print(json);
+      Map<String, String> headers = {
+        "Content-type": "application/json",
+        "Authorization": "Bearer " + PasswordLogin.token,
+      };
+      var res = await http.post(Uri.parse(api + "/addotp"),
+          headers: headers, body: json);
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(),
+        ),
+      );
+    }
   }
 
   String otpcode = "";

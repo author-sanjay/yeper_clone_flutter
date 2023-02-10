@@ -168,7 +168,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                             color: Colors.white,
                             fontWeight: FontWeight.w300)),
                     SizedBox(
-                      height: 5,
+                      height: 15,
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 32),
@@ -196,13 +196,33 @@ class _ProfileBodyState extends State<ProfileBody> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                TextField(
-                                  onChanged: (value) {
-                                    email = value;
-                                  },
-                                  decoration:
-                                      InputDecoration(labelText: user.email),
+                                Text(
+                                  "Email",
+                                  style: TextStyle(fontSize: 10),
                                 ),
+                                user.email != null
+                                    ? Container(
+                                        height: 23,
+                                        child: TextField(
+                                          onChanged: (value) {
+                                            email = value;
+                                          },
+                                          decoration: InputDecoration(
+                                            labelText: user.email,
+                                          ),
+                                        ),
+                                      )
+                                    : Container(
+                                        height: 23,
+                                        child: TextField(
+                                          onChanged: (value) {
+                                            email = value;
+                                          },
+                                          decoration: InputDecoration(
+                                            labelText: "Email",
+                                          ),
+                                        ),
+                                      )
                               ],
                             ),
                           ),
@@ -210,7 +230,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                       ),
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 15,
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 32),
@@ -221,6 +241,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                       child: Row(
                         children: <Widget>[
                           Container(
+                            padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
                                 color: Colors.grey[100],
                                 borderRadius:
@@ -238,13 +259,31 @@ class _ProfileBodyState extends State<ProfileBody> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                TextField(
-                                  onChanged: (value) {
-                                    phonenumber = value;
-                                  },
-                                  decoration: InputDecoration(
-                                      labelText: user.phonenumber),
+                                Text(
+                                  "Phone Number",
+                                  style: TextStyle(fontSize: 10),
                                 ),
+                                user.phonenumber != null
+                                    ? Container(
+                                        height: 23,
+                                        child: TextField(
+                                          onChanged: (value) {
+                                            phonenumber = value;
+                                          },
+                                          decoration: InputDecoration(
+                                              labelText: user.phonenumber),
+                                        ),
+                                      )
+                                    : Container(
+                                        height: 23,
+                                        child: TextField(
+                                          onChanged: (value) {
+                                            phonenumber = value;
+                                          },
+                                          decoration: InputDecoration(
+                                              labelText: "Phone Number"),
+                                        ),
+                                      ),
                               ],
                             ),
                           ),
@@ -253,7 +292,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                     ),
 
                     SizedBox(
-                      height: 5,
+                      height: 15,
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 32),
@@ -281,13 +320,31 @@ class _ProfileBodyState extends State<ProfileBody> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                TextField(
-                                  onChanged: (value) {
-                                    acnumber = value;
-                                  },
-                                  decoration:
-                                      InputDecoration(labelText: user.acnumber),
+                                Text(
+                                  "Account Number",
+                                  style: TextStyle(fontSize: 10),
                                 ),
+                                user.acnumber != null
+                                    ? Container(
+                                        height: 20,
+                                        child: TextField(
+                                          onChanged: (value) {
+                                            acnumber = value;
+                                          },
+                                          decoration: InputDecoration(
+                                              labelText: user.acnumber),
+                                        ),
+                                      )
+                                    : Container(
+                                        height: 20,
+                                        child: TextField(
+                                          onChanged: (value) {
+                                            acnumber = value;
+                                          },
+                                          decoration: InputDecoration(
+                                              labelText: user.acnumber),
+                                        ),
+                                      ),
                               ],
                             ),
                           ),
@@ -296,7 +353,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                     ),
 
                     SizedBox(
-                      height: 5,
+                      height: 15,
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 32),
@@ -324,13 +381,31 @@ class _ProfileBodyState extends State<ProfileBody> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                TextField(
-                                  onChanged: (value) {
-                                    bankname = value;
-                                  },
-                                  decoration:
-                                      InputDecoration(labelText: user.bankname),
+                                Text(
+                                  "Bank Name",
+                                  style: TextStyle(fontSize: 10),
                                 ),
+                                user.bankname != null
+                                    ? Container(
+                                        height: 20,
+                                        child: TextField(
+                                          onChanged: (value) {
+                                            bankname = value;
+                                          },
+                                          decoration: InputDecoration(
+                                              labelText: user.bankname),
+                                        ),
+                                      )
+                                    : Container(
+                                        height: 20,
+                                        child: TextField(
+                                          onChanged: (value) {
+                                            bankname = value;
+                                          },
+                                          decoration: InputDecoration(
+                                              labelText: user.bankname),
+                                        ),
+                                      ),
                               ],
                             ),
                           ),
@@ -339,7 +414,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                     ),
 
                     SizedBox(
-                      height: 5,
+                      height: 15,
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 32),
@@ -367,31 +442,52 @@ class _ProfileBodyState extends State<ProfileBody> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                TextField(
-                                  onChanged: (value) {
-                                    idfc = value;
-                                  },
-                                  decoration:
-                                      InputDecoration(labelText: user.idfc),
+                                Text(
+                                  "IFSC Code",
+                                  style: TextStyle(fontSize: 10),
                                 ),
+                                user.bankname != null
+                                    ? Container(
+                                        height: 20,
+                                        child: TextField(
+                                          onChanged: (value) {
+                                            idfc = value;
+                                          },
+                                          decoration: InputDecoration(
+                                              labelText: user.idfc),
+                                        ),
+                                      )
+                                    : Container(
+                                        height: 20,
+                                        child: TextField(
+                                          onChanged: (value) {
+                                            idfc = value;
+                                          },
+                                          decoration: InputDecoration(
+                                              labelText: user.idfc),
+                                        ),
+                                      ),
                               ],
                             ),
                           ),
                         ],
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        post(
-                            email.toString(),
-                            phonenumber.toString(),
-                            acnumber.toString(),
-                            bankname.toString(),
-                            idfc.toString(),
-                            photo.toString());
-                      },
-                      child: Text("Save"),
-                      style: ButtonStyle(),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 18.0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          post(
+                              email.toString(),
+                              phonenumber.toString(),
+                              acnumber.toString(),
+                              bankname.toString(),
+                              idfc.toString(),
+                              photo.toString());
+                        },
+                        child: Text("Save"),
+                        style: ButtonStyle(),
+                      ),
                     )
                     // Text("Profile Photo can ",style: TextStyle(fontSize: 23,color: Colors.white,fontWeight: FontWeight.w200))
                   ],

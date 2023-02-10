@@ -30,11 +30,7 @@ class kycbody extends StatefulWidget {
   const kycbody({
     super.key,
   });
-  static late String acnumber;
-  static late String bankname;
-  static late String ifsc;
-  static late String gst;
-  static late String pan;
+
   @override
   State<kycbody> createState() => _kycbodyState();
 }
@@ -56,18 +52,22 @@ class _kycbodyState extends State<kycbody> {
     };
     var res =
         await http.post(Uri.parse(api + "/kyc"), headers: headers, body: json);
-    if (res.statusCode == 200) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomeScreen(),
-        ),
-      );
-    }
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomeScreen(),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    String acnumber = "";
+    String bankname = "";
+    String ifsc = "";
+    String gst = "";
+    String pan = "";
     return Padding(
       padding: const EdgeInsets.only(top: 18.0),
       child: Container(
@@ -99,7 +99,7 @@ class _kycbodyState extends State<kycbody> {
                         ),
                         TextField(
                           onChanged: (value) {
-                            kycbody.acnumber = value;
+                            acnumber = value;
                           },
                           decoration: InputDecoration(labelText: user.acnumber),
                         )
@@ -108,7 +108,7 @@ class _kycbodyState extends State<kycbody> {
                   else
                     TextField(
                       onChanged: (value) {
-                        kycbody.acnumber = value;
+                        acnumber = value;
                       },
                       decoration:
                           const InputDecoration(labelText: "Account Number"),
@@ -124,7 +124,7 @@ class _kycbodyState extends State<kycbody> {
                             ),
                             TextField(
                               onChanged: (value) {
-                                kycbody.acnumber = value;
+                                bankname = value;
                               },
                               decoration:
                                   InputDecoration(labelText: user.bankname),
@@ -133,7 +133,7 @@ class _kycbodyState extends State<kycbody> {
                         )
                       : TextField(
                           onChanged: (value) {
-                            kycbody.bankname = value;
+                            bankname = value;
                           },
                           decoration:
                               const InputDecoration(labelText: "Bank Name"),
@@ -149,7 +149,7 @@ class _kycbodyState extends State<kycbody> {
                             ),
                             TextField(
                               onChanged: (value) {
-                                kycbody.acnumber = value;
+                                ifsc = value;
                               },
                               decoration: InputDecoration(labelText: user.idfc),
                             )
@@ -157,7 +157,7 @@ class _kycbodyState extends State<kycbody> {
                         )
                       : TextField(
                           onChanged: (value) {
-                            kycbody.ifsc = value;
+                            ifsc = value;
                           },
                           decoration:
                               const InputDecoration(labelText: "Bank IFSC"),
@@ -173,7 +173,7 @@ class _kycbodyState extends State<kycbody> {
                             ),
                             TextField(
                               onChanged: (value) {
-                                kycbody.acnumber = value;
+                                gst = value;
                               },
                               decoration: InputDecoration(labelText: user.gst),
                             )
@@ -183,7 +183,7 @@ class _kycbodyState extends State<kycbody> {
                           onChanged: (value) {
                             // phone_number = value;
                             // DetailsFields.address = value;
-                            kycbody.gst = value;
+                            gst = value;
                           },
                           decoration: const InputDecoration(
                               labelText: "GST Number (Optional)"),
@@ -199,7 +199,7 @@ class _kycbodyState extends State<kycbody> {
                             ),
                             TextField(
                               onChanged: (value) {
-                                kycbody.acnumber = value;
+                                pan = value;
                               },
                               decoration: InputDecoration(labelText: user.pan),
                             )
@@ -208,7 +208,7 @@ class _kycbodyState extends State<kycbody> {
                       : TextField(
                           onChanged: (value) {
                             // DetailsFields.referal = value;
-                            kycbody.pan = value;
+                            pan = value;
                           },
                           decoration:
                               const InputDecoration(labelText: "Pan Number"),
@@ -217,9 +217,22 @@ class _kycbodyState extends State<kycbody> {
                   SizedBox(height: 20),
                   GestureDetector(
                     onTap: (() {
-                      // setState(() {
-                      //   adduser();
-                      // });
+                      if (acnumber == "") {
+                        acnumber = user.acnumber.toString();
+                      }
+                      if (bankname == "") {
+                        bankname = user.bankname.toString();
+                      }
+                      if (ifsc == "") {
+                        ifsc = user.idfc.toString();
+                      }
+                      if (gst == "") {
+                        gst = user.gst.toString();
+                      }
+                      if (pan == "") {
+                        pan = user.pan.toString();
+                      }
+                      update(acnumber, bankname, ifsc, gst, pan);
                     }),
                     child: Container(
                       height: 45,
