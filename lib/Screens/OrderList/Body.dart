@@ -52,13 +52,13 @@ class _PreviewBodyState extends State<PreviewBody> {
 
   Future<void> otp(int id, String status, String courier, String otp) async {
     if (otp == "") {
-      final json = jsonEncode({"status": status, "courier": courier});
+      final json = jsonEncode({"status": status, "courier": courier, "id": id});
       print(json);
       Map<String, String> headers = {
         "Content-type": "application/json",
         "Authorization": "Bearer " + PasswordLogin.token,
       };
-      var res = await http.post(Uri.parse(api + "/addotp"),
+      var res = await http.post(Uri.parse(api + "/orders/addotp"),
           headers: headers, body: json);
 
       Navigator.pushReplacement(
@@ -68,14 +68,18 @@ class _PreviewBodyState extends State<PreviewBody> {
         ),
       );
     } else {
-      final json = jsonEncode(
-          {"status": status, "courier": courier, "otp": int.parse(otp)});
+      final json = jsonEncode({
+        "status": status,
+        "courier": courier,
+        "otp": int.parse(otp),
+        "id": id
+      });
       print(json);
       Map<String, String> headers = {
         "Content-type": "application/json",
         "Authorization": "Bearer " + PasswordLogin.token,
       };
-      var res = await http.post(Uri.parse(api + "/addotp"),
+      var res = await http.post(Uri.parse(api + "/orders/addotp"),
           headers: headers, body: json);
 
       Navigator.pushReplacement(

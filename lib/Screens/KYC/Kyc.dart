@@ -39,6 +39,7 @@ class _kycbodyState extends State<kycbody> {
   Future<void> update(
       String ac, String bank, String ifsc, String gst, String pan) async {
     final json = jsonEncode({
+      "uid": user.id.toString(),
       "acnumber": ac,
       "bankname": bank,
       "idfc": ifsc,
@@ -50,8 +51,8 @@ class _kycbodyState extends State<kycbody> {
       "Content-type": "application/json",
       "Authorization": "Bearer " + PasswordLogin.token,
     };
-    var res =
-        await http.post(Uri.parse(api + "/kyc"), headers: headers, body: json);
+    var res = await http.post(Uri.parse(api + "/user/kyc"),
+        headers: headers, body: json);
 
     Navigator.pushReplacement(
       context,
