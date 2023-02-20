@@ -8,7 +8,7 @@ import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:intl/intl.dart';
-import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
+import 'package:yeper_user/Components/PasswordLogin.dart';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import '../../../api.dart';
 

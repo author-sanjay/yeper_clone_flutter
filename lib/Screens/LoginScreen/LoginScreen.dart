@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:yeper_user/Screens/LoginScreen/Components/Body.dart';
+import 'package:yeper_user/Components/Body.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

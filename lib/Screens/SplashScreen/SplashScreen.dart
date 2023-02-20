@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
-import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
+import 'package:yeper_user/Components/PasswordLogin.dart';
 import 'package:yeper_user/Screens/LoginScreen/LoginScreen.dart';
 import 'package:yeper_user/constants.dart';
 

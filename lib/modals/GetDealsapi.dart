@@ -2,11 +2,10 @@
 
 import 'dart:convert';
 
-import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
+import 'package:yeper_user/Components/PasswordLogin.dart';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/modals/GetDeals.dart';
 import 'package:http/http.dart' as http;
-
 import '../api.dart';
 
 class Getdealsapi {
@@ -16,6 +15,7 @@ class Getdealsapi {
       "Content-type": "application/json",
       "Authorization": "Bearer " + PasswordLogin.token,
     };
+
     var res =
         await http.get(Uri.parse(api + "/deals/getactive"), headers: headers);
     print(res.body);

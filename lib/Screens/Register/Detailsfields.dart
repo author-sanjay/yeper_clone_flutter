@@ -5,7 +5,7 @@ import 'dart:math';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
+import 'package:yeper_user/Components/PasswordLogin.dart';
 import 'package:yeper_user/Screens/Register/Registerfields.dart';
 import 'package:yeper_user/api.dart';
 import 'package:yeper_user/constants.dart';

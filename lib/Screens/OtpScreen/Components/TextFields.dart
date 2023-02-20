@@ -3,12 +3,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
-import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
-import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
+import 'package:yeper_user/Components/PasswordLogin.dart';
 import 'package:yeper_user/Screens/LoginScreen/LoginScreen.dart';
-
 import '../../../constants.dart';
-import '../../LoginScreen/Components/LoginFields.dart';
+import '../../../Components/LoginFields.dart';
 
 final defaultPinTheme = PinTheme(
   width: 36,

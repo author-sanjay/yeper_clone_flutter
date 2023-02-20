@@ -1,34 +1,81 @@
 {
   "project_info": {
-    "project_number": "408323260658",
-    "project_id": "creward-6c52c",
-    "storage_bucket": "creward-6c52c.appspot.com"
+    "project_number": "898639630100",
+    "project_id": "yeper-d41df",
+    "storage_bucket": "yeper-d41df.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:408323260658:android:6469e2480aa88ed138d06b",
+        "mobilesdk_app_id": "1:898639630100:android:83a4a0deacc4a582c07c01",
         "android_client_info": {
-          "package_name": "com.artic.creward"
+          "package_name": "com.example.yeper_user"
         }
       },
       "oauth_client": [
         {
-          "client_id": "408323260658-hr9ls9l9aq9452drbpkfifhtshfh818g.apps.googleusercontent.com",
+          "client_id": "898639630100-8tj5lmoruhq8rkt08n6bvvbc437al5l3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yeper_user",
+            "certificate_hash": "ed8010267c2bb8f7d93c024506d0ce80e3c11727"
+          }
+        },
+        {
+          "client_id": "898639630100-kf88jodil237iosr4de6svq8vb4bugar.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yeper_user",
+            "certificate_hash": "87ddc7bd78365d344d7ca5000bdda9f9e43c76de"
+          }
+        },
+        {
+          "client_id": "898639630100-morp3htfq8j9lnnhm3ebvc1slu4sm4ks.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yeper_user",
+            "certificate_hash": "93cf6d6d5ba8265458d4f7b3570abeda9da4850a"
+          }
+        },
+        {
+          "client_id": "898639630100-r42ncds862k6q7818lj7vbm6ntu0fplf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yeper_user",
+            "certificate_hash": "65e87c4d241188bfd1f584db9ee91408aa43c8b4"
+          }
+        },
+        {
+          "client_id": "898639630100-v0qh5lbadcfdjf8o5aqodkrbskq3cll0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yeper_user",
+            "certificate_hash": "50812a1cff2560e50be70c40fe07c902ee20db42"
+          }
+        },
+        {
+          "client_id": "898639630100-emmapc7rqca05t92jnu89elo0819lht5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDTjpHd7fJ1QrwVpgDEHdY1MnTazYyxLPU"
+          "current_key": "AIzaSyDdUJfH_FmVbq4ISo08cD-sbEzmxzLM8Rw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "408323260658-hr9ls9l9aq9452drbpkfifhtshfh818g.apps.googleusercontent.com",
+              "client_id": "898639630100-emmapc7rqca05t92jnu89elo0819lht5.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "898639630100-ugjii0s46uoq0sfu95t8rn8d7701bb5l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.yeperUser"
+              }
             }
           ]
         }

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/EditProfile/EditProfile.dart';
 import 'package:yeper_user/Screens/HomeScreen/HomeScreen.dart';
 import 'package:http/http.dart' as http;
-import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
+import 'package:yeper_user/Components/PasswordLogin.dart';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/api.dart';
 import 'package:yeper_user/constants.dart';

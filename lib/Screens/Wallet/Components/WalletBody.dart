@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:yeper_user/Screens/DetailsScreen/Components/Body.dart';
 import 'package:yeper_user/Screens/HomeScreen/Components/HeaderWithSearchbar.dart';
-import 'package:yeper_user/Screens/LoginScreen/Components/PasswordLogin.dart';
+import 'package:yeper_user/Components/PasswordLogin.dart';
 import 'package:yeper_user/Screens/Register/Detailsfields.dart';
 import 'package:yeper_user/Screens/Wallet/Components/Header.dart';
 import 'package:yeper_user/constants.dart';
