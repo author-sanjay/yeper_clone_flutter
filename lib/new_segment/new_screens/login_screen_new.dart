@@ -31,7 +31,7 @@ class _LoginNewScreenState extends State<LoginNewScreen> {
   void _sendOTP() {
     if (_formKey.currentState!.validate() && !_showOTP) {
       SignUpController.instance
-          .phoneAuthentication("+91" + _phoneController.text.trim());
+          .phoneAuthentication("+91" + _phoneController.text.trim(),context);
       _showOTP = true;
       setState(() {});
       // Get.to(() => NewOtpScreen());
@@ -122,6 +122,7 @@ class _LoginNewScreenState extends State<LoginNewScreen> {
                           ? ReusbleTextField(
                               hint: "Enter OTP",
                               controller: _otpController,
+                              isEnterOtp: true,
                             )
                           : SizedBox.shrink(),
                       SizedBox(

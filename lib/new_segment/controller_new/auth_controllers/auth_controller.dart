@@ -2,12 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
+import 'package:yeper_user/new_segment/controller_new/auth_controllers/enter_login_controller.dart';
 import 'package:yeper_user/new_segment/new_screens/login_details_new.dart';
-
-
-import '../../new_screens/enter_passoword_new_screen.dart';
-import '../../new_screens/home_screens_new.dart';
+import 'package:yeper_user/new_segment/new_screens/navbar_new_screen.dart';
 import '../../new_screens/login_screen_new.dart';
+import '../../utils/utils.dart';
 
 class AuthController extends GetxController {
   static AuthController get instance => Get.find();
@@ -34,7 +33,10 @@ class AuthController extends GetxController {
     //     : Get.offAll(() => const LoginNewScreen());
   }
 
-  Future<void> phoneAuthentication(String phoneNo) async {
+  Future<void> phoneAuthentication(String phoneNo, BuildContext context) async {
+    // SimpleFontelicoProgressDialog _dialog =
+    //     SimpleFontelicoProgressDialog(context: context);
+
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNo,
       verificationCompleted: (credential) async {
@@ -43,28 +45,20 @@ class AuthController extends GetxController {
       codeSent: ((verificationId, resendToken) {
         this.verficationId.value = verificationId;
       }),
-      codeAutoRetrievalTimeout: (verificationId) {
-        this.verficationId.value = verificationId;
-      },
-      
+      codeAutoRetrievalTimeout: (verificationId) {},
       timeout: Duration(seconds: 5),
       verificationFailed: (e) {
-        Get.showSnackbar(
-          GetSnackBar(
-            title: "Error",
-            message: e.message,
-            duration: const Duration(seconds: 3),
-          ),
-        );
+        ShowSnackBar(e.message.toString());
       },
     );
   }
+
 
   Future<bool> verifyOtp(String otp, BuildContext context) async {
     SimpleFontelicoProgressDialog _dialog =
         SimpleFontelicoProgressDialog(context: context);
     try {
-      _dialog.show(message: "Vetifing OTP...");
+      _dialog.show(message: "Verifying OTP...");
 
       var credentials = await _auth.signInWithCredential(
           PhoneAuthProvider.credential(
@@ -75,7 +69,8 @@ class AuthController extends GetxController {
           Get.offAll(() => const LoginDetailNewScreen());
         } else {
           _dialog.hide();
-          Get.offAll(() => const EnterPasswordNewScreen());
+          // Get.offAll(() => const NavbarNewScreen());
+          logincontroller().login("1234", context);
         }
         return true;
       }
@@ -100,7 +95,7 @@ class AuthController extends GetxController {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       firebaseUser.value != null
-          ? Get.offAll(() => const HomeScreenNew())
+          ? Get.offAll(() => const NavbarNewScreen())
           : Get.to(() => const LoginNewScreen());
     } on FirebaseAuthException catch (e) {
       return e.message;

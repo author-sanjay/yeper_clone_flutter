@@ -54,9 +54,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:yeper_user/Screens/LoginScreen/LoginScreen.dart';
+import 'package:yeper_user/new_segment/new_screens/enter_order_id_screen.dart';
+import 'package:yeper_user/new_segment/new_screens/login_screen_new.dart';
+
+
+import 'package:yeper_user/new_segment/new_screens/login_screen_new.dart';
+import 'package:yeper_user/new_segment/new_screens/new_screen_order_details.dart';
 
 import 'new_segment/binding/main_binding.dart';
-import 'new_segment/new_screens/new_screen_order_details.dart';
+
+
+import 'new_segment/binding/main_binding.dart';
+import 'new_segment/new_screens/navbar_new_screen.dart';
 
 
 Future<void> main() async {
@@ -83,7 +93,10 @@ class MyApp extends StatelessWidget {
 
         //  home:
 
-        home: OrderDetailsPage(),
+
+        home: LoginNewScreen(),
+
+      
       );
     });
   }

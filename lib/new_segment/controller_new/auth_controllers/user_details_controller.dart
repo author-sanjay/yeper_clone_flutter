@@ -28,14 +28,13 @@ class UserDetailsController extends GetxController {
       var res = await http.get(_url, headers: headers);
       var result = jsonDecode(res.body);
       if (res.statusCode == 200) {
-        print(res.statusCode);
-        print(res.body);
+      
         userDetailsModel.value = UserDetailsModel.fromJson(result);
       } else {
         Get.showSnackbar(
           GetSnackBar(
             title: "Error",
-            message: "Something Went Wen't Wrong",
+            message: "Something Went Wrong",
             duration: const Duration(seconds: 3),
           ),
         );

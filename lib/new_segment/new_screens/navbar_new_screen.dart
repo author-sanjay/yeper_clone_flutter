@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../controller_new/auth_controllers/user_details_controller.dart';
 import 'home_screens_new.dart';
 import 'new_orderlist.dart';
+import 'new_referral_page.dart';
+import 'new_wallet_screen.dart';
 
 class NavbarNewScreen extends StatefulWidget {
   const NavbarNewScreen({super.key});
@@ -11,19 +15,26 @@ class NavbarNewScreen extends StatefulWidget {
 }
 
 class _NavbarNewScreenState extends State<NavbarNewScreen> {
+  UserDetailsController _userDetailsController =
+      Get.find<UserDetailsController>();
+
+  Future<void> _fetchUserDetails() async {
+    await _userDetailsController.getuser();
+  }
+
+  @override
+  void initState() {
+    _fetchUserDetails();
+    super.initState();
+  }
+
   int _selectedIndex = 0;
 
   static const List<Widget> _pages = <Widget>[
     HomeScreenNew(),
     OrderListPage(),
-    Icon(
-      Icons.chat,
-      size: 150,
-    ),
-    Icon(
-      Icons.chat,
-      size: 150,
-    ),
+    NewWalletScreen(),
+    ReferralPage()
   ];
 
   void _onItemTapped(int index) {

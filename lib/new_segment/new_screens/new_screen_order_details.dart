@@ -1,28 +1,81 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:yeper_user/new_segment/controller_new/deals_controllers/add_otp_controller.dart';
+import 'package:yeper_user/new_segment/new_models/deals_models/single_product_model.dart';
+import 'package:yeper_user/new_segment/new_screens/navbar_new_screen.dart';
+import 'package:yeper_user/new_segment/reusable_widget/reusable_chached_image.dart';
+import 'package:yeper_user/new_segment/utils/utils.dart';
+import '../new_models/deals_models/order_list_model.dart';
 import '../reusable_widget/reusable_underline_textfield.dart';
 
 class OrderDetailsPage extends StatefulWidget {
-  const OrderDetailsPage({super.key});
+  final SingleProductModel item;
+  final OrderListModel itemForUpdate;
+  const OrderDetailsPage({
+    super.key,
+    required this.item,
+    required this.itemForUpdate,
+  });
 
   @override
   State<OrderDetailsPage> createState() => _OrderDetailsPageState();
 }
 
 class _OrderDetailsPageState extends State<OrderDetailsPage> {
-  final List<String> items = [
-    'Item1',
-    'Item2',
-    'Item3',
-    'Item4',
+  AddOTPController addOTPController = Get.find<AddOTPController>();
+
+  final List<String> statusItems = [
+    'Placed',
+    'cancelled',
+    'Out For Delivery',
+    'Completed',
   ];
-  String? selectedValue;
-  TextEditingController _otpController = TextEditingController();
-  TextEditingController _addressController = TextEditingController(
-    text: "191, PNTC, Ahemdabad, India",
-  );
-  TextEditingController _mobileNoController = TextEditingController();
+
+  String? statusDefaultValue;
+  String? courierDefaultValue;
+
+  final List<String> courierItems = [
+    'E-Kart',
+    'Delhivery',
+    'Bluedart',
+    'Fedex',
+    'IndiaPost',
+    'Others',
+  ];
+
+  TextEditingController _otpController = TextEditingController(text: "");
+  TextEditingController _addressController = TextEditingController(text: "");
+  TextEditingController _mobileNoController = TextEditingController(text: "");
+
+  Future<void> getUpdate() async {
+    await addOTPController.getUpdate(
+      statusDefaultValue == null
+          ? widget.itemForUpdate.status
+          : statusDefaultValue,
+      _mobileNoController.text == ""
+          ? widget.itemForUpdate.phonenumberr.toString()
+          : _mobileNoController.text,
+      courierDefaultValue == null
+          ? widget.itemForUpdate.courier
+          : courierDefaultValue,
+      _otpController.text == ""
+          ? widget.itemForUpdate.otp.toString()
+          : _otpController.text,
+      widget.itemForUpdate.id.toString(),
+    );
+    Get.offAll(() => NavbarNewScreen());
+  }
+
+  Future<void> _save() async {
+    await getUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -34,6 +87,11 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    _mobileNoController.text =
+        getPhoneString(widget.itemForUpdate.phonenumberr);
+    _otpController.text = getPhoneString(widget.itemForUpdate.otp);
+    _addressController.text = getAdressString(widget.item.addresssfordelivery);
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -45,6 +103,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(18)),
                   child: Stack(
+                    alignment: Alignment.center,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,10 +119,13 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                     bottomRight: Radius.circular(18))),
                             child: Padding(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 3.w, vertical: 2.h),
+                                  horizontal: 3.w, vertical: 1.h),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  SizedBox(
+                                    height: 8,
+                                  ),
                                   Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -86,13 +148,14 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                         ),
                                       ]),
                                   SizedBox(
-                                    height: 9.h,
+                                    height: 8.h,
                                   ),
+                                  Spacer(),
                                   Row(
                                     children: [
                                       Spacer(),
                                       Text(
-                                        " Order Id\n7",
+                                        " Order Id\n${widget.itemForUpdate.id.toString()}",
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             color: Colors.white,
@@ -103,7 +166,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                         flex: 8,
                                       ),
                                       Text(
-                                        " Your Profit\n3000",
+                                        " Your Profit\n${widget.item.userEarning}",
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             color: Colors.white,
@@ -130,7 +193,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        "Amazon",
+                                        widget.item.platform.toString(),
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 15,
@@ -144,7 +207,10 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                         child: Text(
-                                          "Status:Placed",
+                                          widget.itemForUpdate.status != null
+                                              ? "Status: ${widget.itemForUpdate.status}"
+                                                  .toString()
+                                              : "No Status",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 14,
@@ -157,32 +223,12 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                 SizedBox(
                                   height: 16,
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "556777777",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Don't Have One? Check here",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400),
-                                    )
-                                  ],
+                                Text(
+                                  "Platform Id : ${getFormatedString(widget.itemForUpdate.platformtxnid)}",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w700),
                                 ),
                                 SizedBox(
                                   height: 16,
@@ -195,109 +241,247 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 14,
-                                          fontWeight: FontWeight.w400),
+                                          fontWeight: FontWeight.w600),
                                     )
                                   ],
                                 ),
                                 SizedBox(
                                   height: 18,
                                 ),
-                                Container(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "You Pay",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                          SizedBox(
-                                            width: 10.w,
-                                          ),
-                                          Text(
-                                            "12000",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "You Get",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                          SizedBox(
-                                            width: 10.w,
-                                          ),
-                                          Text(
-                                            "15000",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 12,
-                                ),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          "Card",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w400),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "You Pay : ",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Text(
+                                              widget.item.actualPrice
+                                                  .toString(),
+                                              style: TextStyle(
+                                                  color: Colors.black
+                                                      .withOpacity(.7),
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ],
                                         ),
                                         SizedBox(
-                                          width: 7.w,
+                                          height: 12,
                                         ),
-                                        Text(
-                                          "SBI SUPER CARD",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w400),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Card : ",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Text(
+                                              widget.item.card.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.black
+                                                      .withOpacity(.7),
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 16,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Status",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Container(
+                                              child:
+                                                  DropdownButtonHideUnderline(
+                                                child: DropdownButton2(
+                                                  hint: Text(
+                                                    widget.itemForUpdate
+                                                                .status !=
+                                                            null
+                                                        ? widget.itemForUpdate
+                                                            .status
+                                                            .toString()
+                                                        : "Select",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Theme.of(context)
+                                                          .hintColor,
+                                                    ),
+                                                  ),
+                                                  iconSize: 20,
+                                                  items: statusItems
+                                                      .map((item) =>
+                                                          DropdownMenuItem<
+                                                              String>(
+                                                            value: item,
+                                                            child: Text(
+                                                              item,
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                              ),
+                                                            ),
+                                                          ))
+                                                      .toList(),
+                                                  value: statusDefaultValue,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      statusDefaultValue =
+                                                          value as String;
+                                                    });
+                                                  },
+                                                  icon: Icon(Icons
+                                                      .keyboard_arrow_down),
+                                                  buttonHeight: 40,
+                                                  buttonWidth: 140,
+                                                  itemHeight: 40,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                    Row(
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          "Profit",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w400),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "You Get : ",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Text(
+                                              widget.item.offerPrice.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.black
+                                                      .withOpacity(.7),
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ],
                                         ),
                                         SizedBox(
-                                          width: 10.w,
+                                          height: 12,
                                         ),
-                                        Text(
-                                          "3000",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w400),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Profit : ",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Text(
+                                              widget.item.userEarning
+                                                  .toString(),
+                                              style: TextStyle(
+                                                  color: Colors.black
+                                                      .withOpacity(.7),
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 16,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "courier",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Container(
+                                              child:
+                                                  DropdownButtonHideUnderline(
+                                                child: DropdownButton2(
+                                                  hint: Text(
+                                                    widget.itemForUpdate
+                                                                .courier !=
+                                                            null
+                                                        ? widget.itemForUpdate
+                                                            .courier
+                                                            .toString()
+                                                        : "Select",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Theme.of(context)
+                                                          .hintColor,
+                                                    ),
+                                                  ),
+                                                  iconSize: 20,
+                                                  items: courierItems
+                                                      .map((item) =>
+                                                          DropdownMenuItem<
+                                                              String>(
+                                                            value: item,
+                                                            child: Text(
+                                                              item,
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                              ),
+                                                            ),
+                                                          ))
+                                                      .toList(),
+                                                  value: courierDefaultValue,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      courierDefaultValue =
+                                                          value as String;
+                                                    });
+                                                  },
+                                                  icon: Icon(Icons
+                                                      .keyboard_arrow_down),
+                                                  buttonHeight: 40,
+                                                  buttonWidth: 140,
+                                                  itemHeight: 40,
+                                                ),
+                                              ),
+                                            ),
+                                            // Row(
+                                            //   children: [
+                                            //     Expanded(
+                                            //         child: Divider(
+                                            //       color: Colors.black,
+                                            //       thickness: 1,
+                                            //     )),
+                                            //   ],
+                                            // ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -308,139 +492,8 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(
-                                      "Status",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                    Text(
-                                      "Counter",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 2,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Expanded(
-                                      child: Column(
-                                        children: [
-                                          DropdownButtonHideUnderline(
-                                            child: DropdownButton2(
-                                              hint: Text(
-                                                'Placed',
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Theme.of(context)
-                                                      .hintColor,
-                                                ),
-                                              ),
-                                              items: items
-                                                  .map((item) =>
-                                                      DropdownMenuItem<String>(
-                                                        value: item,
-                                                        child: Text(
-                                                          item,
-                                                          style:
-                                                              const TextStyle(
-                                                            fontSize: 14,
-                                                          ),
-                                                        ),
-                                                      ))
-                                                  .toList(),
-                                              value: selectedValue,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  selectedValue =
-                                                      value as String;
-                                                });
-                                              },
-                                              icon: Icon(
-                                                  Icons.keyboard_arrow_down),
-                                              buttonHeight: 40,
-                                              buttonWidth: 140,
-                                              itemHeight: 40,
-                                            ),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                  child: Divider(
-                                                color: Colors.black,
-                                                thickness: 1,
-                                              )),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        children: [
-                                          DropdownButtonHideUnderline(
-                                            child: DropdownButton2(
-                                              hint: Text(
-                                                'Other',
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Theme.of(context)
-                                                      .hintColor,
-                                                ),
-                                              ),
-                                              items: items
-                                                  .map((item) =>
-                                                      DropdownMenuItem<String>(
-                                                        value: item,
-                                                        child: Text(
-                                                          item,
-                                                          style:
-                                                              const TextStyle(
-                                                            fontSize: 14,
-                                                          ),
-                                                        ),
-                                                      ))
-                                                  .toList(),
-                                              value: selectedValue,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  selectedValue =
-                                                      value as String;
-                                                });
-                                              },
-                                              icon: Icon(
-                                                  Icons.keyboard_arrow_down),
-                                              buttonHeight: 40,
-                                              buttonWidth: 140,
-                                              itemHeight: 40,
-                                            ),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                  child: Divider(
-                                                color: Colors.black,
-                                                thickness: 1,
-                                              )),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [],
                                 ),
                                 SizedBox(
                                   height: 12,
@@ -465,18 +518,21 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 28, vertical: 10),
-                                decoration: BoxDecoration(
-                                    color: Color(0xff1C2039),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Text(
-                                  "Save",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500),
+                              InkWell(
+                                onTap: _save,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 28, vertical: 10),
+                                  decoration: BoxDecoration(
+                                      color: Color(0xff1C2039),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Text(
+                                    "Save",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                               ),
                             ],
@@ -487,16 +543,15 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                         ],
                       ),
                       Positioned(
-                        top: 10.h,
-                        left: 32.w,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            "https://upload.wikimedia.org/wikipedia/commons/7/7e/Virat_Kohli.jpg",
-                            width: 30.w,
-                            height: 18.h,
-                            fit: BoxFit.fill,
-                          ),
+                        top: 60,
+                        child: SizedBox(
+                          width: 130,
+                          height: 170,
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: reusableChachedImage(
+                                widget.item.photourl.toString(),
+                              )),
                         ),
                       ),
                     ],

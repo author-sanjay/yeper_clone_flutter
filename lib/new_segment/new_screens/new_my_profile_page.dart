@@ -1,24 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:yeper_user/new_segment/controller_new/auth_controllers/auth_controller.dart';
+import 'package:yeper_user/new_segment/new_models/user_details_get_model.dart';
+import 'package:yeper_user/new_segment/new_screens/help_support_new_screen.dart';
+import 'package:yeper_user/new_segment/new_screens/login_screen_new.dart';
+import 'package:yeper_user/new_segment/reusable_widget/reusable_chached_image.dart';
+import 'new_bank_account_details.dart';
+import 'new_edit_profile.dart';
+import 'new_orderlist.dart';
+import 'new_referral_page.dart';
+import 'new_wallet_screen.dart';
 
-class MyProfilePage extends StatefulWidget {
-  const MyProfilePage({super.key});
+class MyProfilePageNew extends StatefulWidget {
+  final UserDetailsModel getUserInfo;
+  const MyProfilePageNew({
+    super.key,
+    required this.getUserInfo,
+  });
 
   @override
-  State<MyProfilePage> createState() => _MyProfilePageState();
+  State<MyProfilePageNew> createState() => _MyProfilePageNewState();
 }
 
-class _MyProfilePageState extends State<MyProfilePage> {
+class _MyProfilePageNewState extends State<MyProfilePageNew> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff1C2039),
-        leading: Image.asset(
-          "assets/images/back.png",
-          scale: 5,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Image.asset(
+            "assets/images/back.png",
+            scale: 5,
+          ),
         ),
         title: Text(
           "My Profile",
@@ -34,14 +52,17 @@ class _MyProfilePageState extends State<MyProfilePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.network(
-                    "https://static.vecteezy.com/system/resources/thumbnails/002/002/403/small/man-with-beard-avatar-character-isolated-icon-free-vector.jpg",
-                    width: 76,
-                    height: 76,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                    borderRadius: BorderRadius.circular(100),
+                    child: SizedBox(
+                        height: 80,
+                        width: 80,
+                        child: widget.getUserInfo.photo == null
+                            ? reusableChachedImage(
+                                "https://static.vecteezy.com/system/resources/thumbnails/002/002/403/small/man-with-beard-avatar-character-isolated-icon-free-vector.jpg")
+                            : Image.network(
+                                widget.getUserInfo.photo,
+                                fit: BoxFit.cover,
+                              ))),
                 SizedBox(
                   width: 20,
                 ),
@@ -52,7 +73,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       height: 4,
                     ),
                     Text(
-                      "Spookie Weirdo",
+                      widget.getUserInfo.name.toString(),
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
@@ -62,7 +83,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       height: 4,
                     ),
                     Text(
-                      "8200369878",
+                      widget.getUserInfo.phonenumber.toString(),
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -72,7 +93,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       height: 3,
                     ),
                     Text(
-                      "spookie@gmail.com",
+                      widget.getUserInfo.email.toString(),
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -88,6 +109,11 @@ class _MyProfilePageState extends State<MyProfilePage> {
             child: Column(
               children: [
                 ListTile(
+                  onTap: () {
+                    Get.to(() => EditProfilePage(
+                          getUserInfo: widget.getUserInfo,
+                        ));
+                  },
                   leading: Icon(
                     Icons.edit,
                     color: Colors.black,
@@ -116,12 +142,15 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   ],
                 ),
                 ListTile(
+                  onTap: () {
+                    Get.to(() => NewWalletScreen());
+                  },
                   leading: Icon(
                     Icons.wallet,
                     color: Colors.black,
                   ),
                   title: Text(
-                    "Edit Profile",
+                    "Wallet",
                     style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
@@ -144,6 +173,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   ],
                 ),
                 ListTile(
+                  onTap: () {
+                    Get.to(() => OrderListPage());
+                  },
                   leading: Icon(
                     Icons.shop,
                     color: Colors.black,
@@ -172,6 +204,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   ],
                 ),
                 ListTile(
+                  onTap: () {
+                    Get.to(() => ReferralPage());
+                  },
                   leading: Icon(
                     Icons.person,
                     color: Colors.black,
@@ -200,34 +235,11 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   ],
                 ),
                 ListTile(
-                  leading: Icon(
-                    Icons.credit_card,
-                    color: Colors.black,
-                  ),
-                  title: Text(
-                    "Manage Cards",
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black),
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios_outlined,
-                    color: Color(0xff1C2039),
-                    size: 20,
-                  ),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        color: Colors.black.withOpacity(0.2),
-                        thickness: 1,
-                      ),
-                    )
-                  ],
-                ),
-                ListTile(
+                  onTap: () {
+                    Get.to(() => BankDetailsPage(
+                         getUserInfo: widget.getUserInfo,
+                    ));
+                  },
                   leading: Icon(
                     Icons.document_scanner_outlined,
                     color: Colors.black,
@@ -255,22 +267,27 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     )
                   ],
                 ),
-                ListTile(
-                  leading: Icon(
-                    Icons.contact_support_outlined,
-                    color: Colors.black,
-                  ),
-                  title: Text(
-                    "Manage KYC",
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black),
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios_outlined,
-                    color: Color(0xff1C2039),
-                    size: 20,
+                InkWell(
+                  onTap: () {
+                    Get.to(() => SupportPage());
+                  },
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.contact_support_outlined,
+                      color: Colors.black,
+                    ),
+                    title: Text(
+                      "Support & Helps",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black),
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios_outlined,
+                      color: Color(0xff1C2039),
+                      size: 20,
+                    ),
                   ),
                 ),
                 Row(
@@ -283,22 +300,29 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     )
                   ],
                 ),
-                ListTile(
-                  leading: Icon(
-                    Icons.power_settings_new,
-                    color: Colors.black,
-                  ),
-                  title: Text(
-                    "Sign Out",
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black),
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios_outlined,
-                    color: Color(0xff1C2039),
-                    size: 20,
+                InkWell(
+                  onTap: () async {
+                    AuthController authController = AuthController();
+                    await authController.logout();
+                    Get.to(() => LoginNewScreen());
+                  },
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.power_settings_new,
+                      color: Colors.black,
+                    ),
+                    title: Text(
+                      "Sign Out",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black),
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios_outlined,
+                      color: Color(0xff1C2039),
+                      size: 20,
+                    ),
                   ),
                 ),
               ],

@@ -12,10 +12,7 @@ import '../../new_screens/navbar_new_screen.dart';
 
 class logincontroller extends GetxController {
   login(String passward, BuildContext context) async {
-    SimpleFontelicoProgressDialog _dialog =
-        SimpleFontelicoProgressDialog(context: context);
     try {
-      _dialog.show(message: "Checking Password...");
       Map<String, String> headers = {"Content-type": "application/json"};
       print(FirebaseAuth.instance.currentUser?.uid.toString());
       var json = jsonEncode({
@@ -33,10 +30,8 @@ class logincontroller extends GetxController {
       print(res.body);
 
       if (res.statusCode == 200) {
-        _dialog.hide();
-        Get.to(() => NavbarNewScreen());
+        Get.offAll(() => NavbarNewScreen());
       } else {
-        _dialog.hide();
         Get.showSnackbar(
           GetSnackBar(
             title: "Error",
@@ -46,7 +41,6 @@ class logincontroller extends GetxController {
         );
       }
     } catch (e) {
-      _dialog.hide();
       Get.showSnackbar(GetSnackBar(
         title: "Error",
         message: e.toString(),

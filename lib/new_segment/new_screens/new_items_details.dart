@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:url_launcher/url_launcher.dart';
+import 'package:yeper_user/new_segment/new_screens/enter_order_id_screen.dart';
+import 'package:yeper_user/new_segment/utils/utils.dart';
 import '../new_models/deals_models/get_all_deals_model.dart';
 import '../reusable_widget/reusable_chached_image.dart';
-
 
 class ItemsDetailsPage extends StatefulWidget {
   final GetAllDealsModel item;
@@ -18,6 +19,23 @@ class ItemsDetailsPage extends StatefulWidget {
 }
 
 class _ItemsDetailsPageState extends State<ItemsDetailsPage> {
+  Future<void> urll() async {
+    String url = widget.item.offerlink!;
+    var urllaunchable = await canLaunchUrl(Uri.parse(url));
+    if (urllaunchable) {
+      await launchUrl(
+        Uri.parse(url),
+        mode: LaunchMode.externalApplication,
+      ).then(
+        (value) => Get.to(
+          () => EnterOrderIdScreen(item: widget.item),
+        ),
+      );
+    } else {
+      ShowSnackBar("Can not Open Broswer");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,16 +93,6 @@ class _ItemsDetailsPageState extends State<ItemsDetailsPage> {
                                         color: Color(0xff1C2039),
                                         fontSize: 18,
                                         fontWeight: FontWeight.w700),
-                                  ),
-                                  SizedBox(
-                                    height: 1.h,
-                                  ),
-                                  Text(
-                                    "6 Gb ram 128 GB Rom\nDual Sim 4G  ",
-                                    style: TextStyle(
-                                        color: Color(0xff1C2039),
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400),
                                   ),
                                 ],
                               ),
@@ -222,11 +230,13 @@ class _ItemsDetailsPageState extends State<ItemsDetailsPage> {
                                   ),
                                 ),
                                 SizedBox(
-                                  width: 8,
+                                  width: 16,
                                 ),
-                                Expanded(
+                                SizedBox(
+                                  height: 90,
+                                  width: 80,
                                   child: reusableChachedImage(
-                                      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Axis_Bank_logo.svg/450px-Axis_Bank_logo.svg.png?20100223155056"),
+                                      widget.item.photourl.toString()),
                                 ),
                               ],
                             ),
@@ -250,21 +260,27 @@ class _ItemsDetailsPageState extends State<ItemsDetailsPage> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
                           children: [
-                            Text(
-                              "Delivery Address",
-                              style: TextStyle(
-                                  color: Color(0xff1C2039),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Delivery Address",
+                                    style: TextStyle(
+                                        color: Color(0xff1C2039),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                  SelectableText(
+                                      "Name :   ${getFormatedString(widget.item.deliverto)}\nPhone Number: 9999999999\nAddress : ${getFormatedString(widget.item.addresssfordelivery)}\nPin Code: ${getPhoneString(widget.item.addresssfordelivery)}"),
+                                ],
+                              ),
                             ),
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            SelectableText(
-                                "Name : Shiv Pandey\nPhone Number: 9999999999\nAddress Line 1: 09, india\nAddress Line 2: 09, india\nLandmark : Near Shop\nPin Code: 482008"),
                           ],
                         ),
                       ),
@@ -424,20 +440,23 @@ class _ItemsDetailsPageState extends State<ItemsDetailsPage> {
               ),
             ),
           ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.h),
-            margin: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
-            decoration: BoxDecoration(
-                color: Color(0xff1C2039),
-                borderRadius: BorderRadius.circular(12)),
-            child: Center(
-                child: Text(
-              "Order Now",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700),
-            )),
+          InkWell(
+            onTap: urll,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.h),
+              margin: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+              decoration: BoxDecoration(
+                  color: Color(0xff1C2039),
+                  borderRadius: BorderRadius.circular(12)),
+              child: Center(
+                  child: Text(
+                "Order Now",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700),
+              )),
+            ),
           )
         ],
       ),

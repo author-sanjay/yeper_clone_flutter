@@ -6,15 +6,15 @@ class UserDetailsModel {
   String? email;
   String? phonenumber;
   String? address;
-  String? referalCode;
+  String? referalcode;
   bool? isuser;
   String? referralof;
-  dynamic? acnumber;
-  dynamic? bankname;
-  dynamic? idfc;
-  dynamic? photo;
-  dynamic? gst;
-  dynamic? pan;
+  dynamic acnumber;
+  dynamic bankname;
+  dynamic idfc;
+  dynamic photo;
+  dynamic gst;
+  dynamic pan;
   List<dynamic>? orders;
   Wallet? wallet;
   List<dynamic>? referrals;
@@ -28,7 +28,7 @@ class UserDetailsModel {
       this.email,
       this.phonenumber,
       this.address,
-      this.referalCode,
+      this.referalcode,
       this.isuser,
       this.referralof,
       this.acnumber,
@@ -50,7 +50,7 @@ class UserDetailsModel {
     email = json['email'];
     phonenumber = json['phonenumber'];
     address = json['address'];
-    referalCode = json['referalCode'];
+    referalcode = json['referalcode'];
     isuser = json['isuser'];
     referralof = json['referralof'];
     acnumber = json['acnumber'];
@@ -83,7 +83,7 @@ class UserDetailsModel {
     data['email'] = this.email;
     data['phonenumber'] = this.phonenumber;
     data['address'] = this.address;
-    data['referalCode'] = this.referalCode;
+    data['referalcode'] = this.referalcode;
     data['isuser'] = this.isuser;
     data['referralof'] = this.referralof;
     data['acnumber'] = this.acnumber;

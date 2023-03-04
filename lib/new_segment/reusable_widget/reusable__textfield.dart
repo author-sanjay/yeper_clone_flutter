@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
 class ReusbleTextField extends StatelessWidget {
@@ -8,6 +9,7 @@ class ReusbleTextField extends StatelessWidget {
   final TextEditingController controller;
   final bool isOtp;
   final bool isPhone;
+  final bool isEnterOtp;
   Callback? onTap;
 
   ReusbleTextField({
@@ -16,6 +18,7 @@ class ReusbleTextField extends StatelessWidget {
     required this.controller,
     this.isPhone = false,
     this.isOtp = false,
+    this.isEnterOtp = false,
     this.onTap,
   }) : super(key: key);
 
@@ -26,9 +29,9 @@ class ReusbleTextField extends StatelessWidget {
       inputFormatters: [
         isPhone
             ? LengthLimitingTextInputFormatter(10)
-            : LengthLimitingTextInputFormatter(30)
+            : isEnterOtp ? LengthLimitingTextInputFormatter(6) :LengthLimitingTextInputFormatter(30)
       ],
-      keyboardType: isPhone ? TextInputType.phone : TextInputType.name,
+      keyboardType: isPhone || isEnterOtp ? TextInputType.phone : TextInputType.name,
       decoration: InputDecoration(
         isDense: true,
         suffixIcon: isOtp

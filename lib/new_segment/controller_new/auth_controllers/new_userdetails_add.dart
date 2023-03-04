@@ -4,14 +4,10 @@ import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
-
 import '../../utils/const_url.dart';
-import '../../new_screens/home_screens_new.dart';
 import '../../new_screens/navbar_new_screen.dart';
 
 class UserDetailsAddController extends GetxController {
@@ -23,8 +19,8 @@ class UserDetailsAddController extends GetxController {
   String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
       length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
-  Future<void> adduser(String name, String email, String passward,
-    BuildContext context) async {
+  Future<void> adduser(
+      String name, String email, String passward, referralof,BuildContext context) async {
     SimpleFontelicoProgressDialog _dialog =
         SimpleFontelicoProgressDialog(context: context);
 
@@ -36,10 +32,10 @@ class UserDetailsAddController extends GetxController {
       "name": name,
       "email": email,
       "phonenumber": user?.phoneNumber,
-      "referalCode": getRandomString(6),
+      "referalcode": getRandomString(6).toUpperCase(),
       "password": passward,
-      "referralof": "nulllllll"
-    });
+      "referralof": referralof.toString()
+    }); 
 
     var res = await http
         .post(Uri.parse(ConstUrl.baseUrl + "/user/add"),

@@ -12,22 +12,31 @@ class GetAllDealsModel {
   String? offerlink;
   String? platform;
   String? name;
+ dynamic deliverto;
+ dynamic addresssfordelivery;
+dynamic pincode;
+ dynamic offerdetails;
+  List<Orders>? orders;
 
-  GetAllDealsModel({
-    this.id,
-    this.productName,
-    this.description,
-    this.actualPrice,
-    this.offerPrice,
-    this.card,
-    this.userEarning,
-    this.photourl,
-    this.countleft,
-    this.active,
-    this.offerlink,
-    this.platform,
-    this.name,
-  });
+  GetAllDealsModel(
+      {this.id,
+      this.productName,
+      this.description,
+      this.actualPrice,
+      this.offerPrice,
+      this.card,
+      this.userEarning,
+      this.photourl,
+      this.countleft,
+      this.active,
+      this.offerlink,
+      this.platform,
+      this.name,
+      this.deliverto,
+      this.addresssfordelivery,
+      this.pincode,
+      this.offerdetails,
+      this.orders});
 
   GetAllDealsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -43,6 +52,16 @@ class GetAllDealsModel {
     offerlink = json['offerlink'];
     platform = json['platform'];
     name = json['name'];
+    deliverto = json['deliverto'];
+    addresssfordelivery = json['addresssfordelivery'];
+    pincode = json['pincode'];
+    offerdetails = json['offerdetails'];
+    if (json['orders'] != null) {
+      orders = <Orders>[];
+      json['orders'].forEach((v) {
+        orders!.add(new Orders.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -60,7 +79,62 @@ class GetAllDealsModel {
     data['offerlink'] = this.offerlink;
     data['platform'] = this.platform;
     data['name'] = this.name;
+    data['deliverto'] = this.deliverto;
+    data['addresssfordelivery'] = this.addresssfordelivery;
+    data['pincode'] = this.pincode;
+    data['offerdetails'] = this.offerdetails;
+    if (this.orders != null) {
+      data['orders'] = this.orders!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
 
+class Orders {
+  int? id;
+  String? status;
+  String? product;
+  String? date;
+  String? courier;
+  int? deal;
+  int? otp;
+  int? phonenumberr;
+  String? platformtxnid;
+
+  Orders(
+      {this.id,
+      this.status,
+      this.product,
+      this.date,
+      this.courier,
+      this.deal,
+      this.otp,
+      this.phonenumberr,
+      this.platformtxnid});
+
+  Orders.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    status = json['status'];
+    product = json['product'];
+    date = json['date'];
+    courier = json['courier'];
+    deal = json['deal'];
+    otp = json['otp'];
+    phonenumberr = json['phonenumberr'];
+    platformtxnid = json['platformtxnid'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['status'] = this.status;
+    data['product'] = this.product;
+    data['date'] = this.date;
+    data['courier'] = this.courier;
+    data['deal'] = this.deal;
+    data['otp'] = this.otp;
+    data['phonenumberr'] = this.phonenumberr;
+    data['platformtxnid'] = this.platformtxnid;
     return data;
   }
 }

@@ -16,7 +16,7 @@ class _LoginDetailNewScreenState extends State<LoginDetailNewScreen> {
 
   TextEditingController _emailIdController = TextEditingController();
   TextEditingController _referralController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  
 
   final _formKey = GlobalKey<FormState>();
 
@@ -25,7 +25,7 @@ class _LoginDetailNewScreenState extends State<LoginDetailNewScreen> {
     _firstNameController.dispose();
     _emailIdController.dispose();
     _referralController.dispose();
-    _passwordController.dispose();
+  
     super.dispose();
   }
 
@@ -35,72 +35,70 @@ class _LoginDetailNewScreenState extends State<LoginDetailNewScreen> {
       backgroundColor: Colors.white,
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Spacer(
-                flex: 3,
+        child: Column(
+          children: [
+            Spacer(
+              flex: 3,
+            ),
+            Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Enter your detail",
+                    style: TextStyle(
+                      color: Color(0xff212223),
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    "If you change your detail it will update in\nyour profile",
+                    style: TextStyle(
+                      color: Color(0xff8A8B8F),
+                      fontSize: 12,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 18,
+                  ),
+                  ReusbleTextField(
+                    controller: _firstNameController,
+                    hint: 'First Name',
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  ReusbleTextField(
+                    controller: _emailIdController,
+                    hint: 'Email ID',
+                  ),
+                
+                ],
               ),
-              Text(
-                "Enter your detail",
-                style: TextStyle(
-                  color: Color(0xff212223),
-                  fontSize: 20,
-                ),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Text(
-                "If you change your detail it will update in\nyour profile",
-                style: TextStyle(
-                  color: Color(0xff8A8B8F),
-                  fontSize: 12,
-                ),
-              ),
-              SizedBox(
-                height: 18,
-              ),
-              ReusbleTextField(
-                controller: _firstNameController,
-                hint: 'First Name',
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              ReusbleTextField(
-                controller: _emailIdController,
-                hint: 'Email ID',
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              ReusbleTextField(
-                controller: _passwordController,
-                hint: 'Password',
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              ReusbleTextField(
-                controller: _referralController,
-                hint: 'Referral Code',
-              ),
-              Spacer(
-                flex: 2,
-              ),
-              ReusableButton(
-                text: "Next",
-                onTap: _next,
-              ),
-              SizedBox(
-                height: 32,
-              ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            ReusbleTextField(
+              controller: _referralController,
+              hint: 'Referral Code',
+            ),
+            Spacer(
+              flex: 2,
+            ),
+            ReusableButton(
+              text: "Next",
+              onTap: _next,
+            ),
+            SizedBox(
+              height: 32,
+            ),
+          ],
         ),
       ),
     );
@@ -108,12 +106,8 @@ class _LoginDetailNewScreenState extends State<LoginDetailNewScreen> {
 
   void _next() {
     if (_formKey.currentState!.validate()) {
-      UserDetailsAddController().adduser(
-          _firstNameController.text,
-          _emailIdController.text,
-          _passwordController.text,
-
-          context);
+      UserDetailsAddController().adduser(_firstNameController.text,
+          _emailIdController.text,_referralController.text,"1234", context);
     }
   }
 }
